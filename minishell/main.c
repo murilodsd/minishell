@@ -6,18 +6,16 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:38:59 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/10/15 16:43:35 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/10/19 13:11:00 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(int argc, char **argv, char **envp)
+int main()
 {
 	char *cmd;
-	t_data data;
-
-	data.envp = envp;
+	
 	while (1)
 	{
 		cmd = readline("minishell$ ");
