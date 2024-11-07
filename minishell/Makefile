@@ -6,7 +6,7 @@
 #    By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/15 12:10:30 by dramos-j          #+#    #+#              #
-#    Updated: 2024/10/15 15:33:48 by dramos-j         ###   ########.fr        #
+#    Updated: 2024/11/07 15:54:38 by dramos-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 EXTRA_FLAGS = -lreadline
 SRCS = main.c \
-		./src/handle_input.c
+		./src/handle_input.c \
+		./src/lexer.c \
+		./src/parser.c
 OBJS = $(SRCS:.c=.o)
 RM = rm -rf
 
