@@ -1,15 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 14:56:43 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/07 17:51:49 by dramos-j         ###   ########.fr       */
+/*   Created: 2023/10/04 12:06:35 by dramos-j          #+#    #+#             */
+/*   Updated: 2023/10/31 15:45:55 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-
+int	ft_isalpha(int c)
+{
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+}
+/*
+int	main()
+{
+	printf("%d\n", ft_isalpha('a'));
+	printf("%d", ft_isalpha('1'));
+}*/

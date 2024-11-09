@@ -1,25 +1,17 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/10/15 12:10:30 by dramos-j          #+#    #+#              #
-#    Updated: 2024/11/07 15:54:38 by dramos-j         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = minishell
-LIBFT_DIR = libft
+LIBFT_DIR = includes/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 EXTRA_FLAGS = -lreadline
-SRCS = main.c \
-		./src/handle_input.c \
-		./src/lexer.c \
-		./src/parser.c
+SRCS = src/main.c \
+	src/syntax_check/syntax_check.c \
+	src/tokenizer/tokenizer.c \
+	src/parser/parser.c \
+	src/binary_tree/binary_tree.c \
+	src/executer/executer.c \
+	src/builtins/builtins.c \
+	src/utils/init_data.c src/utils/handle_input.c src/utils/handle_signals.c
 OBJS = $(SRCS:.c=.o)
 RM = rm -rf
 

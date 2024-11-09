@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_input.c                                     :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 15:23:31 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/07 17:52:22 by dramos-j         ###   ########.fr       */
+/*   Created: 2023/10/04 15:44:31 by dramos-j          #+#    #+#             */
+/*   Updated: 2023/10/31 16:01:34 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-void	handle_input(char *cmd)
+int	ft_isprint(int c)
 {
-	lexer(cmd);
-//	printf("minishell: command not found: %s\n", cmd);
+	return (c >= 32 && c <= 126);
 }
+/*
+int	main()
+{
+	printf("%d\n", ft_isprint('a'));
+	printf("%d", ft_isprint(127));
+}*/

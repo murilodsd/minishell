@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 11:38:59 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/07 14:54:08 by dramos-j         ###   ########.fr       */
+/*   Created: 2023/10/17 17:21:21 by dramos-j          #+#    #+#             */
+/*   Updated: 2023/11/04 12:38:38 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main()
+char	*ft_strrchr(const char *s, int c)
 {
-	char *cmd;
+	int	i;
 
-	while (1)
+	i = ft_strlen (s);
+	while (i >= 0)
 	{
-		cmd = readline("minishell$ ");
-		if (!cmd)
-			exit(0);
-		if (cmd)
-		{
-			add_history(cmd);
-			handle_input(cmd);
-		}
-		free(cmd);
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i--;
 	}
 	return (0);
 }
+/*
+int	main()
+{
+	char	s[] = "Daniela";
+
+	printf("%s", ft_strrchr(s, 'a'));
+}*/
