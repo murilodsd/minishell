@@ -6,7 +6,7 @@ int	main(int argc, char **argv, char **envp)
 
 	data = malloc(sizeof(t_data));
 	init_data();
-	if(argc != 1 || argv[1] || !envp)
+	if (argc != 1 || argv[1] || !envp)
 	{
 		printf("Error: No arguments needed\n");
 		exit(0);
@@ -18,10 +18,6 @@ int	main(int argc, char **argv, char **envp)
 		{
 			add_history(data->cmd);
 			handle_input(data->cmd);
-			parser();
-			binary_tree();
-			executer();
-			builtins();
 			free(data->cmd);
 		}
 	}

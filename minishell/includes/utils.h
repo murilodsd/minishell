@@ -3,13 +3,13 @@
 
 # include "minishell.h"
 
-// init_data.c
-void	init_data(void);
+// handle_error.c
+void	handle_error(void);
 
 // handle_input.c
 void	handle_input(char *cmd);
 
-// handle_signals.c
-void	handle_signals(void);
+// init_data.c
+void	init_data(void);
 
 #endif

@@ -2,6 +2,7 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
+# include "handle_signals.h"
 # include "syntax_check.h"
 # include "tokenizer.h"
 # include "parser.h"

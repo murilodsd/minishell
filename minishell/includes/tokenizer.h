@@ -11,20 +11,27 @@ enum e_token_type
 	REDIR_OUT,
 	REDIR_APPEND,
 	HEREDOC,
-	SEMICOLON,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE,
 	ENV_VAR,
 	FILENAME
 };
 
+enum e_token_quote
+{
+	NO_QUOTE,
+	SINGLE,
+	DOUBLE
+};
+
 typedef struct s_token
 {
-	int				i;
-	char			*data;
+	int					i;
+	char				*data;
 	enum e_token_type	type;
-	struct s_token	*prev;
-	struct s_token	*next;
+	enum e_token_quote	quote;
+	struct s_token		*prev;
+	struct s_token		*next;
 }	t_token;
 
 // tokenizer.c

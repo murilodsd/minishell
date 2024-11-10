@@ -6,4 +6,9 @@ void	handle_input(char *cmd)
 		exit(0);
 	syntax_check(cmd);
 	tokenizer(cmd);
+	parser();
+	binary_tree();
+	builtins();
+	executer();
+	handle_error();
 }

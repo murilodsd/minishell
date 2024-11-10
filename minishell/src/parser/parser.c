@@ -2,5 +2,5 @@
 
 void	parser(void)
 {
-		printf("Parsing\n");
+	printf("Parsing\n");
 }
