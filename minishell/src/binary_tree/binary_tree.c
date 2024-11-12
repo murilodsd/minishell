@@ -1,4 +1,4 @@
-#include "../../includes/binary_tree.h"
+#include "../../includes/minishell.h"
 
 void	binary_tree(void)
 {

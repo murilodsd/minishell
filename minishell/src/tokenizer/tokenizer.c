@@ -1,4 +1,4 @@
-#include "../../includes/tokenizer.h"
+#include "../../includes/minishell.h"
 
 void	tokenizer(char *cmd)
 {

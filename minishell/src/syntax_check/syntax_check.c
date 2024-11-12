@@ -1,4 +1,4 @@
-#include "../../includes/syntax_check.h"
+#include "../../includes/minishell.h"
 
 void	syntax_check(char *cmd)
 {
