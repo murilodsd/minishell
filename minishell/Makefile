@@ -1,8 +1,8 @@
 NAME = minishell
-LIBFT_DIR = includes/libft
+LIBFT_DIR = lib/libft
 LIBFT = $(LIBFT_DIR)/libft.a
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CC=cc
+CCFLAGS= -Wall -Wextra -Werror -g
 EXTRA_FLAGS = -lreadline
 SRCS = src/main.c \
 	src/handle_signals/handle_signals.c \
@@ -23,16 +23,31 @@ SRCS = src/main.c \
 	src/utils/handle_error.c \
 	src/utils/init_data.c
 OBJS = $(SRCS:.c=.o)
-RM = rm -rf
+
+#GENERAL
+LIB_STATIC_NAME = libft.a
+LIB_PATH=lib/
+LIB_EXTERNALS = libreadline
+LIBS_FLAGS= -l$(patsubst lib%.a, %, $(LIB_STATIC_NAME)) -l$(patsubst lib%, %, $(LIB_EXTERNALS)) -L$(LIB_PATH)
+LIB_STATIC= $(addprefix $(LIB_PATH) , $(INCLUDE_PATH))
+INCLUDE_PATH=./includes/ ./lib/*/include/
+INCLUDE_FLAG=$(addprefix -I , $(INCLUDE_PATH))
+RM = rm -f
 
 all: $(NAME)
 
-$(NAME) : $(OBJS)
-	make -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(EXTRA_FLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+$(NAME): msg libs $(OBJS) $(LIB_STATIC)
+	$(CC) $(CCFLAGS) $(OBJS) $(INCLUDE_FLAG) $(LIBS_FLAGS) -o $(NAME)
+	echo "\033[1;32m✔ Compilation complete! 🎉\033[0m"
+
+libs:
+	make -s all -C lib/libft
+
+msg:
+	@echo "\033[1;32m🌟 Compiling... The code is coming to life! 🚀\033[0m"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CCFLAGS) -c $< -o $@
 
 clean:
 	make -C $(LIBFT_DIR) clean
