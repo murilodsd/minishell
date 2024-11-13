@@ -9,11 +9,12 @@
 # include <signal.h>
 # include <sys/wait.h>
 
-// ------------------------------------- GLOBAL VARIABLE ----------------------
+
+// ********************************* GLOBAL VARIABLE ********************* //
 
 extern int	g_signal;
 
-// ------------------------------------- ERROR CODES --------------------------
+// ********************************* ERROR CODES ************************* //
 
 typedef enum e_error_codes
 {
@@ -26,12 +27,12 @@ typedef enum e_error_codes
 	IS_NOT_DIRECTORY,
 }	t_error_codes;
 
-// ------------------------------------- EXIT CODES ---------------------------
+// ********************************* EXIT CODES ************************* //
 
 # define EXIT_USAGE_SYNTAX_ERROR 2
 # define EXIT_CMD_NOT_FOUND 127
 
-// ------------------------------------- SHELL STRUCT -------------------------
+// ******************************** SHELL STRUCT *********************** //
 
 typedef struct s_shell
 {

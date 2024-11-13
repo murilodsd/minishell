@@ -1,8 +1,6 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "./minishell.h"
-
 // handle_mem.c
 void	check_mem_alloc(t_shell *shell, t_list **ptr_or_matrix_list, \
 	void *ptr, char *error_msg);
