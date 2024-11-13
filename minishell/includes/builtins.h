@@ -6,7 +6,7 @@ void	builtins(void);
 
 // cd
 // cd.c
-void	cd_builtin(void);
+//void	cd_builtin(void);
 
 // echo
 // echo.c
