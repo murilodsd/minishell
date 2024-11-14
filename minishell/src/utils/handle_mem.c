@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:56:32 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/13 17:15:39 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:43:03 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	save_pointer(t_shell *shell, \
 }
 
 void	check_mem_alloc(t_shell *shell, t_list **ptr_or_matrix_list, \
-	void *ptr, char *error_msg, bool exit_program)
+	void *ptr, char *error_msg)
 {
 	if (!ptr)
 		free_exit_error(shell, GENERAL_ERROR, error_msg);

@@ -50,6 +50,7 @@ typedef struct s_shell
 	char			*path;
 }				t_shell;
 
+# include "utils.h"
 # include "handle_signals.h"
 # include "syntax_check.h"
 # include "tokenizer.h"
@@ -57,6 +58,5 @@ typedef struct s_shell
 # include "binary_tree.h"
 # include "executer.h"
 # include "builtins.h"
-# include "utils.h"
 
 #endif
