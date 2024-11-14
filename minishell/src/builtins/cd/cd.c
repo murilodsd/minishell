@@ -1,25 +1,18 @@
 #include "../../../includes/minishell.h"
 
-char	*safe_getcwd(char *buf, size_t size, t_shell *shell)
+void	cd_builtin(char **cd_args)
 {
-	char	*cwd;
-
-	cwd = getcwd(buf, size);
-/* 	if (!cwd)
+	if (cd_args[2])
+		//error -> bash:  cd: too many  arguments
+		ft_printf(2,"cd: too many arguments");
+	if (cd_args[1])
 	{
-		shell->exit_status = EXIT_FAILURE;
-		shell_error(shell, "PWD Error", 0, false);
-		return (NULL);
-	} */
-	return (cwd);
-}
+		if(!ft_strcmp(cd_args[1], ""))
+			return ;
+	}
 
-void	cd_builtin(char *path)
-{
-	if (chdir(path) != 0)
+	if (chdir(cd_args[1]) != 0)
 		ft_printf(2,"Erro ao mudar o diretório");
-	else
-		ft_printf(2,"Mudamos de diretório\n");
 }
 
 int main(int argc, char const *argv[])
@@ -27,20 +20,52 @@ int main(int argc, char const *argv[])
 
 	char cwd[100];
 
-	// Obtém e imprime o diretório atual antes de mudar
-    if (getcwd(cwd, sizeof(cwd)) != NULL) {
-        printf("Diretório atual: %s\n", cwd);
-    } else {
-        perror("getcwd() erro");
-    }
-	cd_builtin("../");
+	char *cwd;
 
-	// Obtém e imprime o diretório atual depois de mudar
-    if (getcwd(cwd, sizeof(cwd)) != NULL) {
-        printf("Diretório atual após mudança: %s\n", cwd);
-    } else {
-        perror("getcwd() erro");
-    }
+	//----- TESTES CD ------//
+	cwd = getcwd(NULL, 0);
+	printf("Diretório atual: %s\n", cwd);
+	//----- INDO PARA PASTA DO USER ------//
+	cd_builtin((char *[]){"cd", "/home/mde-souz", NULL});
+	cwd = getcwd(NULL, 0);
+	printf("/home/mde-souz\n");
+	printf("%s\n", cwd);
+	//-----  cd .  ----//
+	cd_builtin((char *[]){"cd", ".", NULL});
+	cwd = getcwd(NULL, 0);
+	printf("%s\n", cwd);
+	printf("/home/mde-souz\n");
+	//-----  cd ..  ----//
+	cd_builtin((char *[]){"cd", "..", NULL});
+	cwd = getcwd(NULL, 0);
+	printf("%s\n", cwd);
+	printf("/home\n");
+	//-----  cd ""  ----//
+	cd_builtin((char *[]){"cd", "", NULL});
+	cwd = getcwd(NULL, 0);
+	printf("%s\n", cwd);
+	printf("/home\n");
+	//-----  cd ''  ----//
+	cd_builtin((char *[]){"cd", (char[]){'\0'}, NULL});
+	cwd = getcwd(NULL, 0);
+	printf("%s\n", cwd);
+	printf("/home\n");
+	//-----  cd mde-souz  ----//
+	cd_builtin((char *[]){"cd", "mde-souz", NULL});
+	cwd = getcwd(NULL, 0);
+	printf("%s\n", cwd);
+	printf("/home/mde-souz\n");
+	//-----  cd ../../../..   ----//
+	cd_builtin((char *[]){"cd", "../../../..", NULL});
+	cwd = getcwd(NULL, 0);
+	printf("%s\n", cwd);
+	printf("/\n");
+
+	//----- CASOS DE ERRO ----//
+
+	//-----  cd "" mde-souz  ----//
+	printf("cd: too many arguments\n");
+	cd_builtin((char *[]){"cd", "", "mde-souz", NULL});
 	return 0;
 }
 
