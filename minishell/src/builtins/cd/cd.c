@@ -3,16 +3,19 @@
 void	cd_builtin(char **cd_args)
 {
 	if (cd_args[2])
-		//error -> bash:  cd: too many  arguments
-		ft_printf(2,"cd: too many arguments");
+		msg_error(TOO_MANY_ARGS, "cd");
 	if (cd_args[1])
 	{
 		if(!ft_strcmp(cd_args[1], ""))
 			return ;	
 	}
-	
 	if (chdir(cd_args[1]) != 0)
-		ft_printf(2,"Erro ao mudar o diretório");
+		msg_error(0, "cd: ", cd_args[1]);
+		//ft_printf(2, "minishell: cd: %s: %s\n", cd_args[1], strerror(errno));
+}
+
+void print_error_message(int errnum) {
+    printf("Erro %d: %s\n", errnum, strerror(errnum));
 }
 
 int main(int argc, char const *argv[])
@@ -61,9 +64,12 @@ int main(int argc, char const *argv[])
 	
 	//----- CASOS DE ERRO ----//
 
+	//-----  cd path_inexistente   ----//
+	cd_builtin((char *[]){"cd", "path_inexistente", NULL});
+	printf("minishell: cd: path_inexistente: No such file or directory\n");
 	//-----  cd "" mde-souz  ----//
-	printf("cd: too many arguments\n");
 	cd_builtin((char *[]){"cd", "", "mde-souz", NULL});
+	printf("minishell: cd: too many arguments\n");
 	return 0;
 }
 
