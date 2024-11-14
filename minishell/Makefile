@@ -21,7 +21,7 @@ SRCS = src/main.c \
 	src/builtins/exit/exit.c \
 	src/utils/handle_input.c \
 	src/utils/handle_error.c \
-	src/util/handle_mem.c \
+	src/utils/handle_mem.c \
 	src/utils/init_data.c
 OBJS = $(SRCS:.c=.o)
 

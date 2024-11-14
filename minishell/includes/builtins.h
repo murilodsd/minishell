@@ -14,7 +14,7 @@ void	echo_builtin(void);
 
 // env
 // env.c
-void	env_builtin(void);
+//void	env_builtin(void);
 
 // exit
 // exit.c

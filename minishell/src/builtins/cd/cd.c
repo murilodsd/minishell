@@ -18,7 +18,7 @@ void print_error_message(int errnum) {
     printf("Erro %d: %s\n", errnum, strerror(errnum));
 }
 
-int main(int argc, char const *argv[])
+/* int main(int argc, char const *argv[])
 {
 	
 	char *cwd;
@@ -71,5 +71,5 @@ int main(int argc, char const *argv[])
 	cd_builtin((char *[]){"cd", "", "mde-souz", NULL});
 	printf("minishell: cd: too many arguments\n");
 	return 0;
-}
+} */
 
