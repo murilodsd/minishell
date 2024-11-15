@@ -1,27 +1,27 @@
 #include "../../includes/minishell.h"
 
-int	check_redirect(char *cmd)
+int	check_pipe(char *cmd)
 {
 	int	i;
 
 	i = 0;
 	while (cmd[i] && cmd[i] == ' ')
 		i++;
-	if (cmd[i] == '<')
+	if (cmd[i] == '|')
 		return (1);
 	while (cmd[i])
 	{
-		if ((cmd[i] == '>' || cmd[i] == '<')
-			&& (cmd[i + 1] == cmd[i]) && cmd[i + 2] == cmd[i])
+		if (cmd[i] == '\'' || cmd[i] == '\"')
+			i = ignore_quotes(cmd, i);
+		if (cmd[i] == '|' && (cmd[i + 1] == '|'
+			|| cmd[i + 1] == '\0'))
 			return (1);
-		if ((cmd[i] == '<' || cmd[i] == '>') && cmd[i + 1] == '\0')
-			return (1);
-		if (cmd[i] == '<' || cmd[i] == '>')
+		if (cmd[i] == '|')
 		{
 			i++;
 			while (cmd[i] && cmd[i] == ' ')
 				i++;
-			if ((cmd[i] == '<' || cmd[i] == '>' || cmd[i] == '\0'))
+			if (cmd[i] == '|' || cmd[i] == '\0')
 				return (1);
 		}
 		i++;
@@ -58,35 +58,6 @@ int	check_quotes(char *cmd)
 	return (0);
 }
 
-int	check_pipe(char *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd[i] && cmd[i] == ' ')
-		i++;
-	if (cmd[i] == '|')
-		return (1);
-	while (cmd[i])
-	{
-		if (cmd[i] == '\'' || cmd[i] == '\"')
-			i = ignore_quotes(cmd, i);
-		if (cmd[i] == '|' && (cmd[i + 1] == '|'
-			|| cmd[i + 1] == '\0'))
-			return (1);
-		if (cmd[i] == '|')
-		{
-			i++;
-			while (cmd[i] && cmd[i] == ' ')
-				i++;
-			if (cmd[i] == '|' || cmd[i] == '\0')
-				return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
 int	check_space(char *cmd)
 {
 	int	i;
@@ -107,8 +78,6 @@ int	syntax_check(char *cmd)
 		msg_error(SYNTAX_ERROR, "open quote");
 	else if (check_pipe(cmd))
 		msg_error(SYNTAX_ERROR, "|");
-	else if (check_redirect(cmd))
-		msg_error(SYNTAX_ERROR, "redirect");
 	else
 		return (0);
 	return (1);
