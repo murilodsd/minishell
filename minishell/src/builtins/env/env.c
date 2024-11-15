@@ -2,10 +2,12 @@
 
 void	print_env(void *envp)
 {
-	char	*content;
+	t_var	*content;
 
-	content = (char *)envp;
-	printf("%s\n", content);
+	content = (t_var *)envp;
+	printf("%s", content->name);
+	if (content->value)
+		printf("=%s\n", content->value);
 }
 
 void	env_builtin(t_list *env_lst)

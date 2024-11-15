@@ -52,6 +52,12 @@ typedef struct s_shell
 	char			*path;
 }				t_shell;
 
+typedef struct s_var
+{
+	char	*name;
+	char	*value;
+}	t_var;
+
 # include "utils.h"
 # include "handle_signals.h"
 # include "syntax_check.h"

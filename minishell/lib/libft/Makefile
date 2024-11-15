@@ -16,7 +16,7 @@ ft_isdigit.c ft_putendl_fd.c ft_strlcpy.c ft_strcpy.c ft_tolower.c \
 ft_isprint.c ft_putnbr_fd.c ft_strlen.c ft_toupper.c ft_countdec.c \
 ft_lstadd_front.c ft_lstadd_back.c \
 ft_lstclear.c ft_lstdelone.c ft_lstiter.c \
-ft_lstlast.c ft_lstmap.c ft_lstnew.c \
+ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstadd_string_ordered.c \
 ft_lstsize.c ft_free_ptr_buffer.c ft_save_pointer.c ft_free_exit_error.c \
 ft_check_mem_alloc.c ft_free_matrix.c
 SRCS_PRINTF=ft_printf.c ft_print_p_fd.c \

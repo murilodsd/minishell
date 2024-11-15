@@ -6,15 +6,25 @@ void	create_env_lst(t_shell *shell, char **envp)
 {
 	int	i;
 	t_list	*new_node;
+	t_var	*var;
 
 	i = 0;
+	var = ft_calloc(sizeof(t_var), 1);
 	while (envp[i] != NULL)
 	{
-		new_node = ft_lstnew(envp[i]);
+		if (!strchr(envp[i], '='))
+			var->name = envp[i];
+		else
+		{
+			var->value = (strchr(envp[i], '=')) + 1;
+			*(strchr(envp[i], '=')) = '\0';
+			var->name = envp[i];
+		}
+		new_node = ft_lstnew(var);
 		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
 			new_node, "Calloc failed");
 		ft_lstadd_back(&(shell->envp_lst), new_node);
-		new_node = ft_lstnew(envp[i]);
+		new_node = ft_lstnew(var);
 		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
 			new_node, "Calloc failed");
 		ft_lstadd_string_ordered(&(shell->export_lst), new_node);

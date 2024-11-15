@@ -22,7 +22,7 @@ void	exit_builtin(void);
 
 // export
 // export.c
-void	export_builtin(t_list *export_lst);
+void	export_builtin(char **export_args, t_list *export_lst);
 
 // pwd
 // pwd.c
