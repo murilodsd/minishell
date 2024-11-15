@@ -14,7 +14,7 @@ void	echo_builtin(void);
 
 // env
 // env.c
-//void	env_builtin(void);
+void	env_builtin(t_list *env_lst);
 
 // exit
 // exit.c
@@ -22,7 +22,7 @@ void	exit_builtin(void);
 
 // export
 // export.c
-void	export_builtin(void);
+void	export_builtin(t_list *export_lst);
 
 // pwd
 // pwd.c

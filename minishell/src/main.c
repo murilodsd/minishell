@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/14 20:32:15 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:19:37 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 int	g_signal;
 
-void	create_env_lst(t_shell *shell, char **envp);
-void	env_builtin(t_list *env_lst);
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell		*shell;
 
 	init_data(&shell, argc, argv, envp);
-	env_builtin(envp);
+	env_builtin(shell->envp_lst);
+	export_builtin(shell->export_lst);
 	while (1)
 	{
 		shell->cmd = readline("minishell$ ");
