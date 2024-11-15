@@ -1,5 +1,27 @@
 #include "../../includes/minishell.h"
 
+void	ft_lstadd_string_ordered(t_list **lst, t_list *new);
+
+void	create_env_lst(t_shell *shell, char **envp)
+{
+	int	i;
+	t_list	*new_node;
+
+	i = 0;
+	while (envp[i] != NULL)
+	{
+		new_node = ft_lstnew(envp[i]);
+		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+			new_node, "Calloc failed");
+		ft_lstadd_back(&(shell->envp_lst), new_node);
+		new_node = ft_lstnew(envp[i]);
+		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+			new_node, "Calloc failed");
+		ft_lstadd_string_ordered(&(shell->export_lst), new_node);
+		i++;
+	}
+}
+
 void	check_args(t_shell *shell, int argc, char **argv)
 {
 	if (argc != 1)
@@ -19,11 +41,12 @@ void	init_data(t_shell **shell, int argc, char **argv, char **envp)
 		exit(EXIT_FAILURE);
 	}
 	check_args(*shell, argc, argv);
-	//TODO - INICIALIZAR ENVS
-	(void)envp;
+	(*shell)->envp_lst = NULL;
+	(*shell)->export_lst = NULL;
 	(*shell)->exit_status = EXIT_SUCCESS;
 	//TODO - PEGAR NUMERO DO PROCESSO
 	(*shell)->fd_in = STDIN_FILENO;
 	(*shell)->fd_out = STDOUT_FILENO;
+	create_env_lst(*shell, envp);
 	handle_signals();
 }

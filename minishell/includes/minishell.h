@@ -25,6 +25,7 @@ typedef enum e_error_codes
 	AMBIGUOS_REDIRECT,
 	IS_DIRECTORY,
 	IS_NOT_DIRECTORY,
+	TOO_MANY_ARGS,
 }	t_error_codes;
 
 // ********************************* EXIT CODES ************************* //
@@ -45,11 +46,13 @@ typedef struct s_shell
 	int				fd_in;
 	int				fd_out;
 	int				count_hd;
-	char			**envp;
+	t_list			*envp_lst;
+	t_list			*export_lst;
 	char			*cmd;
 	char			*path;
 }				t_shell;
 
+# include "utils.h"
 # include "handle_signals.h"
 # include "syntax_check.h"
 # include "tokenizer.h"
@@ -57,6 +60,5 @@ typedef struct s_shell
 # include "binary_tree.h"
 # include "executer.h"
 # include "builtins.h"
-# include "utils.h"
 
 #endif

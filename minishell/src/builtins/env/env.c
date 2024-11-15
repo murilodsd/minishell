@@ -1,6 +1,14 @@
 #include "../../../includes/minishell.h"
 
-void	env_builtin(void)
+void	print_env(void *envp)
 {
-	printf("\t\tenv\n");
+	char	*content;
+
+	content = (char *)envp;
+	printf("%s\n", content);
+}
+
+void	env_builtin(t_list *env_lst)
+{
+	ft_lstiter(env_lst, print_env);
 }
