@@ -25,6 +25,7 @@ typedef enum e_error_codes
 	AMBIGUOS_REDIRECT,
 	IS_DIRECTORY,
 	IS_NOT_DIRECTORY,
+	SYNTAX_ERROR
 }	t_error_codes;
 
 // ********************************* EXIT CODES ************************* //

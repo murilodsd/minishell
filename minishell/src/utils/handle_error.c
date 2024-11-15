@@ -30,6 +30,9 @@ void	msg_error(t_error_codes error_code, char *error_msg)
 		ft_printf(STDERR_FILENO, "minishell: %s: Is a directory\n", error_msg);
 	else if (error_code == IS_NOT_DIRECTORY)
 		ft_printf(STDERR_FILENO, "minishell: %s: Not a directory\n", error_msg);
+	else if (error_code == SYNTAX_ERROR)
+		ft_printf(STDERR_FILENO, "minishell: syntax error near unexpected token `%s'\n",
+			error_msg);
 	else
 		ft_printf(STDERR_FILENO, "%s\n", error_msg);
 }

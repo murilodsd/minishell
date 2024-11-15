@@ -11,7 +11,7 @@ void	msg_error(t_error_codes error_code, char *error_msg);
 void	handle_error(void);
 
 // handle_input.c
-void	handle_input(char *cmd);
+void	handle_input(char *cmd, t_shell *shell);
 
 // init_data.c
 void	init_data(t_shell **shell, int argc, char **argv, char **envp);
