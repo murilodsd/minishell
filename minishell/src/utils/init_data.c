@@ -41,8 +41,8 @@ void	init_data(t_shell **shell, int argc, char **argv, char **envp)
 		exit(EXIT_FAILURE);
 	}
 	check_args(*shell, argc, argv);
-	create_env_lst(shell);
-	(void)envp;
+	(*shell)->envp_lst = NULL;
+	(*shell)->export_lst = NULL;
 	(*shell)->exit_status = EXIT_SUCCESS;
 	//TODO - PEGAR NUMERO DO PROCESSO
 	(*shell)->fd_in = STDIN_FILENO;
