@@ -6,8 +6,8 @@ CCFLAGS= -Wall -Wextra -Werror -g
 EXTRA_FLAGS = -lreadline
 SRCS = src/main.c \
 	src/handle_signals/handle_signals.c \
-	src/syntax_check/syntax_check_utils.c \
 	src/syntax_check/syntax_check.c \
+	src/syntax_check/syntax_check_utils.c \
 	src/tokenizer/tokenizer.c \
 	src/parser/parser.c \
 	src/binary_tree/binary_tree.c \

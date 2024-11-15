@@ -1,4 +1,4 @@
-#include "../../includes/minishell.h"
+#include "../../includes/minishell.h"\
 
 int	check_pipe(char *cmd)
 {
@@ -14,7 +14,7 @@ int	check_pipe(char *cmd)
 		if (cmd[i] == '\'' || cmd[i] == '\"')
 			i = ignore_quotes(cmd, i);
 		if (cmd[i] == '|' && (cmd[i + 1] == '|'
-			|| cmd[i + 1] == '\0'))
+				|| cmd[i + 1] == '\0'))
 			return (1);
 		if (cmd[i] == '|')
 		{
@@ -58,7 +58,7 @@ int	check_quotes(char *cmd)
 	return (0);
 }
 
-int	check_space(char *cmd)
+int	check_spaces(char *cmd)
 {
 	int	i;
 
@@ -72,7 +72,7 @@ int	check_space(char *cmd)
 
 int	syntax_check(char *cmd)
 {
-	if (check_space(cmd))
+	if (check_spaces(cmd))
 		return (1);
 	else if (check_quotes(cmd))
 		msg_error(SYNTAX_ERROR, "open quote");

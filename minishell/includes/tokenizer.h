@@ -1,5 +1,6 @@
 #ifndef TOKENIZER_H
 # define TOKENIZER_H
+# include "minishell.h"
 
 enum e_token_type
 {
