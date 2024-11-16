@@ -1,6 +1,6 @@
 #include "../../../includes/minishell.h"
 
-void	lstadd_name_ordered(t_list **lst, t_list *new)
+void	ft_lstadd_var_ordered(t_list **lst, t_list *new)
 {
 	t_list	*node_ref;
 
@@ -16,7 +16,7 @@ void	lstadd_name_ordered(t_list **lst, t_list *new)
 	else
 	{
 		node_ref = *lst;
-		while (node_ref->next && ft_strcmp(((t_var *)((*lst)->content))->name, ((t_var *)((new)->content))->name ) > 0)
+		while (node_ref->next && ft_strcmp(((t_var *)(node_ref->next->content))->name, ((t_var *)(new->content))->name ) < 0)
 			node_ref = node_ref->next;
 		if (node_ref->next == NULL)
 			ft_lstlast(*lst)->next = new;
@@ -28,12 +28,25 @@ void	lstadd_name_ordered(t_list **lst, t_list *new)
 	}
 }
 
-/* void	add_export(t_list *export_lst, char *var)
+void	add_export(t_shell *shell, char *export_arg)
 {
 	//export var=    -> var=""
 	//export var=1 var2=2 var=3    -> salva todas
 	//export var 1   -> bash: export: `1': not a valid identifier     (so pode comecar com letra ou _ e no nome so pode conter letras numeros e _)
-} */
+	//export var=1; export var;     -> irá manter o valor anterior de var
+	t_var	*var;
+
+	var = (t_var *)ft_calloc(sizeof(t_var), 1);
+	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+			var, "Calloc failed");
+	get_var_name_and_value(shell, var, export_arg);
+	if (!(var->name))
+		return ;
+	if (ft_lstfind_name(shell->export_lst, var->name))
+		edit_var(shell, var);
+	else
+		add_var(shell, var);
+}
 
 /* char	*put_double_quote(char *s)
 {
@@ -63,35 +76,36 @@ void	lstadd_name_ordered(t_list **lst, t_list *new)
 
 void	print_export(void *envp)
 {
-	char	*content;
-	bool	find_equal_signal;
+	t_var	*content;
 
-	find_equal_signal = FALSE;
-	content = (char *)envp;
-	if (!content)
+	content = (t_var *)envp;
+	if (!content || !(content->name))
 		return ;
-	ft_printf(STDOUT_FILENO, "declare -x ");
-	while (*content)
+	ft_printf(STDOUT_FILENO, "declare -x %s", content->name);
+	if (content->value)
 	{
-		ft_putchar_fd(*content, STDOUT_FILENO);
-		if (*content == '=')
-		{
-			ft_putchar_fd('"', STDOUT_FILENO);
-			find_equal_signal = TRUE;
-			break;
-		}
-		content++;
-	}
-	ft_printf(STDOUT_FILENO, content);
-	if (find_equal_signal == TRUE)
+		ft_putchar_fd('=', STDOUT_FILENO);
 		ft_putchar_fd('"', STDOUT_FILENO);
-	printf("%s\n", content);
+		ft_printf(STDOUT_FILENO, "%s", content->value);
+		ft_putchar_fd('"', STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
+	}
 }
 
-void	export_builtin(char **export_args, t_list *export_lst)
+void	export_builtin(t_shell *shell, char **export_args)
 {
-	if (!export_args[1])
-		ft_lstiter(export_lst, print_export);
+	int	i;
 
+	if (!export_args[1])
+		ft_lstiter(shell->export_lst, print_export);
+	else
+	{
+		i = 1;
+		while (export_args[i])
+		{
+			add_export(shell, export_args[i]);
+			i++;
+		}
+	}
 }
 

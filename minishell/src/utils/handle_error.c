@@ -11,6 +11,10 @@ void	free_all(t_shell *shell)
 		ft_lstclear(&(shell->mem_allocation.ptr_mem_list), free);
 	if (shell->mem_allocation.matrix_mem_list != NULL)
 		ft_lstclear(&(shell->mem_allocation.matrix_mem_list), ft_free_matrix);
+	if (shell->envp_lst != NULL)
+		ft_lstclear(&(shell->envp_lst), free);
+	if (shell->export_lst != NULL)
+		ft_lstclear(&(shell->export_lst), free);
 	clear_history();
 	free(shell);
 }
@@ -42,6 +46,8 @@ void	msg_error(t_error_codes error_code, char *error_msg, ...)
 			ft_printf(STDERR_FILENO, "minishell: %s: Not a directory\n", error_msg);
 		else if (error_code == TOO_MANY_ARGS)
 			ft_printf(STDERR_FILENO, "minishell: %s: too many arguments\n", error_msg);
+		else if (error_code == NOT_VALID_IDENTIFIER)
+			ft_printf(STDERR_FILENO, "minishell: %s: `%s': not a valid identifier\n", error_msg, va_arg(va_args, char *));
 		else
 			ft_printf(STDERR_FILENO, "%s\n", error_msg);
 	va_end(va_args);
@@ -53,6 +59,8 @@ void	free_exit_error(t_shell *shell, t_error_codes error_code, char *error_msg)
 {
 	int	exit_status;
 
+	if (!shell->exit_status)
+		shell->exit_status = 1;
 	exit_status = shell->exit_status;
 	msg_error(error_code, error_msg);
 	free_all(shell);

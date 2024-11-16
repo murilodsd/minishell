@@ -26,6 +26,7 @@ typedef enum e_error_codes
 	IS_DIRECTORY,
 	IS_NOT_DIRECTORY,
 	TOO_MANY_ARGS,
+	NOT_VALID_IDENTIFIER,
 }	t_error_codes;
 
 // ********************************* EXIT CODES ************************* //

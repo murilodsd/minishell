@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/15 20:43:23 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:45:50 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ int	g_signal;
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell		*shell;
-	//char *args[] = {"export", NULL};
+	//REVIEW -> APAGAR LINHA DEBAIXO
+	char *args[] = {"export", "1var", "var2=", "var3=50", "var-=50", "var4", NULL};
 	init_data(&shell, argc, argv, envp);
-	printf("%s",((t_var *)(shell->envp_lst->content))->name);
-	//env_builtin(shell->envp_lst);
-	//export_builtin(args, shell->export_lst);
+	export_builtin(shell, args);
+	char *args2[] = {"export", NULL};
+	export_builtin(shell, args2);
+	env_builtin(shell->envp_lst);
 /* 	while (1)
 	{
 		shell->cmd = readline("minishell$ ");

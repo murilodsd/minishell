@@ -16,6 +16,7 @@ SRCS = src/main.c \
 	src/builtins/cd/cd.c \
 	src/builtins/pwd/pwd.c \
 	src/builtins/export/export.c \
+	src/builtins/export/export_utils.c \
 	src/builtins/unset/unset.c \
 	src/builtins/env/env.c \
 	src/builtins/exit/exit.c \
