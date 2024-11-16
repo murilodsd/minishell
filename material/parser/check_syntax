@@ -1,10 +1,5 @@
 1. Erros de Redirecionamento Malformado
 Verificar se os redirects sao seguidos de um arquivo valido(WORD).
-ex:
-echo hello >
-echo "hello" >>>
-cat < > file
-> echo > file
 
 2. Pipes Malformados
 Verificar se existe um comando(WORD) antes e depois do pipe.
@@ -13,6 +8,7 @@ ex:
        | echo hello
 echo hello | | grep hi
 echo hello |
+echo hello |                
 
 3. Aspas Não Fechadas
 Verificar se existe o fechamento das aspas, se for simples, tem que finalizar com simples, se for dupla, tem que finalizar com dupla.
