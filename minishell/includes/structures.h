@@ -13,6 +13,7 @@ typedef enum e_error_codes
 	AMBIGUOS_REDIRECT,
 	IS_DIRECTORY,
 	IS_NOT_DIRECTORY,
+	TOO_MANY_ARGS,
 	SYNTAX_ERROR
 }	t_error_codes;
 
@@ -21,17 +22,18 @@ typedef enum e_error_codes
 typedef struct s_shell
 {
 	t_mem_alloc	mem_allocation;
-	void		*root;
-	int			*array_fd_here_doc;
-	int			exit_status;
-	int			pid;
-	int			process;
-	int			fd_in;
-	int			fd_out;
-	int			count_hd;
-	char		**envp;
-	char		*cmd;
-	char		*path;
+	void			*root;
+	int				*array_fd_here_doc;
+	int				exit_status;
+	int				pid;
+	int				process;
+	int				fd_in;
+	int				fd_out;
+	int				count_hd;
+	t_list			*envp_lst;
+	t_list			*export_lst;
+	char			*cmd;
+	char			*path;
 }				t_shell;
 
 #endif

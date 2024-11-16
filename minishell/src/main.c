@@ -19,8 +19,6 @@ int	main(int argc, char **argv, char **envp)
 	t_shell		*shell;
 
 	init_data(&shell, argc, argv, envp);
-	env_builtin(shell->envp_lst);
-	export_builtin(shell->export_lst);
 	while (1)
 	{
 		shell->cmd = readline("minishell$ ");
