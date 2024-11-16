@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_isall.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 16:11:28 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/16 19:26:34 by mde-souz         ###   ########.fr       */
+/*   Created: 2024/11/16 13:45:24 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/11/16 14:41:06 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-char	*ft_strdup(const char *s)
+bool	ft_str_validate(char *str, bool(*f)(char))
 {
-	int		i;
-	char	*p;
-
-	p = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!p)
-		return (NULL);
-	i = 0;
-	while (s[i])
+	if (!str)
+		return (FALSE);
+	while (*str)
 	{
-		p[i] = s[i];
-		i++;
+		if (!f(*str))
+			return (FALSE);
+		str++;
 	}
-	p[i] = '\0';
-	return (p);
+	return (TRUE);
 }
-/* #include <stdio.h>
-int	main(void)
-{	
-	char s1[] = "teste";
-	printf("%s",ft_strdup(s1));
-} */

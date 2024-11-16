@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_str_replace.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 16:11:28 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/16 19:26:34 by mde-souz         ###   ########.fr       */
+/*   Created: 2024/11/16 19:06:20 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/11/16 19:29:39 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-char	*ft_strdup(const char *s)
+void ft_str_replace(char **dest, char *src)
 {
-	int		i;
-	char	*p;
-
-	p = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!p)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		p[i] = s[i];
-		i++;
-	}
-	p[i] = '\0';
-	return (p);
+	if (!dest)
+		return ;
+	if (*dest)
+		free(*dest);
+	*dest = ft_strdup(src);
 }
-/* #include <stdio.h>
-int	main(void)
-{	
-	char s1[] = "teste";
-	printf("%s",ft_strdup(s1));
+/* int main() {
+    char *str = NULL;
+
+    ft_str_replace(&str, "Hello, world!");
+    printf("str: %s\n", str);
+
+    ft_str_replace(&str, "Goodbye, world!");
+    printf("str: %s\n", str);
+
+    free(str);
+    return 0;
 } */
