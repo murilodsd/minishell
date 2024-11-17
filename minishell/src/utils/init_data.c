@@ -21,9 +21,9 @@ static void	create_env_export_lst(t_shell *shell, char **envp)
 			new_node, "Calloc failed");
 		ft_lstadd_back(&(shell->envp_lst), new_node);
 		var = ft_calloc(sizeof(t_var), 1);
-		get_var_name_and_value(shell, var, envp[i]);
 		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
 			var, "Calloc failed");
+		get_var_name_and_value(shell, var, envp[i]);
 		new_node = ft_lstnew(var);
 		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
 			new_node, "Calloc failed");

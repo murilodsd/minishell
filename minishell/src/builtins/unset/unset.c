@@ -3,6 +3,7 @@
 //unset -> só retorna
 //unset nonexistentvariable -> só retorna
 //unset USER -> apaga USER
+//unset "" -> retorna
 
 void	ft_lstremove_mem_node(t_list **lst, void *content)
 {
@@ -51,7 +52,7 @@ void	ft_lstremove_var(t_shell *shell, char *name)
 			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), var->value);
 			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), current->content);
 			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), current);
-			return ;
+			break ;
 		}
 		previous = current;
       		current = current->next;
