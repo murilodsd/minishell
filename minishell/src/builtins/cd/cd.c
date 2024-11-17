@@ -1,5 +1,7 @@
 #include "../../../includes/minishell.h"
 
+//TODO - cd sem nada: ir para home
+
 void	cd_builtin(char **cd_args)
 {
 	if (cd_args[2])

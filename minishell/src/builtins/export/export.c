@@ -34,6 +34,7 @@ void	add_export(t_shell *shell, char *export_arg)
 	//export var=1 var2=2 var=3    -> salva todas
 	//export var 1   -> bash: export: `1': not a valid identifier     (so pode comecar com letra ou _ e no nome so pode conter letras numeros e _)
 	//export var=1; export var;     -> irá manter o valor anterior de var
+	//export = ->  bash: export: `=': not a valid identifier
 	t_var	*var;
 
 	var = (t_var *)ft_calloc(sizeof(t_var), 1);
@@ -90,6 +91,8 @@ void	print_export(void *envp)
 		ft_putchar_fd('"', STDOUT_FILENO);
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	}
+	else
+		ft_putchar_fd('\n', STDOUT_FILENO);
 }
 
 void	export_builtin(t_shell *shell, char **export_args)

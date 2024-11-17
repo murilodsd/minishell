@@ -36,6 +36,6 @@ void	pwd_builtin(void);
 
 // unset
 // unset.c
-void	unset_builtin(void);
+void	unset_builtin(t_shell *shell, char **unset_args);
 
 #endif

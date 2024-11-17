@@ -11,10 +11,6 @@ void	free_all(t_shell *shell)
 		ft_lstclear(&(shell->mem_allocation.ptr_mem_list), free);
 	if (shell->mem_allocation.matrix_mem_list != NULL)
 		ft_lstclear(&(shell->mem_allocation.matrix_mem_list), ft_free_matrix);
-	if (shell->envp_lst != NULL)
-		ft_lstclear(&(shell->envp_lst), free);
-	if (shell->export_lst != NULL)
-		ft_lstclear(&(shell->export_lst), free);
 	clear_history();
 	free(shell);
 }
