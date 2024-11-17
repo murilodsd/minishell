@@ -2,20 +2,17 @@
 # define STRUCTURES_H
 # include "minishell.h"
 
-// ********************************* ERROR CODES ************************* //
+// ******************************** TOKEN STRUCT *********************** //
 
-typedef enum e_error_codes
+typedef struct s_token
 {
-	GENERAL_ERROR,
-	CMD_NOT_FOUND,
-	NO_FILE_DIRECTORY,
-	PERMISSION_DENIED,
-	AMBIGUOS_REDIRECT,
-	IS_DIRECTORY,
-	IS_NOT_DIRECTORY,
-	TOO_MANY_ARGS,
-	SYNTAX_ERROR
-}	t_error_codes;
+	int				i;
+	char			*data;
+	t_token_type	type;
+	t_token_quote	quote;
+	struct s_token	*prev;
+	struct s_token	*next;
+}	t_token;
 
 // ******************************** SHELL STRUCT *********************** //
 
@@ -34,6 +31,7 @@ typedef struct s_shell
 	t_list			*export_lst;
 	char			*cmd;
 	char			*path;
+	t_token			*token;
 }				t_shell;
 
 #endif

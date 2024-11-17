@@ -37,8 +37,8 @@ int	check_pipe(char *cmd)
 	{
 		if (cmd[i] == '\'' || cmd[i] == '\"')
 			i = ignore_quotes(cmd, i);
-		if (cmd[i] == '|' && (cmd[i + 1] == '|' || cmd[i + 1] == '\0'
-			|| cmd[ignore_spaces(cmd, i + 1)] == '\0' || cmd[ignore_spaces(cmd, i + 1)] == '|'))
+		if (cmd[i] == '|' && (cmd[i + 1] == '|'
+			|| cmd[ignore_spaces(cmd, i + 1)] == '|'))
 			return (1);
 		i++;
 	}

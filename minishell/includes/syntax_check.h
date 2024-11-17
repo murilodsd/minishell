@@ -20,7 +20,6 @@ int	check_spaces(char *cmd);
 
 // syntax_check_utils.c
 int	ignore_quotes(char *cmd, int i);
-int	ignore_spaces(char *cmd, int i);
 int	is_redir(char c);
 int	analyze_redir(char *cmd, int i);
 

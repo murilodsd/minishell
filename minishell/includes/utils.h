@@ -17,4 +17,8 @@ void	handle_input(char *cmd, t_shell *shell);
 // init_data.c
 void	init_data(t_shell **shell, int argc, char **argv, char **envp);
 
+// utils.c
+int		ft_isspace(char c);
+int		ignore_spaces(char *cmd, int i);
+
 #endif

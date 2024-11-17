@@ -17,13 +17,6 @@ int	ignore_quotes(char *cmd, int i)
 	return (i);
 }
 
-int	ignore_spaces(char *cmd, int i)
-{
-	while (cmd[i] && cmd[i] == ' ')
-		i++;
-	return (i);
-}
-
 int	is_redir(char c)
 {
 	if (c == '>' || c == '<')

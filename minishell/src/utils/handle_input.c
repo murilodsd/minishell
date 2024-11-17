@@ -7,7 +7,7 @@ void	handle_input(char *cmd, t_shell *shell)
 		exit(0);
 	if (syntax_check(cmd))
 		return ;
-	tokenizer(cmd);
+	tokenizer(cmd, shell);
 	parser();
 	binary_tree();
 	builtins();

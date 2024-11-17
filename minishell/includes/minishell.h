@@ -7,6 +7,7 @@
 # include <dirent.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include "definitions.h"
 # include "structures.h"
 # include "syntax_check.h"
 # include "handle_signals.h"
@@ -16,14 +17,5 @@
 # include "executer.h"
 # include "builtins.h"
 # include "utils.h"
-
-// ********************************* GLOBAL VARIABLE ********************* //
-
-extern int	g_signal;
-
-// ********************************* EXIT CODES ************************* //
-
-# define EXIT_USAGE_SYNTAX_ERROR 2
-# define EXIT_CMD_NOT_FOUND 127
 
 #endif
