@@ -10,7 +10,7 @@ void	builtins(void);
 
 // echo
 // echo.c
-void	echo_builtin(void);
+void	echo_builtin(char **args);
 
 // env
 // env.c
