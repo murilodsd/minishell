@@ -28,6 +28,7 @@ typedef enum e_error_codes
 	TOO_MANY_ARGS,
 	NOT_VALID_IDENTIFIER,
 	VAR_NOT_SET,
+	NUMERIC_ARGUMENT_REQUIRED,
 }	t_error_codes;
 
 // ********************************* EXIT CODES ************************* //

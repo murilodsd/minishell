@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/19 08:26:09 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/11/19 10:39:45 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argc, char **argv, char **envp)
 	cd_builtin(shell, args3);
 	export_builtin(shell, args0);
 	env_builtin(shell->envp_lst);
+	exit_builtin(shell,)
 /* 	while (1)
 	{
 		shell->cmd = readline("minishell$ ");
@@ -58,4 +59,4 @@ int	main(int argc, char **argv, char **envp)
 	} */
 // 	free_exit_error(shell, 0, "teste");
 // 	return (0);
-// }
+}

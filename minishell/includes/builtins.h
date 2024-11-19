@@ -18,7 +18,7 @@ void	env_builtin(t_list *env_lst);
 
 // exit
 // exit.c
-void	exit_builtin(void);
+void	exit_builtin(t_shell * shell, char **exit_args);
 
 // export
 // export_utils.c
