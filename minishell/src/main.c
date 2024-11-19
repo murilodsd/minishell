@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/19 10:39:45 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/11/19 20:39:24 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,43 +20,71 @@ int	g_signal;
 	//export var=1; export var;     -> irá manter o valor anterior de var
 	//export = ->  bash: export: `=': not a valid identifier
 
+#define MAX_TOKENS 100
+
+char **parse_input(char *input) {
+    char **tokens = malloc(MAX_TOKENS * sizeof(char *));
+    char *token;
+    int i = 0;
+
+    if (!tokens) {
+        fprintf(stderr, "Allocation error\n");
+        exit(EXIT_FAILURE);
+    }
+
+    token = strtok(input, " \t\r\n\a");
+    while (token != NULL) {
+        tokens[i] = token;
+        i++;
+
+        if (i >= MAX_TOKENS) {
+            fprintf(stderr, "Too many tokens\n");
+            exit(EXIT_FAILURE);
+        }
+
+        token = strtok(NULL, " \t\r\n\a");
+    }
+    tokens[i] = NULL;
+    return tokens;
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell		*shell;
 	(void)envp;
 	//REVIEW -> APAGAR LINHA DEBAIXO
 	//char *envp1[] = {"aaa=primeira", "var2=1", "var3=", "var", NULL};
-	char *args[] = {"cd", "src", NULL};
+	//char *args[] = {"cd", "src", NULL};
 	init_data(&shell, argc, argv, envp);
-	pwd_builtin();
-	cd_builtin(shell, args);
-	char *args0[] = {"export", NULL};
-	export_builtin(shell, args0);
-	char *args1[] = {"unset", "PWD", "OLDPWD", NULL};
-	unset_builtin(shell, args1);
-	export_builtin(shell, args0);
-	env_builtin(shell->envp_lst);
-	char *args2[] = {"cd", "utils", NULL};
-	cd_builtin(shell, args2);
-	export_builtin(shell, args0);
-	env_builtin(shell->envp_lst);
-	char *args3[] = {"cd", NULL};
+	char *args3[] = {"cd", "", NULL};
+	printf("%s %c%c\n", "cd", '"','"');
 	cd_builtin(shell, args3);
-	export_builtin(shell, args0);
-	env_builtin(shell->envp_lst);
-	exit_builtin(shell,)
-/* 	while (1)
+	printf("%d\n", shell->exit_status);
+	char *args4[] = {"exit", NULL};
+	printf("%s\n", "cd");
+	cd_builtin(shell, args4);
+	printf("%d\n", shell->exit_status);
+	char *args5[] = {"cd", "nonexistent", NULL};
+	printf("%d\n", shell->exit_status);
+	printf("%s %s\n", "cd", "nonexistent");
+	cd_builtin(shell, args5);
+	while (1)
 	{
 		shell->cmd = readline("minishell$ ");
 		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
 			shell->cmd, "Read line failed");
 		if (shell->cmd[0] != '\0')
 		{
+			char **args = parse_input(shell->cmd);
+			if (ft_strcmp(args[0], "cd"))
+				cd_builtin(shell, args);
+			printf("exit_status: %d\n", shell->exit_status);
+			pwd_builtin();
 			add_history(shell->cmd);
-			handle_input(shell->cmd);
+			//handle_input(shell->cmd);
 			free(shell->cmd);
 		}
-	} */
+	}
 // 	free_exit_error(shell, 0, "teste");
 // 	return (0);
 }

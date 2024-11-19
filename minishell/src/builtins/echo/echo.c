@@ -27,7 +27,7 @@ void	echo_builtin(char **args)
 		ft_printf(STDOUT_FILENO, "\n");
 }
 
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	t_shell		*shell;
 	(void)envp;
@@ -54,4 +54,4 @@ int	main(int argc, char **argv, char **envp)
 	echo_builtin(args4);
 	free_exit_error(shell, 0, "teste");
 	return (0);
-}
+} */

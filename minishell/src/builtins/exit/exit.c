@@ -13,7 +13,7 @@ void	exit_builtin(t_shell * shell, char **exit_args)
 		i = 1;
 		if (*exit_args[1] == '-' || *exit_args[1] == '+')
 			i++;
-		if (!ft_isalldigits(exit_args[1] + i) || status >= INT_MIN || status <= INT_MAX);
+		if (!ft_isalldigits(exit_args[1] + i) || status >= INT_MIN || status <= INT_MAX)
 		{
 			shell->exit_status = EXIT_USAGE_SYNTAX_ERROR;
 			msg_error(NUMERIC_ARGUMENT_REQUIRED, "exit", exit_args[1]);
