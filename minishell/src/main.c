@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/18 08:02:18 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/11/19 08:26:09 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ int	main(int argc, char **argv, char **envp)
 			free(shell->cmd);
 		}
 	} */
-	free_exit_error(shell, 0, "teste");
-	return (0);
-}
+// 	free_exit_error(shell, 0, "teste");
+// 	return (0);
+// }

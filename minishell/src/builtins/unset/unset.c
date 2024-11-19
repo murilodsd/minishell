@@ -52,7 +52,7 @@ void	ft_lstremove_var(t_shell *shell, t_list **lst, char *name)
 			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), var->value);
 			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), current->content);
 			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), current);
-			break ;
+			return ;
 		}
 		previous = current;
       		current = current->next;
