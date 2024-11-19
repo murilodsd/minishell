@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:52:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/16 19:10:16 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/11/18 07:51:08 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # endif
 # ifndef FALSE
 #  define FALSE 0
+# endif
+
+# ifndef SUCCESS
+#  define SUCCESS 0
 # endif
 
 // ----------------------- COLOR CODES ----------------------------- //

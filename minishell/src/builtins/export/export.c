@@ -28,14 +28,8 @@ void	ft_lstadd_var_ordered(t_list **lst, t_list *new)
 	}
 }
 
-void	add_export(t_shell *shell, char *export_arg)
+void	add_or_edit_var(t_shell *shell, t_var *var)
 {
-	t_var	*var;
-
-	var = (t_var *)ft_calloc(sizeof(t_var), 1);
-	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
-			var, "Calloc failed");
-	get_var_name_and_value(shell, var, export_arg);
 	if (!(var->name))
 		return ;
 	if (ft_lstfind_name(shell->export_lst, var->name))
@@ -48,31 +42,16 @@ void	add_export(t_shell *shell, char *export_arg)
 		add_var(shell, shell->envp_lst, var);
 }
 
-/* char	*put_double_quote(char *s)
+void	export_var(t_shell *shell, char *export_arg)
 {
-	int		i;
-	int	mem_for_double_quotes;
-	char	*p;
+	t_var	*var;
 
-	mem_for_double_quotes = 0;
-	if (ft_strchr(s, '\n'))
-		mem_for_double_quotes = 2;
-	p = (char *)malloc(sizeof(char) * (ft_strlen(s) + mem_for_double_quotes + 1));
-	if (!p)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		p[i] = s[i];
-		i++;
-	}
-	p[i] = '\0';
-	return (p);
-		int	count;
-
-	count = 0;
-	
-} */
+	var = (t_var *)ft_calloc(sizeof(t_var), 1);
+	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+			var, "Calloc failed");
+	get_new_var_name_and_value(shell, var, export_arg);
+	add_or_edit_var(shell, var);
+}
 
 void	print_export(void *envp)
 {
@@ -105,9 +84,29 @@ void	export_builtin(t_shell *shell, char **export_args)
 		i = 1;
 		while (export_args[i])
 		{
-			add_export(shell, export_args[i]);
+			export_var(shell, export_args[i]);
 			i++;
 		}
 	}
 }
+
+/* int	main(int argc, char **argv, char **envp)
+{
+	t_shell		*shell;
+	(void)envp;
+	//REVIEW -> APAGAR LINHA DEBAIXO
+	char *envp1[] = {"aaa=primeira", "var2=1", "var3=", "var", NULL};
+	char *args[] = {"export", "", "1var=", "var2 =", "var2=2", "var3", "var=", "var4", NULL};
+	init_data(&shell, argc, argv, envp1);
+	export_builtin(shell, args);
+	char *args0[] = {"export", NULL};
+	export_builtin(shell, args0);
+	char *args1[] = {"unset", "aaa", "v1var", "var3", "1VAR", "", NULL};
+	unset_builtin(shell, args1);
+	char *args2[] = {"export", NULL};
+	export_builtin(shell, args2);
+	env_builtin(shell->envp_lst);
+	free_exit_error(shell, 0, "teste");
+	return (0);
+} */
 

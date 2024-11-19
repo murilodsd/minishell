@@ -9,6 +9,7 @@ void	edit_var(t_shell *shell, t_list *lst, t_var *var)
 		return ;
 	var_value = &((t_var *)\
 		(ft_lstfind_name(lst, var->name)->content))->value;
+	//REVIEW -> LIBERAR A MEMORIA DE VAR->NAME E VAR, POIS COMO FOI UMA EDIÇÃO, NÃO FORAM USADOS.
 	ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), *var_value);
 	*var_value = ft_strdup(var->value);
 	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
@@ -65,7 +66,7 @@ static bool	validate_var_name(char *string)
 	return (TRUE);
 }
 
-void	get_var_name_and_value(t_shell *shell, t_var *var, char *string)
+void	get_new_var_name_and_value(t_shell *shell, t_var *var, char *string)
 {
 		if (!validate_var_name(string))
 		{

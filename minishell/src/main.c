@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/17 21:18:32 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/11/18 08:02:18 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,24 @@ int	main(int argc, char **argv, char **envp)
 	t_shell		*shell;
 	(void)envp;
 	//REVIEW -> APAGAR LINHA DEBAIXO
-	char *envp1[] = {"aaa=primeira", "var2=1", "var3=", "var", NULL};
-	char *args[] = {"export", "", "1var=", "var2 =", "var2=2", "var3", "var=", "var4", NULL};
-	init_data(&shell, argc, argv, envp1);
-	export_builtin(shell, args);
+	//char *envp1[] = {"aaa=primeira", "var2=1", "var3=", "var", NULL};
+	char *args[] = {"cd", "src", NULL};
+	init_data(&shell, argc, argv, envp);
+	pwd_builtin();
+	cd_builtin(shell, args);
 	char *args0[] = {"export", NULL};
 	export_builtin(shell, args0);
-	char *args1[] = {"unset", "aaa", "v1var", "var3", "1VAR", "", NULL};
+	char *args1[] = {"unset", "PWD", "OLDPWD", NULL};
 	unset_builtin(shell, args1);
-	char *args2[] = {"export", NULL};
-	export_builtin(shell, args2);
+	export_builtin(shell, args0);
+	env_builtin(shell->envp_lst);
+	char *args2[] = {"cd", "utils", NULL};
+	cd_builtin(shell, args2);
+	export_builtin(shell, args0);
+	env_builtin(shell->envp_lst);
+	char *args3[] = {"cd", NULL};
+	cd_builtin(shell, args3);
+	export_builtin(shell, args0);
 	env_builtin(shell->envp_lst);
 /* 	while (1)
 	{

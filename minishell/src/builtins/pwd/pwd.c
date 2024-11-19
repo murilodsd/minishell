@@ -17,7 +17,6 @@ void	pwd_builtin(void)
 
 	pwd = safe_getcwd(NULL, 0, NULL);
 	ft_printf(1, "%s\n", pwd);
-	free(pwd);
 	//REVIEW - PRECISA SETAR A SAÍDA AQUI?
 	//shell->exit_status = EXIT_SUCCESS;
 }
