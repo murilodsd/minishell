@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/15 11:18:56 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/11/20 13:56:56 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		shell->cmd = readline("minishell$ ");
-		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
-			shell->cmd, "Read line failed");
 		if (shell->cmd[0] != '\0')
 		{
 			add_history(shell->cmd);
 			handle_input(shell->cmd, shell);
-			free(shell->cmd);
+			if (shell->cmd)
+				free(shell->cmd);
 		}
 	}
 	return (0);

@@ -4,7 +4,7 @@ void	ft_lstadd_string_ordered(t_list **lst, t_list *new);
 
 void	create_env_lst(t_shell *shell, char **envp)
 {
-	int	i;
+	int		i;
 	t_list	*new_node;
 
 	i = 0;

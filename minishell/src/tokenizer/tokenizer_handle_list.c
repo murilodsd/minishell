@@ -1,13 +1,14 @@
 #include "../../includes/minishell.h"
 
-void	add_token(t_shell **shell, char *data, enum e_token_type type, enum e_token_quote quote)
+void	add_token(t_shell **shell, char *data, enum e_token_type type, \
+	enum e_token_quote quote)
 {
 	t_token	*new_token;
 	t_token	*tmp;
 
 	new_token = (t_token *)malloc(sizeof(t_token));
-	check_mem_alloc(*shell, &(*shell)->mem_allocation.ptr_mem_list, \
-			new_token, "Token malloc failed");
+//	check_mem_alloc(*shell, &(*shell)->mem_allocation.ptr_mem_list, \
+//			new_token, "Token malloc failed");
 	new_token->data = data;
 	new_token->type = type;
 	new_token->quote = quote;

@@ -7,7 +7,8 @@ static void	save_pointer(t_shell *shell, \
 
 	new_node = ft_lstnew(ptr);
 	if (!new_node)
-		free_exit_error(shell, GENERAL_ERROR, "Failed to allocate mem for a node");
+		free_exit_error(shell, GENERAL_ERROR, \
+			"Failed to allocate mem for a node");
 	ft_lstadd_front(ptr_or_matrix_list, new_node);
 }
 

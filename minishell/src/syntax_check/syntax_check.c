@@ -1,4 +1,4 @@
-#include "../../includes/minishell.h"\
+#include "../../includes/minishell.h"
 
 int	check_redir(char *cmd)
 {
@@ -38,7 +38,7 @@ int	check_pipe(char *cmd)
 		if (cmd[i] == '\'' || cmd[i] == '\"')
 			i = ignore_quotes(cmd, i);
 		if (cmd[i] == '|' && (cmd[i + 1] == '|'
-			|| cmd[ignore_spaces(cmd, i + 1)] == '|'))
+				|| cmd[ignore_spaces(cmd, i + 1)] == '|'))
 			return (1);
 		i++;
 	}

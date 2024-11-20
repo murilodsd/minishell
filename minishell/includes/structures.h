@@ -18,7 +18,7 @@ typedef struct s_token
 
 typedef struct s_shell
 {
-	t_mem_alloc	mem_allocation;
+	t_mem_alloc		mem_allocation;
 	void			*root;
 	int				*array_fd_here_doc;
 	int				exit_status;

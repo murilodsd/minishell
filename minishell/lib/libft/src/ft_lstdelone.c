@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:22:57 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/08/20 17:24:14 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/11/20 13:54:59 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/** 
+/**
  * Takes as a parameter a node and frees the memory of
 the node’s content using the function ’del’ given
 as a parameter and free the node. The memory of
@@ -33,7 +33,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*))
 void ft_printlst(t_list *head)
 {
 	t_list *temp = head;
-	
+
 	if (!head)
 		printf("Lista inexistente\n");
 	else

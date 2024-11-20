@@ -7,7 +7,9 @@ void	check_mem_alloc(t_shell *shell, t_list **ptr_or_matrix_list, \
 	void *ptr, char *error_msg);
 
 // handle_error.c
-void	free_exit_error(t_shell *shell, t_error_codes error_code, char *error_msg);
+void	free_exit_error(t_shell *shell, t_error_codes error_code, \
+	char *error_msg);
+void	free_all(t_shell *shell);
 void	msg_error(t_error_codes error_code, char *error_msg, ...);
 void	handle_error(void);
 

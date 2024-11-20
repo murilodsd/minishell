@@ -2,13 +2,15 @@
 
 void	handle_input(char *cmd, t_shell *shell)
 {
-	(void)shell;
 	if (ft_strncmp(cmd, "exit", 4) == 0)
+	{
+		free_exit_error(shell, EXIT_SUCCESS, NULL);
 		exit(0);
+	}
 	if (syntax_check(cmd))
 		return ;
-	tokenizer(cmd, shell);
-	parser();
+	tokenizer(cmd, shell, 0);
+	parser(shell);
 	binary_tree();
 	builtins();
 	executer();

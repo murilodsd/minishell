@@ -22,21 +22,25 @@ typedef enum e_error_codes
 # define EXIT_USAGE_SYNTAX_ERROR 2
 # define EXIT_CMD_NOT_FOUND 127
 
-// ********************************* TOKEN DEFINITIONS *********************** //
-
+// ********************************* TOKEN DEFINITIONS ***************** //
 
 typedef enum e_token_type
 {
 	WORD,
+	COMMAND,
+	COMMAND_ARG,
 	PIPE,
 	REDIR_IN,
+	REDIR_IN_FILE,
 	REDIR_OUT,
+	REDIR_OUT_FILE,
 	REDIR_APPEND,
+	REDIR_APPEND_FILE,
 	HEREDOC,
+	EOF_TOKEN,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE,
-	ENV_VAR,
-	FILENAME
+	ENV_VAR
 }	t_token_type;
 
 typedef enum e_token_quote
@@ -45,6 +49,5 @@ typedef enum e_token_quote
 	SINGLE,
 	DOUBLE
 }	t_token_quote;
-
 
 #endif

@@ -1,11 +1,7 @@
 #include "../../includes/minishell.h"
 
-void	tokenizer(char *cmd, t_shell *shell)
+void	tokenizer(char *cmd, t_shell *shell, int i)
 {
-	int	i;
-
-	i = ignore_spaces(cmd, 0);
-	printf("\n");
 	while (cmd[i])
 	{
 		if (cmd[i] == '\'')
@@ -28,8 +24,7 @@ void	tokenizer(char *cmd, t_shell *shell)
 			i = ignore_spaces(cmd, i) - 1;
 		else
 			i = handle_word(cmd, i, shell);
-		i++;
+		if (cmd[i] != '\0')
+			i++;
 	}
-	print_list(shell->token);
-	clear_list(&(shell->token));
 }

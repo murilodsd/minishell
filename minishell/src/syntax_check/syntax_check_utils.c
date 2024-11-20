@@ -23,6 +23,7 @@ int	is_redir(char c)
 		return (1);
 	return (0);
 }
+
 int	analyze_redir(char *cmd, int i)
 {
 	if (is_redir(cmd[i + 1]))
