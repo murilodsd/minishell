@@ -1,5 +1,12 @@
 #include "../../../includes/minishell.h"
 
+	//export var=    -> var=""
+	//export var=1 var2=2 var=3    -> salva todas
+	//export var 1   -> bash: export: `1': not a valid identifier     (so pode comecar com letra ou _ e no nome so pode conter letras numeros e _)
+	//export var=1; export var;     -> irá manter o valor anterior de var
+	//export = ->  bash: export: `=': not a valid identifier
+
+
 void	ft_lstadd_var_ordered(t_list **lst, t_list *new)
 {
 	t_list	*node_ref;
