@@ -18,7 +18,7 @@ void	set_pwd(t_shell *shell)
 	pwd = (t_var *)ft_calloc(sizeof(t_var), 1);
 	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
 			pwd, "Calloc failed");
-	pwd->value = safe_getcwd(NULL, 0, NULL);
+	pwd->value = safe_getcwd(NULL, 0, shell);
 	pwd->name = ft_strdup("PWD");
 	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
 			pwd->name, "Calloc failed");
@@ -43,7 +43,7 @@ void	change_directory(t_shell *shell, char *path)
 {
 	char	*actual_path;
 
-	actual_path = safe_getcwd(NULL, 0, NULL);
+	actual_path = safe_getcwd(NULL, 0, shell);
 	if (!path)
 	{
 		path = get_home(shell);
@@ -70,7 +70,7 @@ void	change_directory(t_shell *shell, char *path)
 
 void	cd_builtin(t_shell *shell, char **cd_args)
 {	
-	if (cd_args[2])
+	if (cd_args[1] && cd_args[2])
 	{
 		msg_error(TOO_MANY_ARGS, "cd");
 		shell->exit_status = EXIT_FAILURE;

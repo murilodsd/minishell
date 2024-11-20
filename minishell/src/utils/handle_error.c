@@ -11,7 +11,6 @@ void	free_all(t_shell *shell)
 		ft_lstclear(&(shell->mem_allocation.ptr_mem_list), free);
 	if (shell->mem_allocation.matrix_mem_list != NULL)
 		ft_lstclear(&(shell->mem_allocation.matrix_mem_list), ft_free_matrix);
-	clear_history();
 	free(shell);
 }
 
@@ -57,12 +56,17 @@ void	msg_error(t_error_codes error_code, char *error_msg, ...)
 
 void	free_exit_error(t_shell *shell, t_error_codes error_code, char *error_msg)
 {
-	int	exit_status;
-
 	if (!shell->exit_status)
 		shell->exit_status = 1;
-	exit_status = shell->exit_status;
 	msg_error(error_code, error_msg);
+	free_exit(shell);
+}
+
+void	free_exit(t_shell *shell)
+{
+	int	exit_status;
+
+	exit_status = shell->exit_status;
 	free_all(shell);
 	exit(exit_status);
 }

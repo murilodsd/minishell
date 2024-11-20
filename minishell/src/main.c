@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/19 20:39:24 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:15:02 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char **parse_input(char *input) {
     int i = 0;
 
     if (!tokens) {
-        fprintf(stderr, "Allocation error\n");
+        ft_printf(2, "Allocation error\n");
         exit(EXIT_FAILURE);
     }
 
@@ -38,7 +38,7 @@ char **parse_input(char *input) {
         i++;
 
         if (i >= MAX_TOKENS) {
-            fprintf(stderr, "Too many tokens\n");
+            ft_printf(2, "Too many tokens\n");
             exit(EXIT_FAILURE);
         }
 
@@ -51,23 +51,46 @@ char **parse_input(char *input) {
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell		*shell;
+	char **args;
 	(void)envp;
 	//REVIEW -> APAGAR LINHA DEBAIXO
 	//char *envp1[] = {"aaa=primeira", "var2=1", "var3=", "var", NULL};
 	//char *args[] = {"cd", "src", NULL};
 	init_data(&shell, argc, argv, envp);
 	char *args3[] = {"cd", "", NULL};
-	printf("%s %c%c\n", "cd", '"','"');
+	ft_printf(1, RED"%s %c%c\n"RESET, "cd", '"','"');
 	cd_builtin(shell, args3);
-	printf("%d\n", shell->exit_status);
-	char *args4[] = {"exit", NULL};
-	printf("%s\n", "cd");
+	pwd_builtin(shell);
+	ft_printf(1, "%d\n", shell->exit_status);
+	char *args4[] = {"cd", NULL};
+	ft_printf(1, RED"%s\n"RESET, "cd");
 	cd_builtin(shell, args4);
-	printf("%d\n", shell->exit_status);
+	pwd_builtin(shell);
+	ft_printf(1, "%d\n", shell->exit_status);
 	char *args5[] = {"cd", "nonexistent", NULL};
-	printf("%d\n", shell->exit_status);
-	printf("%s %s\n", "cd", "nonexistent");
+	ft_printf(1, RED"%s %s\n"RESET, "cd", "nonexistent");
 	cd_builtin(shell, args5);
+	pwd_builtin(shell);
+	ft_printf(1, "%d\n", shell->exit_status);
+	char *args6[] = {"cd", "..", NULL};
+	ft_printf(1, RED"%s %s\n"RESET, "cd", "..");
+	cd_builtin(shell, args6);
+	pwd_builtin(shell);
+	ft_printf(1, "%d\n", shell->exit_status);
+	char *args7[] = {"unset", "HOME", NULL};
+	unset_builtin(shell, args7);
+	char *args8[] = {"cd", NULL};
+	ft_printf(1, RED"%s\n"RESET, "cd");
+	cd_builtin(shell, args8);
+	pwd_builtin(shell);
+	ft_printf(1, "%d\n", shell->exit_status);
+	char *args9[] = {"cd", "um", "dois", NULL};
+	ft_printf(1, RED"%s %s %s\n"RESET, "cd", "um", "dois");
+	cd_builtin(shell, args9);
+	pwd_builtin(shell);
+	ft_printf(1, "%d\n", shell->exit_status);
+	// char *args10[] = {"exit", "9223372036854775808", NULL};
+	// exit_builtin(shell, args10);
 	while (1)
 	{
 		shell->cmd = readline("minishell$ ");
@@ -75,16 +98,21 @@ int	main(int argc, char **argv, char **envp)
 			shell->cmd, "Read line failed");
 		if (shell->cmd[0] != '\0')
 		{
-			char **args = parse_input(shell->cmd);
-			if (ft_strcmp(args[0], "cd"))
+			args = parse_input(shell->cmd);
+			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+			args, "Read line failed");
+			if (!ft_strcmp(args[0], "cd"))
 				cd_builtin(shell, args);
-			printf("exit_status: %d\n", shell->exit_status);
-			pwd_builtin();
+			else if (!ft_strcmp(args[0], "exit"))
+				exit_builtin(shell, args);
+			ft_printf(1, "exit_status: %d\n", shell->exit_status);
+			pwd_builtin(shell);
 			add_history(shell->cmd);
 			//handle_input(shell->cmd);
-			free(shell->cmd);
+			//free(shell->cmd);
+			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), shell->cmd);
 		}
 	}
-// 	free_exit_error(shell, 0, "teste");
-// 	return (0);
+	free_exit_error(shell, 0, "teste");
+ 	return (0);
 }

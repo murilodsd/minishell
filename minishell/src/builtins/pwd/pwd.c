@@ -11,12 +11,11 @@ char	*safe_getcwd(char *buf, size_t size, t_shell *shell)
 	return (cwd);
 }
 
-void	pwd_builtin(void)
+void	pwd_builtin(t_shell *shell)
 {
 	char	*pwd;
 
-	pwd = safe_getcwd(NULL, 0, NULL);
+	pwd = safe_getcwd(NULL, 0, shell);
 	ft_printf(1, "%s\n", pwd);
-	//REVIEW - PRECISA SETAR A SAÍDA AQUI?
-	//shell->exit_status = EXIT_SUCCESS;
+	shell->exit_status = EXIT_SUCCESS;
 }

@@ -36,6 +36,10 @@ INCLUDE_PATH=./includes/ ./lib/*/include/
 INCLUDE_FLAG=$(addprefix -I , $(INCLUDE_PATH))
 RM = rm -f
 
+#VALGRIND
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --gen-suppressions=all
+VALGRIND_SUPP = --suppressions=readline.supp
+
 all: $(NAME)
 
 $(NAME): msg libs $(OBJS) $(LIB_STATIC)
@@ -50,6 +54,9 @@ msg:
 
 %.o: %.c
 	$(CC) $(CCFLAGS) -c $< -o $@
+
+valgrind: all
+	valgrind $(VALGRIND_FLAGS) $(VALGRIND_SUPP) ./$(NAME)
 
 clean:
 	make -C $(LIBFT_DIR) clean

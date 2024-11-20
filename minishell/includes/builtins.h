@@ -33,7 +33,7 @@ void	add_or_edit_var(t_shell *shell, t_var *var);
 
 // pwd
 // pwd.c
-void	pwd_builtin(void);
+void	pwd_builtin(t_shell * shell);
 char	*safe_getcwd(char *buf, size_t size, t_shell *shell);
 
 // unset

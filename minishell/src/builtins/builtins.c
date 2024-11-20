@@ -8,6 +8,6 @@ void	builtins(void)
 	env_builtin();
 	exit_builtin();
 	export_builtin();
-	pwd_builtin();
+	pwd_builtin(shell);
 	unset_builtin(); */
 }
