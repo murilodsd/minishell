@@ -19,6 +19,8 @@ ls >< wc
 ls > < wc
 >     >
 
+
+
 ex de erros '<':
 ls <<< wc
 ><
@@ -46,10 +48,12 @@ ls <> wc
 
 2. Pipes Malformados
 Verificar se existe um comando(WORD) antes e depois do pipe.
-ex:
+ex de erros:
 | echo hello
        | echo hello
 echo hello | | grep hi
+
+ex certos:
 echo hello |
 echo hello |                
 
