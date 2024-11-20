@@ -9,7 +9,6 @@ void	cd_builtin(char **cd_args)
 		if(!ft_strcmp(cd_args[1], ""))
 			return ;
 	}
-
 	if (chdir(cd_args[1]) != 0)
 		msg_error(0, "cd: ", cd_args[1]);
 		//ft_printf(2, "minishell: cd: %s: %s\n", cd_args[1], strerror(errno));
@@ -21,8 +20,6 @@ void print_error_message(int errnum) {
 
 /* int main(int argc, char const *argv[])
 {
-
-	char cwd[100];
 
 	char *cwd;
 

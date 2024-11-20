@@ -43,10 +43,13 @@ void	init_data(t_shell **shell, int argc, char **argv, char **envp)
 	check_args(*shell, argc, argv);
 	(*shell)->envp_lst = NULL;
 	(*shell)->export_lst = NULL;
+	(*shell)->envp_lst = NULL;
+	(*shell)->export_lst = NULL;
 	(*shell)->exit_status = EXIT_SUCCESS;
 	//TODO - PEGAR NUMERO DO PROCESSO
 	(*shell)->fd_in = STDIN_FILENO;
 	(*shell)->fd_out = STDOUT_FILENO;
+	create_env_lst(*shell, envp);
 	create_env_lst(*shell, envp);
 	handle_signals();
 }
