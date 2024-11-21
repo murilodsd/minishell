@@ -6,11 +6,11 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/20 17:53:03 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:54:01 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+/* #include "../includes/minishell.h"
 
 int	g_signal;
 
@@ -33,4 +33,4 @@ int	main(int argc, char **argv, char **envp)
 		}
 	}
 	return (0);
-}
+} */

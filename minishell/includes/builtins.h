@@ -10,7 +10,7 @@ void	cd_builtin(t_shell *shell, char **cd_args);
 
 // echo
 // echo.c
-void	echo_builtin(char **args);
+void	echo_builtin(t_shell *shell, char **args);
 
 // env
 // env.c

@@ -64,7 +64,7 @@ void	exit_builtin(t_shell * shell, char **exit_args)
 	}
 	free_exit(shell);
 }
-
+/* 
 #define MAX_TOKENS 100
 
 char **parse_input(char *input) {
@@ -160,4 +160,4 @@ int	main(int argc, char **argv, char **envp)
 	}
 	free_exit_error(shell, 0, "teste");
  	return (0);
-}
+} */

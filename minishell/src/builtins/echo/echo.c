@@ -1,6 +1,6 @@
 #include "../../../includes/minishell.h"
 
-void	echo_builtin(char **args)
+void	echo_builtin(t_shell *shell, char **args)
 {
 	bool	new_line;
 	int	i;
@@ -25,6 +25,7 @@ void	echo_builtin(char **args)
 	}
 	if (new_line)
 		ft_printf(STDOUT_FILENO, "\n");
+	shell->exit_status = EXIT_SUCCESS;
 }
 
 /* int	main(int argc, char **argv, char **envp)
@@ -49,7 +50,7 @@ void	echo_builtin(char **args)
 	char *args3[] = {"echo", "-1", "-n", "-nnn", "comquebra", NULL};
 	echo_builtin(args3);
 	char *args5[] = {"echo", "-n", "-1", "-nnn", "semquebra", NULL};
-	echo_builtin(args5);
+	echo_builtin(args5);t_shell		*shell;
 	char *args4[] = {"echo", "-nnnnn", "-n", "-nnn", "fimsemquebra", NULL};
 	echo_builtin(args4);
 	free_exit_error(shell, 0, "teste");
