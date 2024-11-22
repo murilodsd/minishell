@@ -9,7 +9,7 @@ void	ft_lstremove_mem_node(t_list **lst, void *content)
 {
 	t_list *current;
 	t_list *previous;
-	
+
 	if (!lst)
 		return ;
 	current = *lst;
@@ -77,7 +77,7 @@ void	unset_builtin(t_shell *shell, char **unset_args)
 	}
 	shell->exit_status = 0;
 }
-
+/*
 #define MAX_TOKENS 100
 
 char **parse_input(char *input) {
@@ -155,4 +155,4 @@ int	main(int argc, char **argv, char **envp)
 	}
 	free_exit_error(shell, 0, "teste");
  	return (0);
-}
+}*/

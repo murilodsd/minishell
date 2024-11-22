@@ -31,9 +31,12 @@ void	looking_for_env_var(t_shell *shell)
 			if (tmp == shell->token)
 				shell->token = tmp_next;
 			rm_token(&tmp, shell);
-			check_env_var(tmp_next);
+			check_env_var(tmp_next, shell);
 		}
+		else if (tmp->type == ENV_VAR_EXIT_CODE)
+			check_exit_code(tmp, shell);
 		tmp = tmp_next;
+
 	}
 }
 
@@ -61,5 +64,27 @@ void	looking_for_redir(t_shell *shell)
 		}
 		else
 			tmp = tmp->next;
+	}
+}
+
+void	looking_d_quote(t_shell *shell)
+{
+	t_token	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = shell->token;
+	while (tmp)
+	{
+		if (tmp->type == DOUBLE_QUOTE)
+		{
+			while (tmp->data[i])
+			{
+				if (tmp->data[i] == '$')
+					expand_var_d_quote(tmp, i);
+				i++;
+			}
+		}
+		tmp = tmp->next;
 	}
 }

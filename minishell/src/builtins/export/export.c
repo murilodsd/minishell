@@ -117,7 +117,7 @@ void	export_builtin(t_shell *shell, char **export_args)
 	free_exit_error(shell, 0, "teste");
 	return (0);
 } */
-
+/*
 
 #define MAX_TOKENS 100
 
@@ -200,5 +200,5 @@ int	main(int argc, char **argv, char **envp)
 	}
 	free_exit_error(shell, 0, "teste");
  	return (0);
-}
+}*/
 

@@ -1,12 +1,12 @@
 #include "../../includes/minishell.h"
 
-void	expand_var(t_token *token)
+void	expand_var(t_token *token, t_shell *shell)
 {
 	char	*env_var;
 
 	if (token->type == ENV_VAR_NAME)
 	{
-		env_var = getenv(token->data);
+		env_var = ft_getenv(shell->envp_lst, token->data);
 		if (env_var)
 		{
 			free(token->data);
@@ -26,26 +26,6 @@ void	expand_var(t_token *token)
 	}
 }
 
-void	check_env_var(t_token *token)
-{
-	int		i;
-
-	i = 0;
-	while (token->data[i])
-	{
-		if (i == 0 && !isalpha(token->data[i]) && token->data[i] != '_')
-			break;
-		if (!isalnum(token->data[i]) && token->data[i] != '_')
-			break;
-		i++;
-	}
-	if (token->data[i] == '\0')
-		token->type = ENV_VAR_NAME;
-	else
-		split_token(token, i);
-	expand_var(token);
-}
-
 void	split_token(t_token *token, int i)
 {
 	char	*env_var;
@@ -63,21 +43,27 @@ void	split_token(t_token *token, int i)
 	find_place(token, word, token->quote);
 }
 
-void	find_place(t_token *token, char *word, t_token_quote quote)
+void	expand_var_d_quote(t_token *token, int i)
 {
-	t_token	*new_token;
-	t_token	*tmp;
+	int		j;
+	char	*env_var;
 
-	new_token = (t_token *)malloc(sizeof(t_token));
-//	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), new_token,
-//		"Token malloc failed");
-	new_token->data = word;
-	new_token->type = WORD;
-	new_token->quote = quote;
-	tmp = token->next;
-	token->next = new_token;
-	new_token->prev = token;
-	new_token->next = tmp;
-	if (tmp)
-		tmp->prev = new_token;
+	j = i + 1;
+	env_var = ft_substr(token->data, i, j - i);
+}
+
+char	*ft_getenv(t_list *envp_lst, char *name)
+{
+	t_var *var;
+	t_list *lst;
+
+	lst = envp_lst;
+	while (lst)
+	{
+		var = (t_var *)lst->content;
+		if (ft_strcmp(var->name, name) == 0)
+			return (var->value);
+		lst = lst->next;
+	}
+	return (NULL);
 }

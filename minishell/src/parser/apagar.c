@@ -69,6 +69,8 @@ const char	*get_token_type_str(t_token_type type)
 		return ("Env var name");
 	else if (type == SPACE_TOKEN)
 		return ("Space");
+	else if (type == NULL_TOKEN)
+		return ("Null");
 	else
 		return ("Unknown");
 }
