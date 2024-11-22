@@ -22,6 +22,7 @@ int			handle_word(char *cmd, int i, t_shell *shell);
 void		init_token(t_shell **shell);
 void		add_token(t_shell **shell, char *data, \
 	enum e_token_type type, enum e_token_quote quote);
+void		rm_token(t_token **token, t_shell *shell);
 
 // tokenizer_utils.c
 int			ft_isword(char c);

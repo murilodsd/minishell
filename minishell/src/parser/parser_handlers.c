@@ -19,16 +19,20 @@ void	looking_for_here_doc(t_shell *shell)
 void	looking_for_env_var(t_shell *shell)
 {
 	t_token	*tmp;
+	t_token	*tmp_next;
 
 	tmp = shell->token;
 	while (tmp)
 	{
+		tmp_next = tmp->next;
 		if (tmp->type == ENV_VAR)
 		{
-			tmp = tmp->next;
-			check_env_var(tmp);
+			if (tmp == shell->token)
+				shell->token = tmp_next;
+			rm_token(&tmp, shell);
+			check_env_var(tmp_next);
 		}
-		tmp = tmp->next;
+		tmp = tmp_next;
 	}
 }
 

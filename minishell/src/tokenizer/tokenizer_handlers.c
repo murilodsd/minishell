@@ -6,7 +6,6 @@ int	handle_s_quotes(char *cmd, int i, t_shell *shell)
 	char	*tmp;
 
 	j = i + 1;
-	j = ignore_quotes(cmd, j);
 	while (cmd[j])
 	{
 		while (cmd[j] == '\'' && cmd[j + 1] == '\'')
@@ -61,9 +60,21 @@ int	handle_env_var(char *cmd, int i, t_shell *shell)
 {
 	char	*tmp;
 
-	tmp = ft_substr(cmd, i, 1);
+	if (cmd[i + 1] == '?')
+	{
+		tmp = ft_substr(cmd, i, 2);
+//		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), tmp,
+//			"Substr malloc failed");
+		add_token(&shell, tmp, ENV_VAR_EXIT_CODE, NO_QUOTE);
+		return (i + 1);
+	}
+	else
+		tmp = ft_substr(cmd, i, 1);
 //	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), tmp,
 //		"Substr malloc failed");
-	add_token(&shell, tmp, ENV_VAR, NO_QUOTE);
+	if (cmd[i + 1] == '\0' || ft_isspace(cmd[i + 1]))
+		add_token(&shell, tmp, WORD, NO_QUOTE);
+	else
+		add_token(&shell, tmp, ENV_VAR, NO_QUOTE);
 	return (i);
 }

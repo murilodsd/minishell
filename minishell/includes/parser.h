@@ -13,6 +13,7 @@ void	looking_for_env_var(t_shell *shell);
 void	looking_for_redir(t_shell *shell);
 
 //parser_utils.c
+void	expand_var(t_token *token);
 void	check_env_var(t_token *token);
 void	split_token(t_token *token, int i);
 void	find_place(t_token *token, char *word, t_token_quote quote);

@@ -1,5 +1,30 @@
 #include "../../includes/minishell.h"
 
+void	expand_var(t_token *token)
+{
+	char	*env_var;
+
+	if (token->type == ENV_VAR_NAME)
+	{
+		env_var = getenv(token->data);
+		if (env_var)
+		{
+			free(token->data);
+			token->data = ft_strdup(env_var);
+//			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list),
+//				token->data, "Strdup malloc failed");
+		}
+		else
+		{
+			free(token->data);
+			token->data = ft_strdup(" ");
+//			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list),
+//				token->data, "Strdup malloc failed");
+		}
+		token->type = WORD;
+	}
+}
+
 void	check_env_var(t_token *token)
 {
 	int		i;
@@ -12,9 +37,10 @@ void	check_env_var(t_token *token)
 		i++;
 	}
 	if (token->data[i] == '\0')
-		token->type = ENV_VAR;
+		token->type = ENV_VAR_NAME;
 	else
 		split_token(token, i);
+	expand_var(token);
 }
 
 void	split_token(t_token *token, int i)
@@ -30,7 +56,7 @@ void	split_token(t_token *token, int i)
 //		"Substr malloc failed");
 	free(token->data);
 	token->data = env_var;
-	token->type = ENV_VAR;
+	token->type = ENV_VAR_NAME;
 	find_place(token, word, token->quote);
 }
 

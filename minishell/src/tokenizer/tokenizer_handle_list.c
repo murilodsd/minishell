@@ -29,3 +29,22 @@ void	add_token(t_shell **shell, char *data, enum e_token_type type, \
 	}
 	new_token->next = NULL;
 }
+
+void	rm_token(t_token **token, t_shell *shell)
+{
+	t_token	*tmp;
+
+	if (!token || !(*token))
+		return;
+	tmp = *token;
+	if (!tmp->prev)
+		shell->token = tmp->next;
+	else
+		tmp->prev->next = tmp->next;
+	if (tmp->next)
+			tmp->next->prev = tmp->prev;
+	if (tmp->data)
+		free(tmp->data);
+	free(tmp);
+}
+

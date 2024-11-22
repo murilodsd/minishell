@@ -63,6 +63,10 @@ const char	*get_token_type_str(t_token_type type)
 		return ("D Quote");
 	else if (type == ENV_VAR)
 		return ("Env var");
+	else if (type == ENV_VAR_EXIT_CODE)
+		return ("Env var exit code");
+	else if (type == ENV_VAR_NAME)
+		return ("Env var name");
 	else
 		return ("Unknown");
 }
@@ -91,8 +95,8 @@ void	print_list(t_token *token)
 	index = 0;
 	while (tmp)
 	{
-		formatted_data = tmp->data ? format_data_parentheses(tmp->data) : "(null)";
-		printf("| %-5d | %-50.50s | %-20.15s | %-10.10s |\n", // Altere para %-15.15s no campo "Type"
+		formatted_data = tmp->data ? format_data_parentheses(tmp->data) : NULL;
+		printf("| %-5d | %-50.50s | %-20.15s | %-10.10s |\n",
 			index,
 			formatted_data,
 			get_token_type_str(tmp->type),
@@ -103,5 +107,4 @@ void	print_list(t_token *token)
 		tmp = tmp->next;
 		index++;
 	}
-	printf("\n");
 }
