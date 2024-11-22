@@ -5,7 +5,7 @@ void	ft_lstadd_var_ordered(t_list **lst, t_list *new);
 
 static void	create_env_export_lst(t_shell *shell, char **envp)
 {
-	int	i;
+	int		i;
 	t_list	*new_node;
 	t_var	*var;
 
@@ -51,6 +51,8 @@ void	 init_data(t_shell **shell, int argc, char **argv, char **envp)
 		exit(EXIT_FAILURE);
 	}
 	check_args(*shell, argc, argv);
+	(*shell)->envp_lst = NULL;
+	(*shell)->export_lst = NULL;
 	(*shell)->envp_lst = NULL;
 	(*shell)->export_lst = NULL;
 	(*shell)->exit_status = EXIT_SUCCESS;

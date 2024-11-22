@@ -1,0 +1,19 @@
+Testes quotes
+
+dramos-j@c2r6s11:~$ echo $USER
+dramos-j
+dramos-j@c2r6s11:~$ echo '$USER'
+$USER
+dramos-j@c2r6s11:~$ echo "$USER"
+dramos-j
+dramos-j@c2r6s11:~$ echo "'$USER'"
+'dramos-j'
+dramos-j@c2r6s11:~$ echo "''$USER''"
+''dramos-j''
+dramos-j@c2r6s11:~$ echo '"$USER"'
+"$USER"
+dramos-j@c2r6s11:~$ echo '"'$USER'"'
+"dramos-j"
+dramos-j@c2r6s11:~$ echo "'"$USER"'"
+'dramos-j'
+

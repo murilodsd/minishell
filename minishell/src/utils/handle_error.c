@@ -14,16 +14,19 @@ void	free_all(t_shell *shell)
 	free(shell);
 }
 
+
 void	msg_error(t_error_codes error_code, char *error_msg, ...)
 {
 	va_list	va_args;
 
 	va_start(va_args, error_msg);
 	if (errno != 0)
+	{
 		if (errno == ENOENT)
 			ft_printf(STDERR_FILENO, "minishell: %s%s: %s\n", error_msg, va_arg(va_args, char *), strerror(errno));
 		else
 			ft_printf(STDERR_FILENO, "minishell: %s%s\n", error_msg, strerror(errno));
+	}
 	else
 	{
 		if (error_code == CMD_NOT_FOUND)
@@ -41,6 +44,8 @@ void	msg_error(t_error_codes error_code, char *error_msg, ...)
 			ft_printf(STDERR_FILENO, "minishell: %s: Not a directory\n", error_msg);
 		else if (error_code == TOO_MANY_ARGS)
 			ft_printf(STDERR_FILENO, "minishell: %s: too many arguments\n", error_msg);
+		else if (error_code == SYNTAX_ERROR)
+			ft_printf(STDERR_FILENO, "minishell: syntax error near unexpected token `%s'\n", error_msg);
 		else if (error_code == NOT_VALID_IDENTIFIER)
 			ft_printf(STDERR_FILENO, "minishell: %s: `%s': not a valid identifier\n", error_msg, va_arg(va_args, char *));
 		else if (error_code == VAR_NOT_SET)

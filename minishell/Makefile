@@ -4,11 +4,19 @@ LIBFT = $(LIBFT_DIR)/libft.a
 CC=cc
 CCFLAGS= -Wall -Wextra -Werror -g
 EXTRA_FLAGS = -lreadline
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --suppressions=./readline.supp --track-origins=yes
 SRCS = src/main.c \
 	src/handle_signals/handle_signals.c \
 	src/syntax_check/syntax_check.c \
+	src/syntax_check/syntax_check_utils.c \
 	src/tokenizer/tokenizer.c \
+	src/tokenizer/tokenizer_handlers.c \
+	src/tokenizer/tokenizer_handlers2.c \
+	src/tokenizer/tokenizer_handle_list.c \
+	src/tokenizer/tokenizer_utils.c \
 	src/parser/parser.c \
+	src/parser/parser_handlers.c \
+	src/parser/parser_utils.c \
 	src/binary_tree/binary_tree.c \
 	src/executer/executer.c \
 	src/builtins/builtins.c \
@@ -20,10 +28,12 @@ SRCS = src/main.c \
 	src/builtins/unset/unset.c \
 	src/builtins/env/env.c \
 	src/builtins/exit/exit.c \
+	src/utils/utils.c \
 	src/utils/handle_input.c \
 	src/utils/handle_error.c \
 	src/utils/handle_mem.c \
-	src/utils/init_data.c
+	src/utils/init_data.c \
+	src/parser/apagar.c
 OBJS = $(SRCS:.c=.o)
 
 #GENERAL
@@ -60,9 +70,11 @@ valgrind: all
 
 clean:
 	make -s -C $(LIBFT_DIR) clean
+	make -s -C $(LIBFT_DIR) clean
 	$(RM) $(OBJS)
 
 fclean: clean
+	make -s -C $(LIBFT_DIR) fclean
 	make -s -C $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
 

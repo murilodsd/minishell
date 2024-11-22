@@ -14,7 +14,6 @@ void	sigint_handler(int signal)
 void	handle_signals(void)
 {
 	printf("handle_signals\n");
-
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 }

@@ -89,7 +89,7 @@ void	cd_builtin(t_shell *shell, char **cd_args)
 
 /* int main(int argc, char const *argv[])
 {
-	
+
 	char *cwd;
 
 	//----- TESTES CD ------//
@@ -130,7 +130,7 @@ void	cd_builtin(t_shell *shell, char **cd_args)
 	cwd = getcwd(NULL, 0);
 	printf("%s\n", cwd);
 	printf("/\n");
-	
+
 	//----- CASOS DE ERRO ----//
 
 	//-----  cd path_inexistente   ----//

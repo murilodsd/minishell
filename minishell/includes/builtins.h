@@ -1,5 +1,6 @@
 #ifndef BUILTINS_H
 # define BUILTINS_H
+# include "minishell.h"
 
 // builtins.c
 void	builtins(void);

@@ -1,25 +1,72 @@
 1. Erros de Redirecionamento Malformado
 Verificar se os redirects sao seguidos de um arquivo valido(WORD).
-ex:
-echo hello >
-echo "hello" >>>
-cat < > file
-> echo > file
+ex de erros 'newline':
+ls >
+ls <
+ls >>
+ls <<
+ls | wc >
+ls | wc <
+>
+<
+>>
+<<
+
+ex de erros '>':
+<         >   
+ls < > wc
+ls >< wc
+ls > < wc
+>     >
+
+
+
+ex de erros '<':
+ls <<< wc
+><
+>           <    
+<    <
+
+ex de erros '|':
+ls <| wc
+ls < | wc
+ls > | wc
+ls >> | wc
+ls << | wc
+
+ex certos:
+> test
+< test
+>> test
+<< test
+ls | > wc
+ls | < wc
+ls | << wc
+ls | >> wc
+ls >| wc
+ls <> wc
 
 2. Pipes Malformados
 Verificar se existe um comando(WORD) antes e depois do pipe.
-ex:
+ex de erros:
 | echo hello
        | echo hello
 echo hello | | grep hi
+
+ex certos:
 echo hello |
+echo hello |                
 
 3. Aspas Não Fechadas
 Verificar se existe o fechamento das aspas, se for simples, tem que finalizar com simples, se for dupla, tem que finalizar com dupla.
-ex:
+ex de erros:
 echo "hello
 echo 'hello
 echo 'hello world"
+
+ex certo:
+echo "hello ' world"
+echo 'hello " world'
 
 4.Comandos Vazios
 Ignorar entradas vazias.
