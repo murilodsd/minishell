@@ -4,14 +4,22 @@ void	edit_var(t_shell *shell, t_list *lst, t_var *var)
 {
 	char	**var_value;
 
-
 	if (!(var->value))
 		return ;
 	var_value = &((t_var *)\
 		(ft_lstfind_name(lst, var->name)->content))->value;
-	//REVIEW -> LIBERAR A MEMORIA DE VAR->NAME E VAR, POIS COMO FOI UMA EDIÇÃO, NÃO FORAM USADOS.
-	ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), *var_value);
-	*var_value = ft_strdup(var->value);
+	//REVIEW -> LIBERAR A MEMORIA DE VAR->NAME, VAR->IS_INCREMENTAL E VAR, POIS COMO FOI UMA EDIÇÃO, NÃO FORAM USADOS.
+	if (!var->is_incremental || (var->is_incremental && !*var_value))
+	{
+		if (*var_value)
+			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), *var_value);
+		*var_value = ft_strdup(var->value);
+	}
+	else
+	{
+		*var_value = ft_strjoin(*var_value, var->value);
+		ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), *var_value);
+	}
 	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
 			*var_value, "Calloc failed");
 }
@@ -57,7 +65,8 @@ static bool	validate_var_name(char *string)
 	if (!ft_isalpha(string[0]) && string[0] != '_')
 		return (FALSE);
 	i = 0;
-	while (string[i] && string[i] != '=')
+	while (string[i] && \
+		(string[i] != '=' && (string[i] != '+' && string[i + 1] != '=')))
 	{
 		if (!ft_isalnum(string[i]) && string[i] != '_')
 			return (FALSE);
@@ -74,20 +83,21 @@ void	get_new_var_name_and_value(t_shell *shell, t_var *var, char *string)
 			shell->exit_status = EXIT_FAILURE;
 			return ;
 		}
-
 		if (!strchr(string, '='))
-		{
 			var->name = ft_strdup(string);
-			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
-				var->name, "Calloc failed");
-		}
 		else
 		{
 			var->value = ft_strdup((ft_strchr(string, '=')) + 1);
 			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
 				var->value, "Calloc failed");
-			var->name = ft_substr(string, 0, ft_strchr(string, '=') - string);
-			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
-				var->name, "Calloc failed");
+			if (ft_strchr(string, '+') && (ft_strchr(string, '=') > ft_strchr(string, '+')))
+			{
+				var->is_incremental = TRUE;
+				var->name = ft_substr(string, 0, ft_strchr(string, '=') - string - 1);
+			}
+			else
+				var->name = ft_substr(string, 0, ft_strchr(string, '=') - string);
 		}
+		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+				var->name, "Calloc failed");
 }

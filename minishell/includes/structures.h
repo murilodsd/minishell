@@ -38,6 +38,7 @@ typedef struct s_var
 {
 	char	*name;
 	char	*value;
+	bool	is_incremental;
 }	t_var;
 
 typedef struct s_pipe
