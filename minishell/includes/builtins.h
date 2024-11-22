@@ -13,8 +13,9 @@ void	cd_builtin(t_shell *shell, char **cd_args);
 void	echo_builtin(char **args);
 
 // env
+
 // env.c
-void	env_builtin(t_list *env_lst);
+void	env_builtin(t_shell *shell);
 
 // exit
 // exit.c

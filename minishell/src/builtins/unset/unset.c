@@ -75,4 +75,84 @@ void	unset_builtin(t_shell *shell, char **unset_args)
 			i++;
 		}
 	}
+	shell->exit_status = 0;
+}
+
+#define MAX_TOKENS 100
+
+char **parse_input(char *input) {
+    char **tokens = malloc(MAX_TOKENS * sizeof(char *));
+    char *token;
+    int i = 0;
+
+    if (!tokens) {
+        ft_printf(2, "Allocation error\n");
+        exit(EXIT_FAILURE);
+    }
+
+    token = strtok(input, " \t\r\n\a");
+    while (token != NULL) {
+        tokens[i] = token;
+        i++;
+
+        if (i >= MAX_TOKENS) {
+            ft_printf(2, "Too many tokens\n");
+            exit(EXIT_FAILURE);
+        }
+
+        token = strtok(NULL, " \t\r\n\a");
+    }
+    tokens[i] = NULL;
+    return tokens;
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_shell		*shell;
+	char **args;
+	(void)envp;
+	//REVIEW -> APAGAR LINHA DEBAIXO
+	char *envp1[] = {"aaa=primeira", NULL};
+	//char *args[] = {"cd", "src", NULL};
+	init_data(&shell, argc, argv, envp1);
+	shell->exit_status = EXIT_CMD_NOT_FOUND;
+	ft_printf(1, "Setei o status como %d\n", shell->exit_status);
+	// char *args0[] = {"exit", "9223372036854775808", NULL};
+	// exit_builtin(shell, args0);
+	// ft_printf(1, "%d\n", shell->exit_status);
+	// char *args1[] = {"exit", "-9223372036854775809", NULL};
+	// exit_builtin(shell, args1);
+	ft_printf(1, "%d\n", shell->exit_status);
+	while (1)
+	{
+		shell->cmd = readline("minishell$ ");
+		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+			shell->cmd, "Read line failed");
+		if (shell->cmd[0] != '\0')
+		{
+			args = parse_input(shell->cmd);
+			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+			args, "Read line failed");
+			if (!ft_strcmp(args[0], "cd"))
+				cd_builtin(shell, args);
+			else if (!ft_strcmp(args[0], "exit"))
+				exit_builtin(shell, args);
+			else if (!ft_strcmp(args[0], "pwd"))
+				pwd_builtin(shell);
+			else if (!ft_strcmp(args[0], "unset"))
+				unset_builtin(shell, args);
+			else if (!ft_strcmp(args[0], "export"))
+				export_builtin(shell, args);
+			else if (!ft_strcmp(args[0], "env"))
+				env_builtin(shell->envp_lst);
+			ft_printf(1, "exit_status: %d\n", shell->exit_status);
+			//pwd_builtin(shell);
+			add_history(shell->cmd);
+			//handle_input(shell->cmd);
+			//free(shell->cmd);
+			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), shell->cmd);
+		}
+	}
+	free_exit_error(shell, 0, "teste");
+ 	return (0);
 }

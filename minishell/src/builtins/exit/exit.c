@@ -59,13 +59,11 @@ void	exit_builtin(t_shell * shell, char **exit_args)
 			return ;
 		}
 		shell->exit_status = *status % 256;
-		if (*status < 0)
-			shell->exit_status = 256 - shell->exit_status;
 	}
 	free_exit(shell);
 }
 
-#define MAX_TOKENS 100
+/* #define MAX_TOKENS 100
 
 char **parse_input(char *input) {
     char **tokens = malloc(MAX_TOKENS * sizeof(char *));
@@ -91,9 +89,9 @@ char **parse_input(char *input) {
     }
     tokens[i] = NULL;
     return tokens;
-}
+} */
 
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	t_shell		*shell;
 	char **args;
@@ -102,40 +100,14 @@ int	main(int argc, char **argv, char **envp)
 	//char *envp1[] = {"aaa=primeira", "var2=1", "var3=", "var", NULL};
 	//char *args[] = {"cd", "src", NULL};
 	init_data(&shell, argc, argv, envp);
-	char *args3[] = {"cd", "", NULL};
-	ft_printf(1, RED"%s %c%c\n"RESET, "cd", '"','"');
-	cd_builtin(shell, args3);
-	pwd_builtin(shell);
+	shell->exit_status = EXIT_CMD_NOT_FOUND;
+	ft_printf(1, "Setei o status como %d\n", shell->exit_status);
+	// char *args0[] = {"exit", "9223372036854775808", NULL};
+	// exit_builtin(shell, args0);
+	// ft_printf(1, "%d\n", shell->exit_status);
+	// char *args1[] = {"exit", "-9223372036854775809", NULL};
+	// exit_builtin(shell, args1);
 	ft_printf(1, "%d\n", shell->exit_status);
-	char *args4[] = {"cd", NULL};
-	ft_printf(1, RED"%s\n"RESET, "cd");
-	cd_builtin(shell, args4);
-	pwd_builtin(shell);
-	ft_printf(1, "%d\n", shell->exit_status);
-	char *args5[] = {"cd", "nonexistent", NULL};
-	ft_printf(1, RED"%s %s\n"RESET, "cd", "nonexistent");
-	cd_builtin(shell, args5);
-	pwd_builtin(shell);
-	ft_printf(1, "%d\n", shell->exit_status);
-	char *args6[] = {"cd", "..", NULL};
-	ft_printf(1, RED"%s %s\n"RESET, "cd", "..");
-	cd_builtin(shell, args6);
-	pwd_builtin(shell);
-	ft_printf(1, "%d\n", shell->exit_status);
-	char *args7[] = {"unset", "HOME", NULL};
-	unset_builtin(shell, args7);
-	char *args8[] = {"cd", NULL};
-	ft_printf(1, RED"%s\n"RESET, "cd");
-	cd_builtin(shell, args8);
-	pwd_builtin(shell);
-	ft_printf(1, "%d\n", shell->exit_status);
-	char *args9[] = {"cd", "um", "dois", NULL};
-	ft_printf(1, RED"%s %s %s\n"RESET, "cd", "um", "dois");
-	cd_builtin(shell, args9);
-	pwd_builtin(shell);
-	ft_printf(1, "%d\n", shell->exit_status);
-	// char *args10[] = {"exit", "9223372036854775808", NULL};
-	// exit_builtin(shell, args10);
 	while (1)
 	{
 		shell->cmd = readline("minishell$ ");
@@ -150,8 +122,10 @@ int	main(int argc, char **argv, char **envp)
 				cd_builtin(shell, args);
 			else if (!ft_strcmp(args[0], "exit"))
 				exit_builtin(shell, args);
+			else if (!ft_strcmp(args[0], "pwd"))
+				pwd_builtin(shell);
 			ft_printf(1, "exit_status: %d\n", shell->exit_status);
-			pwd_builtin(shell);
+			//pwd_builtin(shell);
 			add_history(shell->cmd);
 			//handle_input(shell->cmd);
 			//free(shell->cmd);
@@ -160,4 +134,4 @@ int	main(int argc, char **argv, char **envp)
 	}
 	free_exit_error(shell, 0, "teste");
  	return (0);
-}
+} */

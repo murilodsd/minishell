@@ -9,7 +9,8 @@ void	print_env(void *envp)
 		printf("%s=%s\n", content->name, content->value);
 }
 
-void	env_builtin(t_list *env_lst)
+void	env_builtin(t_shell *shell)
 {
-	ft_lstiter(env_lst, print_env);
+	ft_lstiter(shell->envp_lst, print_env);
+	shell->exit_status = 0;
 }
