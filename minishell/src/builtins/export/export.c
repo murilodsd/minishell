@@ -119,7 +119,7 @@ void	export_builtin(t_shell *shell, char **export_args)
 } */
 
 
-#define MAX_TOKENS 100
+/* #define MAX_TOKENS 100
 
 char **parse_input(char *input) {
     char **tokens = malloc(MAX_TOKENS * sizeof(char *));
@@ -202,3 +202,4 @@ int	main(int argc, char **argv, char **envp)
  	return (0);
 }
 
+ */

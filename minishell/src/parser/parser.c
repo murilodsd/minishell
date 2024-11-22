@@ -11,5 +11,4 @@ void	parser(t_shell *shell)
 {
 	polish_list(shell);
 	print_list(shell->token);
-	clear_list(&(shell->token));
 }

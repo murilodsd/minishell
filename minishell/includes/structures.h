@@ -40,4 +40,11 @@ typedef struct s_var
 	char	*value;
 }	t_var;
 
+typedef struct s_pipe
+{
+	enum e_token_type	type;
+	void			*left;
+	void			*right;
+}					t_pipe;
+
 #endif
