@@ -59,11 +59,11 @@ valgrind: all
 	valgrind $(VALGRIND_FLAGS) $(VALGRIND_SUPP) ./$(NAME)
 
 clean:
-	make -C $(LIBFT_DIR) clean
+	make -s -C $(LIBFT_DIR) clean
 	$(RM) $(OBJS)
 
 fclean: clean
-	make -C $(LIBFT_DIR) fclean
+	make -s -C $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
 
 re: fclean all

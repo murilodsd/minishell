@@ -144,7 +144,7 @@ int	main(int argc, char **argv, char **envp)
 			else if (!ft_strcmp(args[0], "export"))
 				export_builtin(shell, args);
 			else if (!ft_strcmp(args[0], "env"))
-				env_builtin(shell->envp_lst);
+				env_builtin(shell);
 			ft_printf(1, "exit_status: %d\n", shell->exit_status);
 			//pwd_builtin(shell);
 			add_history(shell->cmd);

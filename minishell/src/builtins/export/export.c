@@ -167,7 +167,7 @@ int	main(int argc, char **argv, char **envp)
 	char *args2[] = {"export", NULL};
 	export_builtin(shell, args2);
 	ft_printf(1, "exit_status: %d\n", shell->exit_status);
-	env_builtin(shell->envp_lst);
+	env_builtin(shell);
 	ft_printf(1, "exit_status: %d\n", shell->exit_status);
 	while (1)
 	{
@@ -184,10 +184,14 @@ int	main(int argc, char **argv, char **envp)
 				cd_builtin(shell, args);
 			else if (!ft_strcmp(args[0], "exit"))
 				exit_builtin(shell, args);
+			else if (!ft_strcmp(args[0], "pwd"))
+				pwd_builtin(shell);
+			else if (!ft_strcmp(args[0], "unset"))
+				unset_builtin(shell, args);
 			else if (!ft_strcmp(args[0], "export"))
 				export_builtin(shell, args);
 			else if (!ft_strcmp(args[0], "env"))
-				env_builtin(shell->envp_lst);
+				env_builtin(shell);
 			ft_printf(1, "exit_status: %d\n", shell->exit_status);
 			//handle_input(shell->cmd);
 			//free(shell->cmd);
