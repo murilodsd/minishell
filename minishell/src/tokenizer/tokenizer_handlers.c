@@ -78,3 +78,15 @@ int	handle_env_var(char *cmd, int i, t_shell *shell)
 		add_token(&shell, tmp, ENV_VAR, NO_QUOTE);
 	return (i);
 }
+
+int	handle_space(char *cmd, int i, t_shell *shell)
+{
+	char	*tmp;
+
+	i = ignore_spaces(cmd, i);
+	tmp = ft_strdup(" ");
+//	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), tmp,
+//		"Substr malloc failed");
+	add_token(&shell, tmp, SPACE_TOKEN, NO_QUOTE);
+	return (i - 1);
+}

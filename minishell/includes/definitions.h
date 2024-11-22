@@ -42,7 +42,8 @@ typedef enum e_token_type
 	DOUBLE_QUOTE,
 	ENV_VAR,
 	ENV_VAR_EXIT_CODE,
-	ENV_VAR_NAME
+	ENV_VAR_NAME,
+	SPACE_TOKEN
 }	t_token_type;
 
 typedef enum e_token_quote

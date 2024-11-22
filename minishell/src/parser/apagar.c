@@ -67,6 +67,8 @@ const char	*get_token_type_str(t_token_type type)
 		return ("Env var exit code");
 	else if (type == ENV_VAR_NAME)
 		return ("Env var name");
+	else if (type == SPACE_TOKEN)
+		return ("Space");
 	else
 		return ("Unknown");
 }

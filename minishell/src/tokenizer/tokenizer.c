@@ -21,10 +21,10 @@ void	tokenizer(char *cmd, t_shell *shell, int i)
 		else if (cmd[i] == '>')
 			i = handle_redir_out(cmd, i, shell);
 		else if (ft_isspace(cmd[i]))
-			i = ignore_spaces(cmd, i) - 1;
+			i = handle_space(cmd, i, shell);
 		else
 			i = handle_word(cmd, i, shell);
-		if (cmd[i] != '\0')
+		if (cmd[i])
 			i++;
 	}
 }

@@ -11,6 +11,7 @@ void	looking_for_here_doc(t_shell *shell)
 		{
 			tmp = tmp->next;
 			tmp->type = EOF_TOKEN;
+			//concatenar com o proximo token
 		}
 		tmp = tmp->next;
 	}

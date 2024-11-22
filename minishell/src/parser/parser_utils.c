@@ -20,6 +20,7 @@ void	expand_var(t_token *token)
 			token->data = ft_strdup(" ");
 //			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list),
 //				token->data, "Strdup malloc failed");
+// remover o token
 		}
 		token->type = WORD;
 	}
@@ -32,6 +33,8 @@ void	check_env_var(t_token *token)
 	i = 0;
 	while (token->data[i])
 	{
+		if (i == 0 && !isalpha(token->data[i]) && token->data[i] != '_')
+			break;
 		if (!isalnum(token->data[i]) && token->data[i] != '_')
 			break;
 		i++;

@@ -10,6 +10,7 @@ int			handle_s_quotes(char *cmd, int i, t_shell *shell);
 int			handle_d_quotes(char *cmd, int i, t_shell *shell);
 int			handle_pipe(char *cmd, int i, t_shell *shell);
 int			handle_env_var(char *cmd, int i, t_shell *shell);
+int			handle_space(char *cmd, int i, t_shell *shell);
 
 // tokenizer_handlers2.c
 int			handle_redir_append(char *cmd, int i, t_shell *shell);
