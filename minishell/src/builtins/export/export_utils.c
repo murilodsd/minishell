@@ -74,8 +74,13 @@ void	get_new_var_name_and_value(t_shell *shell, t_var *var, char *string)
 			shell->exit_status = EXIT_FAILURE;
 			return ;
 		}
+
 		if (!strchr(string, '='))
-			var->name = string;
+		{
+			var->name = ft_strdup(string);
+			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+				var->name, "Calloc failed");
+		}
 		else
 		{
 			var->value = ft_strdup((ft_strchr(string, '=')) + 1);
