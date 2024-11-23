@@ -10,8 +10,14 @@ void	looking_for_here_doc(t_shell *shell)
 		if (tmp->type == HEREDOC)
 		{
 			tmp = tmp->next;
+			if (tmp->type == SPACE_TOKEN)
+				tmp = tmp->next;
 			tmp->type = EOF_TOKEN;
-			//concatenar com o proximo token
+			while (tmp->next && tmp->next->type != SPACE)
+			{
+				tmp = tmp->next;
+				tmp->type = EOF_TOKEN;
+			}
 		}
 		tmp = tmp->next;
 	}
@@ -40,6 +46,26 @@ void	looking_for_env_var(t_shell *shell)
 	}
 }
 
+void	looking_d_quote(t_shell *shell)
+{
+	t_token	*tmp;
+	char	*new_data;
+
+	tmp = shell->token;
+	while (tmp)
+	{
+		if (tmp->quote == DOUBLE && tmp->type != EOF_TOKEN && tmp->data)
+		{
+			new_data = check_env_var_d_quote(shell, tmp->data);
+			if (new_data && ft_strcmp(tmp->data, new_data) != 0)
+				ft_str_replace(&(tmp->data), new_data);
+			if (new_data)
+				free(new_data);
+		}
+		tmp = tmp->next;
+	}
+}
+
 void	looking_for_redir(t_shell *shell)
 {
 	t_token	*tmp;
@@ -50,41 +76,25 @@ void	looking_for_redir(t_shell *shell)
 		if (tmp->type == REDIR_IN)
 		{
 			tmp = tmp->next;
+			if (tmp->type == SPACE)
+				tmp = tmp->next;
 			tmp->type = REDIR_IN_FILE;
 		}
 		else if (tmp->type == REDIR_OUT)
 		{
 			tmp = tmp->next;
+			if (tmp->type == SPACE)
+				tmp = tmp->next;
 			tmp->type = REDIR_OUT_FILE;
 		}
 		else if (tmp->type == REDIR_APPEND)
 		{
 			tmp = tmp->next;
+			if (tmp->type == SPACE)
+				tmp = tmp->next;
 			tmp->type = REDIR_APPEND_FILE;
 		}
 		else
 			tmp = tmp->next;
-	}
-}
-
-void	looking_d_quote(t_shell *shell)
-{
-	t_token	*tmp;
-	int		i;
-
-	i = 0;
-	tmp = shell->token;
-	while (tmp)
-	{
-		if (tmp->type == DOUBLE_QUOTE)
-		{
-			while (tmp->data[i])
-			{
-				if (tmp->data[i] == '$')
-					expand_var_d_quote(tmp, i);
-				i++;
-			}
-		}
-		tmp = tmp->next;
 	}
 }

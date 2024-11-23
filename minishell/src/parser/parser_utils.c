@@ -13,16 +13,10 @@ void	expand_var(t_token *token, t_shell *shell)
 			token->data = ft_strdup(env_var);
 //			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list),
 //				token->data, "Strdup malloc failed");
+			token->type = WORD;
 		}
 		else
-		{
-			free(token->data);
-			token->data = ft_strdup(" ");
-//			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list),
-//				token->data, "Strdup malloc failed");
-// remover o token
-		}
-		token->type = WORD;
+			rm_token(&token, shell);
 	}
 }
 
@@ -43,13 +37,48 @@ void	split_token(t_token *token, int i)
 	find_place(token, word, token->quote);
 }
 
-void	expand_var_d_quote(t_token *token, int i)
+char	*expand_var_d_quote(t_shell *shell, char *tmp, char *cmd, int *i)
 {
-	int		j;
+	char	*env_var_name;
 	char	*env_var;
+	char	*strjoin;
+	int		j;
 
-	j = i + 1;
-	env_var = ft_substr(token->data, i, j - i);
+	j = *i;
+	while (cmd[*i] && (ft_isalnum(cmd[*i]) || cmd[*i] == '_'))
+		*i = *i + 1;
+	env_var_name = ft_substr(cmd, j, *i - j);
+//	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), env_var,
+//		"Substr malloc failed");
+	env_var = ft_getenv(shell->envp_lst, env_var_name);
+	if (env_var)
+	{
+		strjoin = ft_strjoin(tmp, env_var);
+//		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list),
+//			strjoin, "Strjoin malloc failed");
+	}
+	else
+		strjoin = ft_strdup(tmp);
+//	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), strjoin,
+//		"Strdup malloc failed");
+	*i = *i - 1;
+	return (strjoin);
+}
+
+char	*expand_exit_code(t_shell *shell, char *tmp)
+{
+	char	*exit_code;
+	char	*strjoin;
+
+	exit_code = ft_itoa(shell->exit_status);
+	if (exit_code == NULL)
+		return (tmp);
+	else
+	{
+		strjoin = ft_strjoin(tmp, exit_code);
+		free(exit_code);
+		return (strjoin);
+	}
 }
 
 char	*ft_getenv(t_list *envp_lst, char *name)

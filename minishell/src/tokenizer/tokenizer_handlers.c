@@ -8,9 +8,7 @@ int	handle_s_quotes(char *cmd, int i, t_shell *shell)
 	j = i + 1;
 	while (cmd[j])
 	{
-		while (cmd[j] == '\'' && cmd[j + 1] == '\'')
-			j++;
-		if (cmd[j] == '\'' && cmd[j - 1] != '\'')
+		if (cmd[j] == '\'')
 			break ;
 		j++;
 	}
@@ -31,9 +29,7 @@ int	handle_d_quotes(char *cmd, int i, t_shell *shell)
 	j = ignore_quotes(cmd, j);
 	while (cmd[j])
 	{
-		if (cmd[j] == '\"' && cmd[j + 1] == '\"')
-			j = j + 2;
-		else if (cmd[j] == '\"' && cmd[j + 1] != '\"')
+		if (cmd[j] == '\"')
 			break ;
 		j++;
 	}

@@ -4,8 +4,8 @@ void	polish_list(t_shell *shell)
 {
 	looking_for_here_doc(shell);
 	looking_for_env_var(shell);
-	looking_for_redir(shell);
 	looking_d_quote(shell);
+	looking_for_redir(shell);
 }
 
 void	parser(t_shell *shell)
