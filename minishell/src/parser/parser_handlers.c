@@ -76,21 +76,21 @@ void	looking_for_redir(t_shell *shell)
 		if (tmp->type == REDIR_IN)
 		{
 			tmp = tmp->next;
-			if (tmp->type == SPACE)
+			if (tmp->type == SPACE_TOKEN)
 				tmp = tmp->next;
 			tmp->type = REDIR_IN_FILE;
 		}
 		else if (tmp->type == REDIR_OUT)
 		{
 			tmp = tmp->next;
-			if (tmp->type == SPACE)
+			if (tmp->type == SPACE_TOKEN)
 				tmp = tmp->next;
 			tmp->type = REDIR_OUT_FILE;
 		}
 		else if (tmp->type == REDIR_APPEND)
 		{
 			tmp = tmp->next;
-			if (tmp->type == SPACE)
+			if (tmp->type == SPACE_TOKEN)
 				tmp = tmp->next;
 			tmp->type = REDIR_APPEND_FILE;
 		}
