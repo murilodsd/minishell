@@ -41,11 +41,19 @@ typedef struct s_var
 	bool	is_incremental;
 }	t_var;
 
+// ************************** BINARY TREE STRUCTS *********************** //
+
 typedef struct s_pipe
 {
 	enum e_token_type	type;
 	void			*left;
 	void			*right;
 }					t_pipe;
+
+typedef struct s_exec
+{
+	enum e_token_type	type;
+	char	**args;
+}				t_exec;
 
 #endif

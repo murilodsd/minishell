@@ -15,22 +15,57 @@ t_pipe	*build_pipe(void *left, void *right)
 {
 	t_pipe	*pipe;
 
-	pipe = ft_calloc(sizeof(t_pipe), 1);
+	pipe = ft_calloc(1, sizeof(t_pipe));
 	pipe->left = left;
 	pipe->right = right;
 	pipe->type = PIPE;
 	return (pipe);
 }
 
-void	*build_tree(void *token)
+char	**get_args(t_shell *shell, t_token *token)
+{
+	int	i;
+	t_token	*tmp;
+	char	**args;
+
+	i = 0;
+	tmp = token;
+	while (token->type == WORD)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	args = ft_calloc(i + 1, sizeof(char *));
+	check_mem_alloc(shell, &(shell->mem_allocation.matrix_mem_list), \
+			args, "Calloc failed");
+	while(i--)
+	{
+		args[i] = ft_dup(tmp->data);
+		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+			args[i], "Calloc failed");
+		tmp = tmp->prev;
+	}
+	return (args);
+}
+
+t_exec	*build_exec(t_shell *shell, t_token *token)
+{
+	t_exec	*exec;
+	char	**args;
+
+	exec = ft_calloc(sizeof(t_exec), 1);
+	args = get_args(shell, token);
+	return (exec);
+}
+void	*build_tree(t_shell *shell, t_token *token)
 {
 	void	*root;
 
 	//TODO -> setar o root igual saida do exec;
-	root = token;
+	root = build_exec(shell, token);
 	
 	if (get_next_pipe(token) != NULL)
-		root = build_pipe(root, build_tree(get_next_pipe(token)->next));
+		root = build_pipe(root, build_tree(shell, get_next_pipe(token)->next));
 	(void)token;
 	return (NULL);
 
