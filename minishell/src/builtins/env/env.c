@@ -4,6 +4,8 @@ void	print_env(void *envp)
 {
 	t_var	*content;
 
+	if (!envp)
+		return ;
 	content = (t_var *)envp;
 	if (content->value)
 		printf("%s=%s\n", content->name, content->value);

@@ -115,7 +115,7 @@ void	export_builtin(t_shell *shell, char **export_args)
 } */
 
 
-#define MAX_TOKENS 100
+/* #define MAX_TOKENS 100
 
 char **parse_input(char *input) {
     char **tokens = malloc(MAX_TOKENS * sizeof(char *));
@@ -148,11 +148,13 @@ int	main(int argc, char **argv, char **envp)
 	t_shell		*shell;
 	(void)envp;
 	//REVIEW -> APAGAR LINHA DEBAIXO
+	(void)argc;
+	(void)argv;
 	char **args;
-	char *envp1[] = {"aaa=primeira", "var2=1", "var3=", "var", NULL};
-	//char *args00[] = {"export", "", "1var=", "var2 =", "var2=2", "var3", "var=", "var4", NULL};
+	//char *envp1[] = {"aaa=primeira", "var2=1", "var3=", "var", NULL};
+	char *args00[] = {"export", "", "1var=", "var2 =", "var2=2", "var3", "var=", "var4", NULL};
 	char *args00[] = {"export", "VAR+=", "VAR+=1", "var+=100", NULL};
-	init_data(&shell, argc, argv, envp1);
+ 	init_data(&shell, argc, argv, envp);
 	export_builtin(shell, args00);
 	ft_printf(1, "exit_status: %d\n", shell->exit_status);
 	char *args0[] = {"export", NULL};
@@ -199,3 +201,4 @@ int	main(int argc, char **argv, char **envp)
  	return (0);
 }
 
+ */

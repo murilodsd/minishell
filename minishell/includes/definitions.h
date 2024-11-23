@@ -49,6 +49,20 @@ typedef enum e_token_type
 	SPACE_TOKEN
 }	t_token_type;
 
+typedef enum e_node_type
+{
+	EXEC_NODE,
+	PIPE_NODE,
+	REDIR_NODE,
+	REDIR_IN,
+	REDIR_IN_FILE,
+	REDIR_OUT,
+	REDIR_OUT_FILE,
+	REDIR_APPEND,
+	REDIR_APPEND_FILE,
+	HEREDOC,
+}	t_token_type;
+
 typedef enum e_token_quote
 {
 	NO_QUOTE,
