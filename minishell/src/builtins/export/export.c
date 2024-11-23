@@ -40,13 +40,9 @@ void	add_or_edit_var(t_shell *shell, t_var *var)
 	if (!(var->name))
 		return ;
 	if (ft_lstfind_name(shell->export_lst, var->name))
-		edit_var(shell, shell->export_lst, var);
+		edit_var(shell, var);
 	else
-		add_var(shell, shell->export_lst, var);
-	if (ft_lstfind_name(shell->envp_lst, var->name))
-		edit_var(shell, shell->envp_lst, var);
-	else if ((var->value))
-		add_var(shell, shell->envp_lst, var);
+		add_var(shell, var);
 }
 
 void	export_var(t_shell *shell, char *export_arg)
@@ -155,15 +151,15 @@ int	main(int argc, char **argv, char **envp)
 	char **args;
 	char *envp1[] = {"aaa=primeira", "var2=1", "var3=", "var", NULL};
 	//char *args00[] = {"export", "", "1var=", "var2 =", "var2=2", "var3", "var=", "var4", NULL};
-	char *args00[] = {"export", "VAR+=", "VAR+=1", NULL};
+	char *args00[] = {"export", "VAR+=", "VAR+=1", "var+=100", NULL};
 	init_data(&shell, argc, argv, envp1);
 	export_builtin(shell, args00);
 	ft_printf(1, "exit_status: %d\n", shell->exit_status);
 	char *args0[] = {"export", NULL};
 	export_builtin(shell, args0);
 	ft_printf(1, "exit_status: %d\n", shell->exit_status);
-	char *args1[] = {"unset", "aaa", "v1var", "var3", "1VAR", "", NULL};
-	unset_builtin(shell, args1);
+	//char *args1[] = {"unset", "aaa", "v1var", "var3", "1VAR", NULL};
+	//unset_builtin(shell, args1);
 	ft_printf(1, "exit_status: %d\n", shell->exit_status);
 	char *args2[] = {"export", NULL};
 	export_builtin(shell, args2);
