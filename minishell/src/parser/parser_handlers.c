@@ -98,3 +98,22 @@ void	looking_for_redir(t_shell *shell)
 			tmp = tmp->next;
 	}
 }
+
+void	rm_space_token(t_shell *shell)
+{
+	t_token	*tmp;
+	t_token	*tmp_next;
+
+	tmp = shell->token;
+	while (tmp)
+	{
+		tmp_next = tmp->next;
+		if (tmp->type == SPACE_TOKEN)
+		{
+			if (tmp == shell->token)
+				shell->token = tmp_next;
+			rm_token(&tmp, shell);
+		}
+		tmp = tmp_next;
+	}
+}

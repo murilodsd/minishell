@@ -12,6 +12,7 @@ void	looking_for_here_doc(t_shell *shell);
 void	looking_for_env_var(t_shell *shell);
 void	looking_for_redir(t_shell *shell);
 void	looking_d_quote(t_shell *shell);
+void	rm_space_token(t_shell *shell);
 
 //parser_checkers.c
 void	check_env_var(t_token *token, t_shell *shell);
