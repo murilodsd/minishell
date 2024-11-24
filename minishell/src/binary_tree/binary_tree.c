@@ -9,7 +9,7 @@ char	**get_args(t_shell *shell, t_token **token)
 	i = 0;
 	tmp = *token;
 	ft_printf(1,BLUE"Primeiro token = %i\n"RESET, tmp->type);
-	while (tmp->type == WORD)
+	while (tmp->type != PIPE && tmp->type != NULL)
 	{
 		tmp = tmp->next;
 		i++;
@@ -56,11 +56,11 @@ t_pipe	*build_pipe(void *left, void *right)
 	pipe = ft_calloc(1, sizeof(t_pipe));
 	pipe->left = left;
 	pipe->right = right;
-	pipe->type = PIPE;
+	pipe->type = PIPE_NODE;
 	return (pipe);
 }
 
-t_exec	*build_exec(t_shell *shell, t_token *token)
+void	*build_exec(t_shell *shell, t_token *token)
 {
 	t_exec	*exec;
 	char	**args;
@@ -68,7 +68,7 @@ t_exec	*build_exec(t_shell *shell, t_token *token)
 	exec = ft_calloc(sizeof(t_exec), 1);
 	args = get_args(shell, &token);
 	exec->args = args;
-	exec->type = EXE
+	exec->type = EXEC_NODE;
 	return (exec);
 }
 

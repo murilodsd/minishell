@@ -45,14 +45,14 @@ typedef struct s_var
 
 typedef struct s_pipe
 {
-	enum e_token_type	type;
+	enum e_node_type	type;
 	void			*left;
 	void			*right;
 }					t_pipe;
 
 typedef struct s_exec
 {
-	enum e_token_type	type;
+	enum e_node_type	type;
 	char	**args;
 }				t_exec;
 

@@ -53,15 +53,11 @@ typedef enum e_node_type
 {
 	EXEC_NODE,
 	PIPE_NODE,
-	REDIR_NODE,
-	REDIR_IN,
-	REDIR_IN_FILE,
-	REDIR_OUT,
-	REDIR_OUT_FILE,
-	REDIR_APPEND,
-	REDIR_APPEND_FILE,
-	HEREDOC,
-}	t_token_type;
+	REDIR_IN_NODE,
+	REDIR_OUT_NODE,
+	REDIR_APPEND_NODE,
+	HEREDOC_NODE
+}	t_node_type;
 
 typedef enum e_token_quote
 {
