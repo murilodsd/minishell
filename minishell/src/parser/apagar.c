@@ -57,10 +57,6 @@ const char	*get_token_type_str(t_token_type type)
 		return ("Heredoc");
 	else if (type == EOF_TOKEN)
 		return ("EOF");
-	else if (type == SINGLE_QUOTE)
-		return ("S Quote");
-	else if (type == DOUBLE_QUOTE)
-		return ("D Quote");
 	else if (type == ENV_VAR)
 		return ("Env var");
 	else if (type == ENV_VAR_EXIT_CODE)
@@ -69,6 +65,8 @@ const char	*get_token_type_str(t_token_type type)
 		return ("Env var name");
 	else if (type == SPACE_TOKEN)
 		return ("Space");
+	else if (type == NULL_TOKEN)
+		return ("Null");
 	else
 		return ("Unknown");
 }

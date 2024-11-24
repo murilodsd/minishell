@@ -41,12 +41,11 @@ typedef enum e_token_type
 	REDIR_APPEND_FILE,
 	HEREDOC,
 	EOF_TOKEN,
-	SINGLE_QUOTE,
-	DOUBLE_QUOTE,
 	ENV_VAR,
 	ENV_VAR_EXIT_CODE,
 	ENV_VAR_NAME,
-	SPACE_TOKEN
+	SPACE_TOKEN,
+	NULL_TOKEN
 }	t_token_type;
 
 typedef enum e_node_type

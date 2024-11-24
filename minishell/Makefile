@@ -16,6 +16,8 @@ SRCS = src/main.c \
 	src/tokenizer/tokenizer_utils.c \
 	src/parser/parser.c \
 	src/parser/parser_handlers.c \
+	src/parser/parser_handlers2.c \
+	src/parser/parser_checkers.c \
 	src/parser/parser_utils.c \
 	src/binary_tree/binary_tree.c \
 	src/executer/executer.c \

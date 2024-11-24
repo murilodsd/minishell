@@ -9,7 +9,7 @@ void	ft_lstremove_mem_node(t_list **lst, void *content)
 {
 	t_list *current;
 	t_list *previous;
-	
+
 	if (!lst)
 		return ;
 	current = *lst;

@@ -48,3 +48,22 @@ void	rm_token(t_token **token, t_shell *shell)
 	free(tmp);
 }
 
+void	find_place(t_token *token, char *word, t_token_quote quote)
+{
+	t_token	*new_token;
+	t_token	*tmp;
+
+	new_token = (t_token *)malloc(sizeof(t_token));
+//	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), new_token,
+//		"Token malloc failed");
+	new_token->data = word;
+	new_token->type = WORD;
+	new_token->quote = quote;
+	tmp = token->next;
+	token->next = new_token;
+	new_token->prev = token;
+	new_token->next = tmp;
+	if (tmp)
+		tmp->prev = new_token;
+}
+
