@@ -7,8 +7,11 @@ void	check_env_var(t_token *token, t_shell *shell)
 	i = 0;
 	while (token->data[i])
 	{
-		if (i == 0 && !isalpha(token->data[i]) && token->data[i] != '_')
+		if (i == 0 && !ft_isalpha(token->data[i]) && token->data[i] != '_')
+		{
+			i++;
 			break;
+		}
 		if (!isalnum(token->data[i]) && token->data[i] != '_')
 			break;
 		i++;

@@ -12,7 +12,14 @@ void	looking_for_here_doc(t_shell *shell);
 void	looking_for_env_var(t_shell *shell);
 void	looking_for_redir(t_shell *shell);
 void	looking_d_quote(t_shell *shell);
+
+
+//parser_handlers2.c
+void	looking_for_cmd(t_shell *shell);
+void	looking_for_cmd_args(t_shell *shell);
+void	listjoin(t_shell *shell);
 void	rm_space_token(t_shell *shell);
+void	sort_list_by_type(t_shell *shell);
 
 //parser_checkers.c
 void	check_env_var(t_token *token, t_shell *shell);
@@ -25,6 +32,8 @@ void	split_token(t_token *token, int i);
 char	*expand_var_d_quote(t_shell *shell, char *tmp, char *cmd, int *i);
 char	*expand_exit_code(t_shell *shell, char *tmp);
 char	*ft_getenv(t_list *envp_lst, char *name);
+void	change_to_first(t_token **lst, t_token *token);
+void	check_right_place(t_token *lst, t_token *token);
 
 // apagar.c
 void		clear_list(t_token **token);
