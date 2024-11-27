@@ -29,5 +29,6 @@ void		find_place(t_token *token, char *word, t_token_quote quote);
 // tokenizer_utils.c
 int			ft_isword(char c);
 void		take_out_quotes(char **data, t_token_quote quote);
+bool		is_redir_token(t_token *token);
 
 #endif
