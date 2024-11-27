@@ -20,5 +20,4 @@ void	parser(t_shell *shell)
 	rm_space_token(shell);
 	add_token(&shell, char_null, NULL_TOKEN, NO_QUOTE);
 	print_list(shell->token);
-	clear_list(&(shell->token));
 }

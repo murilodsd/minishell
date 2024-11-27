@@ -6,13 +6,14 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/27 12:53:27 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:58:09 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "../includes/minishell.h"
 
-	int	g_signal;
+int	g_signal;
 
 int	main(int argc, char **argv, char **envp)
 {
