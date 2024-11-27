@@ -56,4 +56,13 @@ typedef struct s_exec
 	char	**args;
 }				t_exec;
 
+typedef struct s_redir
+{
+	enum e_node_type	type;
+	enum e_token_quote	file_status;
+	void			*down;
+	int				id;
+	char			*file;
+}					t_redir;
+
 #endif
