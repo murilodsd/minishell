@@ -39,3 +39,19 @@ int	analyze_redir(char *cmd, int i)
 		return (R_IN_ERROR);
 	return (-1);
 }
+
+void	msg_error_redir(int redir_check)
+{
+	if (redir_check == NO_ARGS)
+		msg_error(SYNTAX_ERROR, "newline");
+	else if (redir_check == R_OUT_ERROR)
+		msg_error(SYNTAX_ERROR, ">");
+	else if (redir_check == R_IN_ERROR)
+		msg_error(SYNTAX_ERROR, "<");
+	else if (redir_check == APPEND_ERROR)
+		msg_error(SYNTAX_ERROR, ">>");
+	else if (redir_check == HEREDOC_ERROR)
+		msg_error(SYNTAX_ERROR, "<<");
+	else if (redir_check == PIPE_ARG_ERROR)
+		msg_error(SYNTAX_ERROR, "|");
+}

@@ -11,8 +11,8 @@ void	expand_var(t_token *token, t_shell *shell)
 		{
 			free(token->data);
 			token->data = ft_strdup(env_var);
-//			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list),
-//				token->data, "Strdup malloc failed");
+			if (check_malloc(token->data))
+				return ;
 			token->type = WORD;
 		}
 		else
@@ -26,11 +26,14 @@ void	split_token(t_token *token, int i)
 	char	*word;
 
 	env_var = ft_substr(token->data, 0, i);
-//	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), env_var,
-//		"Substr malloc failed");
-	word = ft_substr(token->data, i, ft_strlen(token->data - i) - i);
-//	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), word,
-//		"Substr malloc failed");
+	if (check_malloc(env_var))
+		return ;
+	word = ft_substr(token->data, i, ft_strlen(token->data - i + 1));
+	if (check_malloc(word))
+	{
+		free(env_var);
+		return ;
+	}
 	free(token->data);
 	token->data = env_var;
 	token->type = ENV_VAR_NAME;
@@ -48,19 +51,20 @@ char	*expand_var_d_quote(t_shell *shell, char *tmp, char *cmd, int *i)
 	while (cmd[*i] && (ft_isalnum(cmd[*i]) || cmd[*i] == '_'))
 		*i = *i + 1;
 	env_var_name = ft_substr(cmd, j, *i - j);
-//	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), env_var,
-//		"Substr malloc failed");
 	env_var = ft_getenv(shell->envp_lst, env_var_name);
+	free(env_var_name);
 	if (env_var)
 	{
 		strjoin = ft_strjoin(tmp, env_var);
-//		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list),
-//			strjoin, "Strjoin malloc failed");
+		if (check_malloc(strjoin))
+			return (0);
 	}
 	else
+	{
 		strjoin = ft_strdup(tmp);
-//	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), strjoin,
-//		"Strdup malloc failed");
+		if (check_malloc(strjoin))
+			return (0);
+	}
 	*i = *i - 1;
 	return (strjoin);
 }
@@ -71,11 +75,15 @@ char	*expand_exit_code(t_shell *shell, char *tmp)
 	char	*strjoin;
 
 	exit_code = ft_itoa(shell->exit_status);
+	if (check_malloc(exit_code))
+		return (0);
 	if (exit_code == NULL)
 		return (tmp);
 	else
 	{
 		strjoin = ft_strjoin(tmp, exit_code);
+		if (check_malloc(strjoin))
+			return (0);
 		free(exit_code);
 		return (strjoin);
 	}
@@ -83,8 +91,8 @@ char	*expand_exit_code(t_shell *shell, char *tmp)
 
 char	*ft_getenv(t_list *envp_lst, char *name)
 {
-	t_var *var;
-	t_list *lst;
+	t_var	*var;
+	t_list	*lst;
 
 	lst = envp_lst;
 	while (lst)

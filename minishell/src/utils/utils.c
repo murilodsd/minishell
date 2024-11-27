@@ -14,3 +14,13 @@ int	ignore_spaces(char *cmd, int i)
 		i++;
 	return (i);
 }
+
+int	check_malloc(void *ptr)
+{
+	if (!ptr)
+	{
+		printf("Malloc failed\n");
+		return (1);
+	}
+	return (0);
+}

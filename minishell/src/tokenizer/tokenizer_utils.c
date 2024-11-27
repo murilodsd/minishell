@@ -18,8 +18,8 @@ void	take_out_quotes(char **data, t_token_quote quote)
 	i = 0;
 	j = 0;
 	tmp = malloc(ft_strlen(*data) + 1);
-//	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), tmp,
-//		"Tmp malloc failed");
+	if (check_malloc(tmp))
+		return ;
 	while ((*data)[i])
 	{
 		while ((*data)[i] == '\'' && quote == SINGLE)
@@ -33,4 +33,12 @@ void	take_out_quotes(char **data, t_token_quote quote)
 	tmp[j] = '\0';
 	free(*data);
 	*data = tmp;
+}
+
+void	add_quote_token(char quote, char *cmd, int i, t_shell *shell)
+{
+	if (quote == '\"')
+		add_token(&shell, ft_substr(cmd, i + 1, 1), ENV_VAR_NAME, DOUBLE);
+	else if (quote == '\'')
+		add_token(&shell, ft_substr(cmd, i + 1, 1), ENV_VAR_NAME, SINGLE);
 }

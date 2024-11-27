@@ -10,10 +10,10 @@ void	looking_for_here_doc(t_shell *shell)
 		if (tmp->type == HEREDOC)
 		{
 			tmp = tmp->next;
-			if (tmp->type == SPACE_TOKEN)
+			while (tmp->type == SPACE_TOKEN)
 				tmp = tmp->next;
 			tmp->type = EOF_TOKEN;
-			while (tmp->next && tmp->next->type != SPACE)
+			while (tmp->next && tmp->next->type != SPACE_TOKEN)
 			{
 				tmp = tmp->next;
 				tmp->type = EOF_TOKEN;
@@ -37,12 +37,13 @@ void	looking_for_env_var(t_shell *shell)
 			if (tmp == shell->token)
 				shell->token = tmp_next;
 			rm_token(&tmp, shell);
-			check_env_var(tmp_next, shell);
+			tmp = tmp_next;
+			tmp_next = tmp->next;
+			check_env_var(tmp, shell);
 		}
 		else if (tmp->type == ENV_VAR_EXIT_CODE)
 			check_exit_code(tmp, shell);
 		tmp = tmp_next;
-
 	}
 }
 

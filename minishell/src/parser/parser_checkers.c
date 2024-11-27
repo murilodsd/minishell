@@ -10,10 +10,10 @@ void	check_env_var(t_token *token, t_shell *shell)
 		if (i == 0 && !ft_isalpha(token->data[i]) && token->data[i] != '_')
 		{
 			i++;
-			break;
+			break ;
 		}
 		if (!isalnum(token->data[i]) && token->data[i] != '_')
-			break;
+			break ;
 		i++;
 	}
 	if (token->data[i] == '\0')
@@ -38,6 +38,7 @@ char	*check_env_var_d_quote(t_shell *shell, char *data)
 	int		i;
 	char	*tmp;
 	char	*new_data;
+	char	*next_char;
 
 	i = 0;
 	new_data = ft_strdup("");
@@ -56,8 +57,10 @@ char	*check_env_var_d_quote(t_shell *shell, char *data)
 		else
 		{
 			tmp = new_data;
-			new_data = ft_strjoin(tmp, ft_substr(data, i, 1));
+			next_char = ft_substr(data, i, 1);
+			new_data = ft_strjoin(tmp, next_char);
 			free(tmp);
+			free(next_char);
 		}
 		i++;
 	}

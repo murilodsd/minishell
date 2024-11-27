@@ -22,5 +22,6 @@ int	check_spaces(char *cmd);
 int	ignore_quotes(char *cmd, int i);
 int	is_redir(char c);
 int	analyze_redir(char *cmd, int i);
+void	msg_error_redir(int redir_check);
 
 #endif

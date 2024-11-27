@@ -55,8 +55,13 @@ void	listjoin(t_shell *shell)
 		tmp_next = tmp->next;
 		while (tmp_next && tmp->type == tmp_next->type)
 		{
+			if (tmp == shell->token)
+				shell->token = tmp;
+			if (tmp->quote != NO_QUOTE || tmp_next->quote != NO_QUOTE)
+				tmp->quote = SINGLE;
 			new_data = ft_strjoin(tmp->data, tmp_next->data);
 			ft_str_replace(&(tmp->data), new_data);
+			free(new_data);
 			rm_token(&tmp_next, shell);
 			tmp_next = tmp->next;
 		}

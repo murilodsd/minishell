@@ -9,7 +9,7 @@ int	check_redir(char *cmd)
 	{
 		if (cmd[i] == '\'' || cmd[i] == '\"')
 			i = ignore_quotes(cmd, i);
-		if (is_redir(cmd[i]))
+		else if (is_redir(cmd[i]))
 		{
 			if (cmd[i + 1] == cmd[i])
 				i++;
@@ -21,7 +21,8 @@ int	check_redir(char *cmd)
 			else if (is_redir(cmd[i]))
 				return (analyze_redir(cmd, i));
 		}
-		i++;
+		else
+			i++;
 	}
 	return (-1);
 }
@@ -41,7 +42,7 @@ int	check_pipe(char *cmd)
 				|| cmd[ignore_spaces(cmd, i + 1)] == '|'))
 			return (1);
 		else if (cmd[i] == '|' && (cmd[i + 1] == '\0'
-			|| cmd[ignore_spaces(cmd, i + 1)] == '\0'))
+				|| cmd[ignore_spaces(cmd, i + 1)] == '\0'))
 			return (2);
 		i++;
 	}
@@ -88,31 +89,25 @@ int	check_spaces(char *cmd)
 
 int	syntax_check(char *cmd)
 {
+	int	pipe_check;
+	int	redir_check;
+
 	if (check_spaces(cmd))
 		return (1);
 	else if (check_quotes(cmd))
 		msg_error(SYNTAX_ERROR, "open quote");
 	else if (check_pipe(cmd))
 	{
-		if (check_pipe(cmd) == 1)
+		pipe_check = check_pipe(cmd);
+		if (pipe_check == 1)
 			msg_error(SYNTAX_ERROR, "|");
-		else
+		else if (pipe_check == 2)
 			msg_error(SYNTAX_ERROR, "newline");
 	}
 	else if (check_redir(cmd) != -1)
 	{
-		if (check_redir(cmd) == NO_ARGS)
-			msg_error(SYNTAX_ERROR, "newline");
-		else if (check_redir(cmd) == R_OUT_ERROR)
-			msg_error(SYNTAX_ERROR, ">");
-		else if (check_redir(cmd) == R_IN_ERROR)
-			msg_error(SYNTAX_ERROR, "<");
-		else if (check_redir(cmd) == APPEND_ERROR)
-			msg_error(SYNTAX_ERROR, ">>");
-		else if (check_redir(cmd) == HEREDOC_ERROR)
-			msg_error(SYNTAX_ERROR, "<<");
-		else if (check_redir(cmd) == PIPE_ARG_ERROR)
-			msg_error(SYNTAX_ERROR, "|");
+		redir_check = check_redir(cmd);
+		msg_error_redir(redir_check);
 	}
 	else
 		return (0);

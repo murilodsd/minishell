@@ -7,8 +7,6 @@ void	add_token(t_shell **shell, char *data, enum e_token_type type, \
 	t_token	*tmp;
 
 	new_token = (t_token *)malloc(sizeof(t_token));
-//	check_mem_alloc(*shell, &(*shell)->mem_allocation.ptr_mem_list, \
-//			new_token, "Token malloc failed");
 	new_token->data = data;
 	new_token->type = type;
 	new_token->quote = quote;
@@ -35,14 +33,14 @@ void	rm_token(t_token **token, t_shell *shell)
 	t_token	*tmp;
 
 	if (!token || !(*token))
-		return;
+		return ;
 	tmp = *token;
 	if (!tmp->prev)
 		shell->token = tmp->next;
 	else
 		tmp->prev->next = tmp->next;
 	if (tmp->next)
-			tmp->next->prev = tmp->prev;
+		tmp->next->prev = tmp->prev;
 	if (tmp->data)
 		free(tmp->data);
 	free(tmp);
@@ -54,8 +52,6 @@ void	find_place(t_token *token, char *word, t_token_quote quote)
 	t_token	*tmp;
 
 	new_token = (t_token *)malloc(sizeof(t_token));
-//	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), new_token,
-//		"Token malloc failed");
 	new_token->data = word;
 	new_token->type = WORD;
 	new_token->quote = quote;
@@ -66,4 +62,3 @@ void	find_place(t_token *token, char *word, t_token_quote quote)
 	if (tmp)
 		tmp->prev = new_token;
 }
-
