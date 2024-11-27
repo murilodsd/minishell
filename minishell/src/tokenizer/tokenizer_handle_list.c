@@ -67,3 +67,12 @@ void	find_place(t_token *token, char *word, t_token_quote quote)
 		tmp->prev = new_token;
 }
 
+t_token	*last_token(t_token *token)
+{
+	if (!token)
+		return (NULL);
+	while (token->next)
+		token = token->next;
+	return (token);
+}
+

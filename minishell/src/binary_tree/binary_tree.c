@@ -1,40 +1,6 @@
 #include "../../includes/minishell.h"
 
-char	**get_args(t_shell *shell, t_token **token)
-{
-	int	i;
-	t_token	*tmp;
-	char	**args;
 
-	i = 0;
-	tmp = *token;
-	while (tmp->type != PIPE && tmp->type != NULL_TOKEN)
-	{
-		if (tmp->type == COMMAND || tmp->type == COMMAND_ARG)
-			i++;
-		tmp = tmp->next;
-	}
-	*token = tmp;
-	if (i == 0)
-		return (NULL);
-	args = ft_calloc(i + 1, sizeof(char *));
-	check_mem_alloc(shell, &(shell->mem_allocation.matrix_mem_list), \
-			args, "Calloc failed");
-	tmp = tmp->prev;
-	while(i)
-	{
-		ft_printf(1,BLUE"Passando por: %s\n"RESET, tmp->data);
-		if (tmp->type == COMMAND || tmp->type == COMMAND_ARG)
-		{
-			args[--i] = ft_strdup(tmp->data);
-			ft_printf(1,BLUE"ARGS[%i] = %s\n"RESET, i, tmp->data);
-			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
-				args[i], "Calloc failed");
-		}
-		tmp = tmp->prev;
-	}
-	return (args);
-}
 
 void	binary_tree(t_shell *shell)
 {
@@ -71,19 +37,20 @@ t_pipe	*build_pipe(t_shell *shell, void *left, void *right)
 void	*build_redir(t_shell *shell, void *down, t_token *token)
 {
 	t_token	*end_of_the_command;
+	t_token	*last_redir;
 	void	*root;
 
 	root = NULL;
 	end_of_the_command = get_next_pipe(token);
 	if (!end_of_the_command)
-		end_of_the_command = ft_lstlast(token);
-	token = get_previous_redir(end_of_the_command);
+		end_of_the_command = last_token(token);
+	//REVIEW - sera que já nao tem uma funcao que pega o
+	last_redir = get_previous_redir(end_of_the_command);
+	root = create_new_redir(shell, down, token, 0);
+	token = get_previous_redir(last_redir);
 	while (is_redir_token(token))
 	{
-		if (last_redir(token))
-			root = create_new_redir(shell, down, token, 0);
-		else
-			root = create_new_redir(shell, root, token, 0);
+		root = create_new_redir(shell, root, token, 0);
 		token = get_previous_redir(token);
 	}
 	if (!root)
@@ -97,8 +64,7 @@ void	*build_exec(t_shell *shell, t_token *token)
 	t_exec	*exec;
 	char	**args;
 
-	//REVIEW => Será que não poderia dar problema no caso de só ter redirecionamento?
-	args = get_args(shell, &token);
+	args = get_args(shell, token);
 	if (args != NULL)
 	{
 		exec = ft_calloc(sizeof(t_exec), 1);
@@ -114,24 +80,11 @@ void	*build_exec(t_shell *shell, t_token *token)
 void	*build_tree(t_shell *shell, t_token *token)
 {
 	void	*root;
+	t_token	*pipe_token;
 
-	//TODO -> setar o root igual saida do exec;
 	root = build_exec(shell, token);
-	
-	if (get_next_pipe(token) != NULL)
-		root = build_pipe(shell, root, build_tree(shell, get_next_pipe(token)->next));
-	(void)token;
-	return (NULL);
-
-}
-
-t_token	*get_next_pipe(t_token *token)
-{
-	while (token)
-	{
-		if (token->type == PIPE)
-			return (token);
-		token = token->next;
-	}
-	return (NULL);
+	pipe_token = get_next_pipe(token);
+	if (pipe_token != NULL)
+		root = build_pipe(shell, root, pipe_token->next);
+	return (root);
 }
