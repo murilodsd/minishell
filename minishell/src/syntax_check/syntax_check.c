@@ -40,6 +40,9 @@ int	check_pipe(char *cmd)
 		if (cmd[i] == '|' && (cmd[i + 1] == '|'
 				|| cmd[ignore_spaces(cmd, i + 1)] == '|'))
 			return (1);
+		else if (cmd[i] == '|' && (cmd[i + 1] == '\0'
+			|| cmd[ignore_spaces(cmd, i + 1)] == '\0'))
+			return (2);
 		i++;
 	}
 	return (0);
@@ -90,7 +93,12 @@ int	syntax_check(char *cmd)
 	else if (check_quotes(cmd))
 		msg_error(SYNTAX_ERROR, "open quote");
 	else if (check_pipe(cmd))
-		msg_error(SYNTAX_ERROR, "|");
+	{
+		if (check_pipe(cmd) == 1)
+			msg_error(SYNTAX_ERROR, "|");
+		else
+			msg_error(SYNTAX_ERROR, "newline");
+	}
 	else if (check_redir(cmd) != -1)
 	{
 		if (check_redir(cmd) == NO_ARGS)
