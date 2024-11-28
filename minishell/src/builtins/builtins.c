@@ -2,19 +2,19 @@
 
 void	builtins(t_shell *shell, char **args)
 {
-	if (!ft_strcmp(args, "pwd"))
+	if (!ft_strcmp(args[0], "pwd"))
 		pwd_builtin(shell);
-	if (!ft_strcmp(args, "echo"))
+	if (!ft_strcmp(args[0], "echo"))
 		echo_builtin(shell, args);
-	if (!ft_strcmp(args, "cd"))
+	if (!ft_strcmp(args[0], "cd"))
 		cd_builtin(shell, args);
-	if (!ft_strcmp(args, "export"))
+	if (!ft_strcmp(args[0], "export"))
 		export_builtin(shell, args);
-	if (!ft_strcmp(args, "unset"))
+	if (!ft_strcmp(args[0], "unset"))
 		unset_builtin(shell, args);
-	if (!ft_strcmp(args, "env"))
-		env_builtin(shell);
-	if (!ft_strcmp(args, "exit"))
+	if (!ft_strcmp(args[0], "env"))
+		env_builtin(shell, args);
+	if (!ft_strcmp(args[0], "exit"))
 		exit_builtin(shell, args);
 	else
 		//exec

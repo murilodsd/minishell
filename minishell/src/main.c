@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/24 16:37:41 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:04:56 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_signal;
 
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	t_shell		*shell;
 
@@ -31,4 +31,4 @@ int	main(int argc, char **argv, char **envp)
 		}
 	}
 	return (0);
-}
+} */

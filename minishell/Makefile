@@ -20,6 +20,8 @@ SRCS = src/main.c \
 	src/parser/parser_checkers.c \
 	src/parser/parser_utils.c \
 	src/binary_tree/binary_tree.c \
+	src/binary_tree/binary_tree_utils.c \
+	src/binary_tree/redir_node_functions.c \
 	src/executer/executer.c \
 	src/builtins/builtins.c \
 	src/builtins/echo/echo.c \

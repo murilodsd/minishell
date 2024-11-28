@@ -12,6 +12,7 @@ bool	is_last_redir(t_token *token)
 
 void	define_redir_file(t_redir *redir, t_token *token)
 {
+	//REVIEW -> Precisavam mesmo dessa verificação? Não vai sempre existir o nome do arquivo?
 	if (!token->next)
 	{
 		redir->file = NULL;
@@ -24,13 +25,45 @@ void	define_redir_file(t_redir *redir, t_token *token)
 	}
 }
 
-t_redir	*define_redir(t_shell *shell, void *down, t_token *token, bool reset_id)
+t_node_type	get_redir_node_type(t_token *token)
+{
+	if (!token)
+		return (-1);
+	if (token->type == REDIR_IN)
+		return (REDIR_IN_NODE);
+	else if (token->type == REDIR_OUT)
+		return (REDIR_OUT_NODE);
+	else if (token->type == REDIR_APPEND)
+		return (REDIR_APPEND_NODE);
+	else
+		return (HEREDOC_NODE);
+}
+
+void	*get_redir_down_node(void *down)
+{
+	t_node_type	node_type;
+
+	if (down)
+	{
+		node_type = *(t_node_type *)down;
+		if (node_type == EXEC_NODE)
+			return ((t_exec *)down);
+		//REVIEW -> acho que poderia ser só um else
+		// else if (node_type == REDIR_IN_NODE || node_type == REDIR_OUT_NODE
+		// 	|| node_type == REDIR_APPEND_NODE || node_type == HEREDOC_NODE)
+		else
+			return ((t_redir *)down);
+	}
+	else
+		return (NULL);
+}
+
+t_redir	*create_redir_node(t_shell *shell, void *down, t_token *token, bool reset_id)
 {
 	t_redir		*redir;
-	t_node_type	node_type;
 	static int	id = 0;
 
-	if (reset_id == 1)
+	if (reset_id == TRUE)
 	{
 		id = 0;
 		return (NULL);
@@ -38,23 +71,12 @@ t_redir	*define_redir(t_shell *shell, void *down, t_token *token, bool reset_id)
 	redir = ft_calloc(sizeof(t_redir), 1);
 	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
 			redir, "Calloc failed");
-	//REVIEW -> SÃO TIPOS DIFERENTES
-	redir->type = token->type;
+	redir->down = get_redir_down_node(down);
+	//REVIEW -> APAGAR PRINT
+	printf("tipo do token redir: %s\n", token->data);
+	redir->type = get_redir_node_type(token);
 	define_redir_file(redir, token);
-	if (down)
-		redir->down = down;
-	//REVIEW -> down pode ser o no exec ou um no redir
-	// {
-	// 	node_type = *(t_node_type *)down;
-	// 	if (node_type == WORD)
-	// 		redir->down = (t_exec *)down;
-	// 	else if (node_type == REDIR_IN || node_type == REDIR_OUT
-	// 		|| node_type == REDIR_APPEND || node_type == HEREDOC)
-	// 		redir->down = (t_redir *)down;
-	// }
-	else
-		redir->down = NULL;
-	if (redir->type == HEREDOC)
+	if (redir->type == HEREDOC_NODE)
 	{
 		redir->id = id;
 		id++;

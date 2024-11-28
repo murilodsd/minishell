@@ -3,7 +3,7 @@
 # include "minishell.h"
 
 // builtins.c
-void	builtins(void);
+void	builtins(t_shell *shell, char **args);
 
 // cd
 // cd.c
@@ -16,7 +16,7 @@ void	echo_builtin(t_shell *shell, char **args);
 // env
 
 // env.c
-void	env_builtin(t_shell *shell);
+void	env_builtin(t_shell *shell, char **args);
 
 // exit
 // exit.c
