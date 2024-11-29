@@ -73,6 +73,8 @@ void	*build_exec(t_shell *shell, t_token *token)
 	if (args != NULL)
 	{
 		exec = ft_calloc(sizeof(t_exec), 1);
+		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+				exec, "Calloc failed");
 		exec->args = args;
 		exec->type = EXEC_NODE;
 		//REVIEW -> apagar print

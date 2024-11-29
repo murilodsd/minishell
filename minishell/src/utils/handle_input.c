@@ -128,6 +128,7 @@ void	handle_input(char *cmd, t_shell *shell)
 		return ;
 	tokenizer(cmd, shell, 0);
 	parser(shell);
+	print_list(shell->token);
 	print_tree(build_tree(shell, shell->token), 0, TRUE);
 	//builtins();
 	//executer();

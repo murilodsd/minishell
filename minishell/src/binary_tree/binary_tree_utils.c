@@ -1,5 +1,13 @@
 #include "../../includes/minishell.h"
 
+bool	is_redir_node_type(t_node_type node_type)
+{
+	if (node_type == REDIR_IN_NODE || node_type == REDIR_APPEND_NODE
+		|| node_type == REDIR_OUT_NODE || node_type == HEREDOC_NODE)
+		return (true);
+	return (false);
+}
+
 bool	is_redir_token(t_token *token)
 {
 	if (!token)
@@ -53,8 +61,8 @@ char	**get_args(t_shell *shell, t_token *token)
 		if (token->type == COMMAND || token->type == COMMAND_ARG)
 		{
 			args[i] = ft_strdup(token->data);
-			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
-				args[i], "Calloc failed");
+			if (!args[i])
+				free_exit_error(shell, GENERAL_ERROR, "Calloc failed");
 			i++;
 		}
 		token = token->next;
