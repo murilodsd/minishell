@@ -63,7 +63,8 @@ void	free_exit_error(t_shell *shell, t_error_codes error_code, char *error_msg)
 {
 	if (!shell->exit_status)
 		shell->exit_status = 1;
-	msg_error(error_code, error_msg);
+	if (error_msg != NULL)
+		msg_error(error_code, error_msg);
 	free_exit(shell);
 }
 

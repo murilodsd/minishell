@@ -10,6 +10,7 @@ typedef struct s_token
 	char			*data;
 	t_token_type	type;
 	t_token_quote	quote;
+	char			*env_var_name;
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;

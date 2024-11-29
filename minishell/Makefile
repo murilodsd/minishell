@@ -4,7 +4,6 @@ LIBFT = $(LIBFT_DIR)/libft.a
 CC=cc
 CCFLAGS= -Wall -Wextra -Werror -g
 EXTRA_FLAGS = -lreadline
-VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --suppressions=./readline.supp --track-origins=yes
 SRCS = src/main.c \
 	src/handle_signals/handle_signals.c \
 	src/syntax_check/syntax_check.c \
@@ -18,6 +17,7 @@ SRCS = src/main.c \
 	src/parser/parser_handlers.c \
 	src/parser/parser_handlers2.c \
 	src/parser/parser_checkers.c \
+	src/parser/parser_expand.c \
 	src/parser/parser_utils.c \
 	src/binary_tree/binary_tree.c \
 	src/binary_tree/binary_tree_utils.c \

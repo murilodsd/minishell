@@ -6,10 +6,11 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/28 16:04:56 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:08:41 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/minishell.h"
 #include "../includes/minishell.h"
 
 int	g_signal;
@@ -22,7 +23,7 @@ int	g_signal;
 	while (1)
 	{
 		shell->cmd = readline("minishell$ ");
-		if (shell->cmd[0] != '\0')
+		if (shell->cmd && shell->cmd[0] != '\0')
 		{
 			add_history(shell->cmd);
 			handle_input(shell->cmd, shell);

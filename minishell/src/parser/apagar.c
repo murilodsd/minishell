@@ -1,20 +1,5 @@
 #include "../../includes/minishell.h"
 
-void	clear_list(t_token **lst)
-{
-	t_token	*tmp;
-
-	while (*lst)
-	{
-		tmp = *lst;
-		*lst = (*lst)->next;
-		if (tmp->data)
-			free(tmp->data);
-		if (tmp)
-			free(tmp);
-	}
-}
-
 char	*format_data_parentheses(const char *data)
 {
 	size_t	len;
