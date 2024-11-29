@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenizer_handle_list.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 11:16:40 by dramos-j          #+#    #+#             */
+/*   Updated: 2024/11/29 11:46:01 by dramos-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 void	add_token(t_shell **shell, char *data, enum e_token_type type, \
@@ -61,4 +73,19 @@ void	find_place(t_token *token, char *word, t_token_quote quote)
 	new_token->next = tmp;
 	if (tmp)
 		tmp->prev = new_token;
+}
+
+void	clear_list(t_token **lst)
+{
+	t_token	*tmp;
+
+	while (*lst)
+	{
+		tmp = *lst;
+		*lst = (*lst)->next;
+		if (tmp->data)
+			free(tmp->data);
+		if (tmp)
+			free(tmp);
+	}
 }

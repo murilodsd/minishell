@@ -23,6 +23,7 @@ void	init_data(t_shell **shell, int argc, char **argv, char **envp);
 // utils.c
 int		ft_isspace(char c);
 int		ignore_spaces(char *cmd, int i);
+int			ft_isword(char c);
 int		check_malloc(void *ptr);
 
 #endif

@@ -15,6 +15,15 @@ int	ignore_spaces(char *cmd, int i)
 	return (i);
 }
 
+int	ft_isword(char c)
+{
+	if (ft_isspace(c) || c == '\'' || c == '"'
+		|| c == '|' || c == '$' || c == '>'
+		|| c == '<')
+		return (0);
+	return (1);
+}
+
 int	check_malloc(void *ptr)
 {
 	if (!ptr)

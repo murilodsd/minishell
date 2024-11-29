@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   syntax_check_utils.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 11:13:22 by dramos-j          #+#    #+#             */
+/*   Updated: 2024/11/29 11:13:23 by dramos-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 int	ignore_quotes(char *cmd, int i)
@@ -24,7 +36,7 @@ int	is_redir(char c)
 	return (0);
 }
 
-int	analyze_redir(char *cmd, int i)
+int	analyze_error_redir(char *cmd, int i)
 {
 	if (is_redir(cmd[i + 1]))
 	{

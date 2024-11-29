@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 11:39:23 by dramos-j          #+#    #+#             */
+/*   Updated: 2024/11/29 13:45:48 by dramos-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 void	polish_list(t_shell *shell)
@@ -16,8 +28,8 @@ void	parser(t_shell *shell)
 
 	char_null = ft_strdup("");
 	polish_list(shell);
+	rm_env_var_error(shell);
 	listjoin(shell);
 	rm_space_token(shell);
 	add_token(&shell, char_null, NULL_TOKEN, NO_QUOTE);
-	print_list(shell->token);
 }

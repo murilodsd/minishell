@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_handlers.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 12:00:21 by dramos-j          #+#    #+#             */
+/*   Updated: 2024/11/29 12:00:22 by dramos-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 void	looking_for_here_doc(t_shell *shell)
@@ -75,41 +87,11 @@ void	looking_for_redir(t_shell *shell)
 	while (tmp)
 	{
 		if (tmp->type == REDIR_IN)
-		{
-			tmp = tmp->next;
-			if (tmp->type == SPACE_TOKEN)
-				tmp = tmp->next;
-			tmp->type = REDIR_IN_FILE;
-			while (tmp->next && tmp->next->type != SPACE_TOKEN)
-			{
-				tmp = tmp->next;
-				tmp->type = REDIR_IN_FILE;
-			}
-		}
+			tmp = find_redir_file(tmp, REDIR_IN_FILE);
 		else if (tmp->type == REDIR_OUT)
-		{
-			tmp = tmp->next;
-			if (tmp->type == SPACE_TOKEN)
-				tmp = tmp->next;
-			tmp->type = REDIR_OUT_FILE;
-			while (tmp->next && tmp->next->type != SPACE_TOKEN)
-			{
-				tmp = tmp->next;
-				tmp->type = REDIR_OUT_FILE;
-			}
-		}
+			tmp = find_redir_file(tmp, REDIR_OUT_FILE);
 		else if (tmp->type == REDIR_APPEND)
-		{
-			tmp = tmp->next;
-			if (tmp->type == SPACE_TOKEN)
-				tmp = tmp->next;
-			tmp->type = REDIR_APPEND_FILE;
-			while (tmp->next && tmp->next->type != SPACE_TOKEN)
-			{
-				tmp = tmp->next;
-				tmp->type = REDIR_APPEND_FILE;
-			}
-		}
+			tmp = find_redir_file(tmp, REDIR_APPEND_FILE);
 		else
 			tmp = tmp->next;
 	}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   syntax_check.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 11:13:13 by dramos-j          #+#    #+#             */
+/*   Updated: 2024/11/29 11:13:14 by dramos-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 int	check_redir(char *cmd)
@@ -19,7 +31,7 @@ int	check_redir(char *cmd)
 			else if (cmd[i] == '|')
 				return (PIPE_ARG_ERROR);
 			else if (is_redir(cmd[i]))
-				return (analyze_redir(cmd, i));
+				return (analyze_error_redir(cmd, i));
 		}
 		else
 			i++;

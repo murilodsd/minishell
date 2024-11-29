@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_checkers.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 11:45:31 by dramos-j          #+#    #+#             */
+/*   Updated: 2024/11/29 11:45:32 by dramos-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 void	check_env_var(t_token *token, t_shell *shell)
@@ -38,7 +50,6 @@ char	*check_env_var_d_quote(t_shell *shell, char *data)
 	int		i;
 	char	*tmp;
 	char	*new_data;
-	char	*next_char;
 
 	i = 0;
 	new_data = ft_strdup("");
@@ -55,13 +66,7 @@ char	*check_env_var_d_quote(t_shell *shell, char *data)
 			free(tmp);
 		}
 		else
-		{
-			tmp = new_data;
-			next_char = ft_substr(data, i, 1);
-			new_data = ft_strjoin(tmp, next_char);
-			free(tmp);
-			free(next_char);
-		}
+			add_next_char(&new_data, data[i]);
 		i++;
 	}
 	return (new_data);

@@ -11,7 +11,8 @@ void	handle_input(char *cmd, t_shell *shell)
 		return ;
 	tokenizer(cmd, shell, 0);
 	parser(shell);
-	binary_tree(shell);
+	print_list(shell->token);
+//	binary_tree(shell);
 	builtins();
 	executer();
 	handle_error();
