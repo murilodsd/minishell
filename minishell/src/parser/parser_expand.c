@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:18:44 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 13:58:15 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:24:55 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	expand_var(t_token *token, t_shell *shell)
 		}
 		else
 		{
+			token->env_var_name = ft_strdup(token->data);
+			if (check_malloc(token->env_var_name))
+				return ;
 			free(token->data);
 			token->data = ft_strdup("");
 			if (check_malloc(token->data))

@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:01:24 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 13:48:20 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:11:37 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void		looking_for_cmd_args(t_shell *shell);
 void		rm_env_var_error(t_shell *shell);
 void		listjoin(t_shell *shell);
 void		rm_space_token(t_shell *shell);
-
 
 //parser_checkers.c
 void		check_env_var(t_token *token, t_shell *shell);

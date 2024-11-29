@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:16:40 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 11:46:01 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:23:29 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	add_token(t_shell **shell, char *data, enum e_token_type type, \
 
 	new_token = (t_token *)malloc(sizeof(t_token));
 	new_token->data = data;
+	new_token->env_var_name = NULL;
 	new_token->type = type;
 	new_token->quote = quote;
 	if (!(*shell)->token)
@@ -55,6 +56,8 @@ void	rm_token(t_token **token, t_shell *shell)
 		tmp->next->prev = tmp->prev;
 	if (tmp->data)
 		free(tmp->data);
+	if (tmp->env_var_name)
+		free(tmp->env_var_name);
 	free(tmp);
 }
 
@@ -85,6 +88,8 @@ void	clear_list(t_token **lst)
 		*lst = (*lst)->next;
 		if (tmp->data)
 			free(tmp->data);
+		if (tmp->env_var_name)
+			free(tmp->env_var_name);
 		if (tmp)
 			free(tmp);
 	}
