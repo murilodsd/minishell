@@ -41,13 +41,13 @@ void	*build_redir(t_shell *shell, void *down, t_token *token)
 	root = NULL;
 	end_of_the_command = get_next_pipe(token);
 	//REVIEW -> apagar print
-	printf("Encontrou pipe (redir)? %i\n", end_of_the_command != NULL);
+	//printf("Encontrou pipe (redir)? %i\n", end_of_the_command != NULL);
 	if (!end_of_the_command)
 		end_of_the_command = last_token(token);
-	printf("ùltimo token %s\n", end_of_the_command->prev->data);
+	//printf("ùltimo token %s\n", end_of_the_command->prev->data);
 	//REVIEW - sera que já nao tem uma funcao que pega o ultimo redir?
 	last_redir = get_previous_redir(end_of_the_command);
-	printf("Encontrou redir? %i\n", last_redir != NULL);
+	//printf("Encontrou redir? %i\n", last_redir != NULL);
 	if (last_redir)
 	{
 		root = create_redir_node(shell, down, last_redir, FALSE);
@@ -76,7 +76,7 @@ void	*build_exec(t_shell *shell, t_token *token)
 		exec->args = args;
 		exec->type = EXEC_NODE;
 		//REVIEW -> apagar print
-		printf("node exec args[0] = %s\n",args[0]);
+		//printf("node exec args[0] = %s\n",args[0]);
 	}
 	else
 		exec = NULL;
@@ -95,14 +95,14 @@ void	*build_tree(t_shell *shell, t_token *token)
 	root = build_exec(shell, token);
 	pipe_token = get_next_pipe(token);
 	//REVIEW -> apagar print abaixo
-	printf("Encontrou pipe (build_tree)? %i\n", pipe_token != NULL);
-	if (pipe_token != NULL)
-		printf("Token depois do pipe? %s\n", pipe_token->next->data);
+	//printf("Encontrou pipe (build_tree)? %i\n", pipe_token != NULL);
+	//if (pipe_token != NULL)
+	//	printf("Token depois do pipe? %s\n", pipe_token->next->data);
 	if (pipe_token != NULL)
 		root = build_pipe(shell, root, build_tree(shell, pipe_token->next));
 	//REVIEW -> apagar print abaixo
 	//meu print
-	ft_printf(1, "nó pai %s\n", get_node_type_name(*((t_node_type *)root)));
+	//ft_printf(1, "nó pai %s\n", get_node_type_name(*((t_node_type *)root)));
 	//ft_printf(1, "filho esquerdo %s filho direito %s\n", get_node_type_name(*((t_node_type *)((t_pipe *)root)->left)), get_node_type_name(*((t_node_type *)((t_pipe *)root)->right)));
 	return (root);
 }

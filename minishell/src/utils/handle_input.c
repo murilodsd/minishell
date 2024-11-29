@@ -53,14 +53,14 @@ void print_tree(void *node, int level, bool first) {
 		// else
 		// {
 			if (*((t_node_type *)node) == PIPE_NODE)
-				printf("    "); // Indentação para níveis mais profundos
+				printf("     "); // Indentação para níveis mais profundos
 			else
 			{
 				if (first)	
-					printf("    ");
+					printf("     ");
 				else
 				{
-					printf(" : ");
+					printf(" - ");
 					break;
 				}
 			}
@@ -69,15 +69,17 @@ void print_tree(void *node, int level, bool first) {
 
 	// Exibe o tipo do nó
 	if (*((t_node_type *)node) == PIPE_NODE)
-		printf("%s\n", get_node_type_name(*((t_node_type *)node), node));
+		printf("( %s )\n", get_node_type_name(*((t_node_type *)node), node));
 	else if (*((t_node_type *)node) == EXEC_NODE)
 	{
 		i = 0;
+		printf("( ");
 		while (((t_exec *)node)->args[i])
 			printf(" %s",(((t_exec *)node)->args[i++]));
+		printf(" )");
 	}
 	else
-		printf("%s", get_node_type_name(*((t_node_type *)node), node));
+		printf("( %s )", get_node_type_name(*((t_node_type *)node), node));
 
 	// Recur para o lado esquerdo
 	if (*((t_node_type *)node) == PIPE_NODE)

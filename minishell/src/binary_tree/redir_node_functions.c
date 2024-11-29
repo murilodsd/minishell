@@ -73,7 +73,7 @@ t_redir	*create_redir_node(t_shell *shell, void *down, t_token *token, bool rese
 			redir, "Calloc failed");
 	redir->down = get_redir_down_node(down);
 	//REVIEW -> APAGAR PRINT
-	printf("tipo do token redir: %s\n", token->data);
+	//printf("tipo do token redir: %s\n", token->data);
 	redir->type = get_redir_node_type(token);
 	define_redir_file(redir, token);
 	if (redir->type == HEREDOC_NODE)
