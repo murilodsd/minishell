@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_handle_list.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:16:40 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 14:23:29 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:14:29 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,15 @@ void	find_place(t_token *token, char *word, t_token_quote quote)
 	new_token->next = tmp;
 	if (tmp)
 		tmp->prev = new_token;
+}
+
+t_token	*last_token(t_token *token)
+{
+	if (!token)
+		return (NULL);
+	while (token->next)
+		token = token->next;
+	return (token);
 }
 
 void	clear_list(t_token **lst)

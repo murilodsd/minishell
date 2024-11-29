@@ -3,7 +3,7 @@
 # include "minishell.h"
 
 // builtins.c
-void	builtins(void);
+void	builtins(t_shell *shell, char **args);
 
 // cd
 // cd.c
@@ -16,7 +16,7 @@ void	echo_builtin(t_shell *shell, char **args);
 // env
 
 // env.c
-void	env_builtin(t_shell *shell);
+void	env_builtin(t_shell *shell, char **args);
 
 // exit
 // exit.c
@@ -25,8 +25,8 @@ void	exit_builtin(t_shell * shell, char **exit_args);
 // export
 // export_utils.c
 t_list	*ft_lstfind_name(t_list *lst, char *name);
-void	edit_var(t_shell *shell, t_list *lst, t_var *var);
-void	add_var(t_shell *shell, t_list *lst, t_var *var);
+void	edit_var(t_shell *shell, t_var *var);
+void	add_var(t_shell *shell, t_var *var);
 void	get_new_var_name_and_value(t_shell *shell, t_var *var, char *string);
 // export.c
 void	export_builtin(t_shell *shell, char **export_args);

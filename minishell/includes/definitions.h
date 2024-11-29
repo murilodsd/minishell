@@ -48,6 +48,16 @@ typedef enum e_token_type
 	NULL_TOKEN
 }	t_token_type;
 
+typedef enum e_node_type
+{
+	EXEC_NODE,
+	PIPE_NODE,
+	REDIR_IN_NODE,
+	REDIR_OUT_NODE,
+	REDIR_APPEND_NODE,
+	HEREDOC_NODE
+}	t_node_type;
+
 typedef enum e_token_quote
 {
 	NO_QUOTE,

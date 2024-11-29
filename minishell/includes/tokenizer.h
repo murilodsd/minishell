@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:14:11 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 11:46:13 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:14:51 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int			handle_redir_out(char *cmd, int i, t_shell *shell);
 int			handle_word(char *cmd, int i, t_shell *shell);
 
 // tokenizer_handle_list.c
-void		init_token(t_shell **shell);
 void		add_token(t_shell **shell, char *data, \
 	enum e_token_type type, enum e_token_quote quote);
 void		rm_token(t_token **token, t_shell *shell);
 void		find_place(t_token *token, char *word, t_token_quote quote);
+t_token		*last_token(t_token *token);
 void		clear_list(t_token **token);
 
 // tokenizer_utils.c
