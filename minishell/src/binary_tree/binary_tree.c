@@ -107,23 +107,3 @@ void	*build_tree(t_shell *shell, t_token *token)
 	return (root);
 }
 
-
-int	main(int argc, char **argv, char **envp)
-{
-	t_shell		*shell;
-
-	init_data(&shell, argc, argv, envp);
-	while (1)
-	{
-		shell->cmd = readline("minishell$ ");
-		if (shell->cmd[0] != '\0')
-		{
-			add_history(shell->cmd);
-			handle_input(shell->cmd, shell);
-			if (shell->cmd)
-				free(shell->cmd);
-		}
-	}
-	return (0);
-}
-

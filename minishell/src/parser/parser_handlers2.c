@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:39:09 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 13:58:57 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:15:29 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ void	looking_for_cmd(t_shell *shell)
 	while (tmp)
 	{
 		tmp_next = tmp->next;
-		if (tmp->type == WORD)
+		if (tmp->type == WORD || (tmp->type == ENV_VAR_NAME
+				&& tmp_next && tmp_next->type == WORD))
 		{
 			tmp->type = COMMAND;
-			while (tmp_next && tmp_next->type == WORD)
+			while (tmp_next && (tmp_next->type == WORD
+					|| tmp_next->type == ENV_VAR_NAME))
 			{
 				tmp = tmp_next;
 				tmp_next = tmp_next->next;
@@ -36,8 +38,7 @@ void	looking_for_cmd(t_shell *shell)
 				tmp_next = tmp_next->next;
 			}
 		}
-		else
-			tmp = tmp_next;
+		tmp = tmp_next;
 	}
 }
 
@@ -48,28 +49,18 @@ void	looking_for_cmd_args(t_shell *shell)
 	tmp = shell->token;
 	while (tmp)
 	{
-		if (tmp->type == WORD)
-			tmp->type = COMMAND_ARG;
-		tmp = tmp->next;
-	}
-}
-
-void	rm_env_var_error(t_shell *shell)
-{
-	t_token	*tmp;
-	t_token	*tmp_next;
-
-	tmp = shell->token;
-	while (tmp)
-	{
-		tmp_next = tmp->next;
-		if (tmp->type == ENV_VAR_NAME)
+		if (tmp->type == WORD || (tmp->type == ENV_VAR_NAME
+				&& tmp->next && tmp->next->type == WORD))
 		{
-			if (tmp == shell->token)
-				shell->token = tmp_next;
-			rm_token(&tmp, shell);
+			tmp->type = COMMAND_ARG;
+			while (tmp->next && (tmp->next->type == WORD
+					|| tmp->next->type == ENV_VAR_NAME))
+			{
+				tmp = tmp->next;
+				tmp->type = COMMAND_ARG;
+			}
 		}
-		tmp = tmp_next;
+		tmp = tmp->next;
 	}
 }
 

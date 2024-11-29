@@ -39,7 +39,6 @@ void	check_args(t_shell *shell, int argc, char **argv)
 
 void	 init_data(t_shell **shell, int argc, char **argv, char **envp)
 {
-	printf("Initializing data\n");
 	*shell = ft_calloc(sizeof(t_shell), 1);
 	if (!(*shell))
 	{

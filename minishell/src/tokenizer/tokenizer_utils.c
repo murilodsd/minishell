@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:15:54 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 11:15:55 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:12:57 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,4 @@ void	take_out_quotes(char **data, t_token_quote quote)
 	tmp[j] = '\0';
 	free(*data);
 	*data = tmp;
-}
-
-void	add_quote_token(char quote, char *cmd, int i, t_shell *shell)
-{
-	if (quote == '\"')
-		add_token(&shell, ft_substr(cmd, i + 1, 1), ENV_VAR_NAME, DOUBLE);
-	else if (quote == '\'')
-		add_token(&shell, ft_substr(cmd, i + 1, 1), ENV_VAR_NAME, SINGLE);
 }
