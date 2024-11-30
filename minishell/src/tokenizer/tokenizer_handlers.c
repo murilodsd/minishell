@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:16:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 11:16:09 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:32:52 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,13 @@ int	handle_d_quotes(char *cmd, int i, t_shell *shell)
 
 	j = i + 1;
 	if (cmd[j] == '\"')
+	{
+		tmp = ft_strdup("");
+		if (check_malloc(tmp))
+			return (0);
+		add_token(&shell, tmp, WORD, DOUBLE);
 		return (j);
+	}
 	while (cmd[j])
 	{
 		if (cmd[j] == '\"')
@@ -90,7 +96,7 @@ int	handle_env_var(char *cmd, int i, t_shell *shell)
 	{
 		add_token(&shell, tmp, ENV_VAR, NO_QUOTE);
 		if (cmd[i + 1] == '\"' || cmd[i + 1] == '\'')
-			add_quote_token(cmd[i + 1], cmd, i, shell);
+			add_token(&shell, ft_substr(cmd, i + 1, 1), ENV_VAR_NAME, NO_QUOTE);
 	}
 	return (i);
 }

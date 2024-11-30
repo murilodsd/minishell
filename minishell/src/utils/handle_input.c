@@ -56,7 +56,7 @@ void print_tree(void *node, int level, bool first) {
 				printf("     "); // Indentação para níveis mais profundos
 			else
 			{
-				if (first)	
+				if (first)
 					printf("     ");
 				else
 				{
