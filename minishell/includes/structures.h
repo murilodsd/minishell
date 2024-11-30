@@ -64,6 +64,7 @@ typedef struct s_redir
 	void			*down;
 	int				id;
 	char			*file;
+	char			*env_var_name;
 }					t_redir;
 
 #endif

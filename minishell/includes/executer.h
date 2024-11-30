@@ -2,6 +2,6 @@
 # define EXECUTER_H
 # include "minishell.h"
 
-void	executer(void);
+void	executer(t_shell * shell, void *root);
 
 #endif
