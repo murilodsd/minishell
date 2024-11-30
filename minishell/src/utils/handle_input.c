@@ -119,19 +119,17 @@ void printTree(void *node, int depth) {
 
 void	handle_input(char *cmd, t_shell *shell)
 {
-	if (ft_strncmp(cmd, "exit", 4) == 0)
-	{
-		free_exit_error(shell, EXIT_SUCCESS, NULL);
-		exit(0);
-	}
+	void	*tree;
+
 	if (syntax_check(cmd))
 		return ;
 	tokenizer(cmd, shell, 0);
 	parser(shell);
 	print_list(shell->token);
-	print_tree(build_tree(shell, shell->token), 0, TRUE);
+	tree = build_tree(shell, shell->token);
+	print_tree(tree, 0, TRUE);
 	//builtins();
-	//executer();
+	executer(shell, tree);
 	//handle_error();
 	clear_list(&(shell->token));
 }
