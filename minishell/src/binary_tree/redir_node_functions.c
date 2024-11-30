@@ -22,9 +22,8 @@ void	define_redir_file(t_redir *redir, t_token *token)
 	{
 		redir->file = token->next->data;
 		redir->file_status = token->next->quote;
-		redir->env_var_name = token->env_var_name;
+		redir->env_var_name = token->next->env_var_name;
 	}
-	printf("env_var_name %s\n", redir->env_var_name);
 }
 
 t_node_type	get_redir_node_type(t_token *token)
