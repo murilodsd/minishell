@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_handle_list.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:16:40 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 15:14:29 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/01 15:35:51 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,14 @@ t_token	*last_token(t_token *token)
 	return (token);
 }
 
-void	clear_list(t_token **lst)
+void	clear_token_list(t_shell *shell)
 {
 	t_token	*tmp;
 
-	while (*lst)
+	while (shell->token)
 	{
-		tmp = *lst;
-		*lst = (*lst)->next;
+		tmp = shell->token;
+		shell->token = shell->token->next;
 		if (tmp->data)
 			free(tmp->data);
 		if (tmp->env_var_name)
