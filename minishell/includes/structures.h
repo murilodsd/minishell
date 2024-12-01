@@ -29,7 +29,6 @@ typedef struct s_shell
 	int				fd_out;
 	int				count_hd;
 	t_list			*envp_lst;
-	t_list			*export_lst;
 	char			*cmd;
 	char			*path;
 	t_token			*token;
