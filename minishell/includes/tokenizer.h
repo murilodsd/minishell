@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:14:11 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 18:41:50 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/02 07:05:32 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		rm_token(t_token **token, t_shell *shell);
 void		find_place(t_token *token, char *word, t_token_quote quote);
 t_token		*last_token(t_token *token);
 t_token		*last_token(t_token *token);
-void		clear_list(t_token **token);
+void		clear_token_list(t_shell *shell);
 
 // tokenizer_utils.c
 void		take_out_quotes(char **data, t_token_quote quote);

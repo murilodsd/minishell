@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_handlers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:00:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 18:30:18 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/02 07:07:52 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	looking_for_here_doc(t_shell *shell)
 			while (tmp->type == SPACE_TOKEN)
 				tmp = tmp->next;
 			tmp->type = EOF_TOKEN;
-			while (tmp->next && tmp->next->type != SPACE_TOKEN)
+			while (tmp->next && (tmp->next->type == WORD
+					|| tmp->next->type == ENV_VAR_NAME
+					|| tmp->next->type == ENV_VAR
+					|| tmp->next->type == ENV_VAR_EXIT_CODE))
 			{
 				tmp = tmp->next;
 				tmp->type = EOF_TOKEN;

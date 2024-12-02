@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_handlers2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:39:09 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 18:15:29 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/02 07:08:55 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,7 @@ void	looking_for_cmd(t_shell *shell)
 				tmp_next = tmp_next->next;
 				tmp->type = COMMAND;
 			}
-			while (tmp_next && tmp_next->type != PIPE)
-			{
-				tmp = tmp_next;
-				tmp_next = tmp_next->next;
-			}
+			skip_to_next_pipe(&tmp_next);
 		}
 		tmp = tmp_next;
 	}

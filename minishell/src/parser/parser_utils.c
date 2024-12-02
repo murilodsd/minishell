@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:39:02 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 13:58:34 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/02 07:10:39 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,12 @@ t_token	*find_redir_file(t_token *tmp, t_token_type type)
 		tmp->type = type;
 	}
 	return (tmp);
+}
+
+void	skip_to_next_pipe(t_token **token)
+{
+	while (*token && (*token)->type != PIPE)
+		*token = (*token)->next;
+	if (*token)
+		*token = (*token)->next;
 }

@@ -131,5 +131,5 @@ void	handle_input(char *cmd, t_shell *shell)
 	//builtins();
 	executer(shell, tree);
 	//handle_error();
-	clear_list(&(shell->token));
+	clear_token_list(shell);
 }

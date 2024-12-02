@@ -15,6 +15,18 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+// ************************** HEREDOC STRUCT *********************** //
+
+typedef struct s_heredoc
+{
+	int				i;
+	int				fd_heredoc;
+	char			*fd_heredoc_path;
+	char			*eof;
+	int				count_hd;
+	struct s_heredoc	*next;
+}	t_heredoc;
+
 // ******************************** SHELL STRUCT *********************** //
 
 typedef struct s_shell
@@ -29,6 +41,7 @@ typedef struct s_shell
 	int				fd_out;
 	int				count_hd;
 	t_list			*envp_lst;
+	t_list			*export_lst;
 	char			*cmd;
 	char			*path;
 	t_token			*token;

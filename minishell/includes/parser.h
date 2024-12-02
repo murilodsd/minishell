@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:01:24 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 17:27:28 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/02 07:03:29 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char		*ft_getenv(t_list *envp_lst, char *name);
 void		split_token(t_token *token, int i);
 void		add_next_char(char **str, char c);
 t_token		*find_redir_file(t_token *tmp, t_token_type type);
+void		skip_to_next_pipe(t_token **token);
 
 // apagar.c
 char		*format_data_parentheses(const char *data);
