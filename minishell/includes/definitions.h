@@ -25,6 +25,10 @@ typedef enum e_error_codes
 # define EXIT_USAGE_SYNTAX_ERROR 2
 # define EXIT_CMD_NOT_FOUND 127
 
+// ********************************* PROCESS PID ************************* //
+
+# define CHILD 0
+
 // ********************************* TOKEN DEFINITIONS ***************** //
 
 typedef enum e_token_type
