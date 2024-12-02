@@ -132,4 +132,5 @@ void	handle_input(char *cmd, t_shell *shell)
 	executer(shell, tree);
 	//handle_error();
 	clear_token_list(shell);
+	clear_heredoc_list(shell);
 }
