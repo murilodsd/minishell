@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:13:13 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 11:13:14 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/02 07:58:10 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ int	check_pipe(char *cmd)
 	{
 		if (cmd[i] == '\'' || cmd[i] == '\"')
 			i = ignore_quotes(cmd, i);
-		if (cmd[i] == '|' && (cmd[i + 1] == '|'
+		if (is_redir(cmd[i]) && check_redir(cmd) != -1)
+			return (0);
+		else if (cmd[i] == '|' && (cmd[i + 1] == '|'
 				|| cmd[ignore_spaces(cmd, i + 1)] == '|'))
 			return (1);
 		else if (cmd[i] == '|' && (cmd[i + 1] == '\0'

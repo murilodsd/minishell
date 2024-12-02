@@ -14,6 +14,7 @@
 # include "tokenizer.h"
 # include "parser.h"
 # include "binary_tree.h"
+# include "heredoc.h"
 # include "executer.h"
 # include "builtins.h"
 # include "utils.h"

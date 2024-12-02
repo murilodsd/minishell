@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_handlers2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:16:01 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 11:16:02 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/02 07:58:44 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@ int	handle_heredoc(char *cmd, int i, t_shell *shell)
 {
 	char	*tmp;
 
+	if (!shell->heredoc)
+		init_heredoc(shell);
 	tmp = ft_substr(cmd, i, 2);
 	if (check_malloc(tmp))
 		return (0);
 	add_token(&shell, tmp, HEREDOC, NO_QUOTE);
+	shell->heredoc->count_hd++;
 	return (i + 1);
 }
 

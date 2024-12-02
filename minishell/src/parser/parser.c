@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:39:23 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 18:16:18 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/02 07:57:28 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,6 @@ void	parser(t_shell *shell)
 	listjoin(shell);
 	rm_space_token(shell);
 	add_token(&shell, char_null, NULL_TOKEN, NO_QUOTE);
+	if (shell->heredoc)
+		heredoc(shell);
 }
