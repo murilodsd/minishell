@@ -15,7 +15,7 @@ char	**get_path(t_shell *shell)
 	path_string = ((t_var *)(path_node->content))->value;
 	if (!path_string)
 		return (NULL);
-	path_array_string = ft_split(path_string,":");
+	path_array_string = ft_split(path_string,':');
 	check_mem_alloc(shell, &(shell->mem_allocation.matrix_mem_list), \
 		path_array_string, "Calloc failed");
 	i = 0;
@@ -60,7 +60,9 @@ void	execute_execve(t_shell *shell, t_exec *exec)
 	char	*path_cmd;
 
 	execve_ret = 0;
-	exported_envs = filter_envs(shell->envp_lst);
+	//REVIEW -> refazer para gerar char*
+	//exported_envs = filter_envs(shell->envp_lst);
+	exported_envs = NULL;
 	if (access(exec->args[0], F_OK) == 0)
 		execve_ret = execve(exec->args[0], exec->args, exported_envs);
 	path = get_path(shell);
@@ -69,7 +71,7 @@ void	execute_execve(t_shell *shell, t_exec *exec)
 	{
 		path_cmd = ft_strjoin(path[i], exec->args[0]);
 		if (access(path_cmd, F_OK) == 0)
-			execve_ret = execve(path_cmd, exec->args, shell->envp_lst);
+			execve_ret = execve(path_cmd, exec->args, exported_envs);
 		free(path_cmd);
 		i++;
 	}
