@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:16:40 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/02 23:30:22 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/02 23:50:02 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,5 @@ void	clear_token_list(t_shell *shell)
 		if (tmp)
 			free(tmp);
 	}
+	shell->token = NULL;
 }

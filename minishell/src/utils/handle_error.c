@@ -7,6 +7,8 @@ void	handle_error(void)
 
 void	free_all(t_shell *shell)
 {
+	if (shell->token)
+		clear_token_list(shell);
 	if (shell->mem_allocation.ptr_mem_list != NULL)
 		ft_lstclear(&(shell->mem_allocation.ptr_mem_list), free);
 	if (shell->mem_allocation.matrix_mem_list != NULL)
