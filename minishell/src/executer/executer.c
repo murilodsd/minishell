@@ -89,6 +89,8 @@ void	run_exec(t_shell *shell, t_exec *exec)
 		echo_builtin(shell, exec->args);
 	else if (!ft_strcmp(exec->args[0], "export"))
 		export_builtin(shell, exec->args);
+	else if (!ft_strcmp(exec->args[0], "env"))
+		env_builtin(shell, exec->args);
 	else if (!ft_strcmp(exec->args[0], "unset"))
 		unset_builtin(shell, exec->args);
 	else if (!ft_strcmp(exec->args[0], "pwd"))
@@ -99,8 +101,9 @@ void	run_exec(t_shell *shell, t_exec *exec)
 		exit_builtin(shell, exec->args);
 	//REVIEW - Caso de nao ser nenhum comando valido
 	else
+		printf("runexecve");
 		//run_execv(shell, exec);
-	free_exit(shell);
+	//free_exit(shell);
 }
 
 void	executer(t_shell * shell, void *root)
