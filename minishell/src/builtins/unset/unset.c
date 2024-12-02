@@ -31,13 +31,15 @@ void	ft_lstremove_mem_node(t_list **lst, void *content)
 	}
 }
 
-void	ft_lstremove_var(t_shell *shell, t_list **lst, char *name)
+
+
+void	ft_lstremove_var(t_shell *shell, char *name)
 {
 	t_list	*current;
 	t_list	*previous;
 	t_var	*var;
 
-	current = *lst;
+	current = shell->export_lst;
 	previous = NULL;
 	while (current)
 	{
@@ -47,7 +49,24 @@ void	ft_lstremove_var(t_shell *shell, t_list **lst, char *name)
 			if (previous)
 				previous->next = current->next;
 			else
-				*lst = current->next;
+				shell->envp_lst = current->next;
+			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), current);
+			break ;
+		}
+		previous = current;
+      		current = current->next;
+	}
+	current = shell->envp_lst;
+	previous = NULL;
+	while (current)
+	{
+		var = (t_var *)current->content;
+		if (ft_strcmp(var->name, name) == 0)
+		{
+			if (previous)
+				previous->next = current->next;
+			else
+				shell->envp_lst = current->next;
 			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), var->name);
 			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), var->value);
 			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), current->content);
@@ -70,8 +89,7 @@ void	unset_builtin(t_shell *shell, char **unset_args)
 		i = 1;
 		while (unset_args[i])
 		{
-			ft_lstremove_var(shell, &(shell->envp_lst), unset_args[i]);
-			ft_lstremove_var(shell, &(shell->export_lst), unset_args[i]);
+			ft_lstremove_var(shell, unset_args[i]);
 			i++;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:52:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/20 20:35:12 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:30:28 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 char	*ft_strcpy(char *dest, char *src);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
+char	*ft_strcat(char *dst, const char *src);
 char	*ft_strchr(const char *s, int c);
 bool	ft_str_validate(char *str, bool(*f)(char));
 bool	ft_str_in_set(char *str, char *set);
