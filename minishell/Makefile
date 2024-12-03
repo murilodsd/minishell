@@ -27,6 +27,7 @@ SRCS = src/main.c \
 	src/heredoc/heredoc_utils.c \
 	src/executer/executer.c \
 	src/executer/execve.c \
+	src/executer/executer_utils.c \
 	src/builtins/builtins.c \
 	src/builtins/echo/echo.c \
 	src/builtins/cd/cd.c \
