@@ -5,8 +5,11 @@ void	run_exec(t_shell *shell, t_exec *exec)
 	if (!exec || !exec->args[0])
 		return ;
 	//REVIEW -> caso de o comando ser "" ou $abc
-	//if (!exec->args[0][0])
-	//	shell_error(shell, "", 1, true);
+	if (exec->args[0][0] == '\0')
+	{
+		shell->exit_status = EXIT_CMD_NOT_FOUND;
+		free_exit_error(shell, CMD_NOT_FOUND, exec->args[0]);
+	}
 	if (!ft_strcmp(exec->args[0], "echo"))
 		echo_builtin(shell, exec->args);
 	else if (!ft_strcmp(exec->args[0], "export"))

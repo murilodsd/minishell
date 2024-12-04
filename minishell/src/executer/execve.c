@@ -113,14 +113,13 @@ void	execute_execve(t_shell *shell, t_exec *exec)
 	if (access(exec->args[0], F_OK) == 0)
 		execve_ret = execve(exec->args[0], exec->args, exported_envs);
 	path = get_path(shell);
-	i = 0;
-	while (path[i])
+	i = -1;
+	while (path[i++])
 	{
 		path_cmd = ft_strjoin(path[i], exec->args[0]);
 		if (access(path_cmd, F_OK) == 0)
 			execve_ret = execve(path_cmd, exec->args, exported_envs);
 		free(path_cmd);
-		i++;
 	}
 	handle_exec_error(execve_ret, exec, shell);
 }
