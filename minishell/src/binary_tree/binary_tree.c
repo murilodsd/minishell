@@ -65,6 +65,8 @@ void	*build_redir(t_shell *shell, void *down, t_token *token)
 
 void	*build_exec(t_shell *shell, t_token *token)
 {
+//	t_token	*end_of_the_command;
+//	t_token	*last_redir;
 	void	*root;
 	t_exec	*exec;
 	char	**args;
@@ -73,8 +75,6 @@ void	*build_exec(t_shell *shell, t_token *token)
 	if (args != NULL)
 	{
 		exec = ft_calloc(sizeof(t_exec), 1);
-		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
-				exec, "Calloc failed");
 		exec->args = args;
 		exec->type = EXEC_NODE;
 		//REVIEW -> apagar print
@@ -108,7 +108,7 @@ void	*build_tree(t_shell *shell, t_token *token)
 	//ft_printf(1, "filho esquerdo %s filho direito %s\n", get_node_type_name(*((t_node_type *)((t_pipe *)root)->left)), get_node_type_name(*((t_node_type *)((t_pipe *)root)->right)));
 	return (root);
 }
-
+/*
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -127,5 +127,5 @@ int	main(int argc, char **argv, char **envp)
 		}
 	}
 	return (0);
-}
+}*/
 

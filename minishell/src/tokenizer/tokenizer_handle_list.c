@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_handle_list.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:16:40 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 15:14:29 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/04 14:04:25 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	find_place(t_token *token, char *word, t_token_quote quote)
 	t_token	*tmp;
 
 	new_token = (t_token *)malloc(sizeof(t_token));
+	if (check_malloc(new_token))
+		return ;
 	new_token->data = word;
 	new_token->type = WORD;
 	new_token->quote = quote;
@@ -87,14 +89,14 @@ t_token	*last_token(t_token *token)
 	return (token);
 }
 
-void	clear_list(t_token **lst)
+void	clear_token_list(t_shell *shell)
 {
 	t_token	*tmp;
 
-	while (*lst)
+	while (shell->token)
 	{
-		tmp = *lst;
-		*lst = (*lst)->next;
+		tmp = shell->token;
+		shell->token = shell->token->next;
 		if (tmp->data)
 			free(tmp->data);
 		if (tmp->env_var_name)

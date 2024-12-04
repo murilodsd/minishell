@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:01:24 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 17:27:28 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:24:24 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,16 @@ char		*expand_var_d_quote(t_shell *shell, char *tmp, char *cmd, int *i);
 char		*expand_exit_code(t_shell *shell, char *tmp);
 char		*ft_getenv(t_list *envp_lst, char *name);
 
+//parser_expand_utils.c
+void		add_var_token(t_shell *shell, t_token *token, char *env_var, int j, int i);
+void		check_var_space(char *env_var, t_token *token, t_shell *shell);
+
 //parser_utils.c
 void		split_token(t_token *token, int i);
 void		add_next_char(char **str, char c);
 t_token		*find_redir_file(t_token *tmp, t_token_type type);
+void		skip_to_next_pipe(t_token **token);
+void		add_space_token(t_token *token);
 
 // apagar.c
 char		*format_data_parentheses(const char *data);

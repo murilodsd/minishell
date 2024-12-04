@@ -1,21 +1,21 @@
 #include "../../../includes/minishell.h"
 
-static bool	ft_atol(char *nptr, long *n)
+static long	ft_atol(char *nptr, long *n)
 {
 	long	signal;
 
 	if (!ft_strcmp("-9223372036854775808", nptr))
-	{
-		*n = LONG_MIN;
-		return (TRUE);
-	}
+		return (*n = LONG_MIN);
 	signal = 1;
 	while (ft_isspace(*nptr))
 		nptr++;
-	if (*nptr == '+' || *nptr == '-')
+	if (*nptr == '+')
 		nptr++;
-	if (*nptr == '-')
+	else if (*nptr == '-')
+	{
+		nptr++;
 		signal = -1;
+	}
 	*n = 0;
 	while (ft_isdigit(*nptr))
 	{
@@ -43,7 +43,7 @@ void	exit_builtin(t_shell * shell, char **exit_args)
 		i = 0;
 		if (*exit_args[1] == '-' || *exit_args[1] == '+')
 			i++;
-		if (!ft_isalldigits(exit_args[1] + i) || !ft_atol(exit_args[1], status) || exit_args[1][0] == '\0')
+		if (!ft_isalldigits(exit_args[1] + i) || !ft_atol(exit_args[1], status))
 		{
 			shell->exit_status = EXIT_USAGE_SYNTAX_ERROR;
 			msg_error(NUMERIC_ARGUMENT_REQUIRED, "exit", exit_args[1]);

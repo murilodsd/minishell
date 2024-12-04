@@ -22,7 +22,6 @@ void	define_redir_file(t_redir *redir, t_token *token)
 	{
 		redir->file = token->next->data;
 		redir->file_status = token->next->quote;
-		redir->env_var_name = token->next->env_var_name;
 	}
 }
 

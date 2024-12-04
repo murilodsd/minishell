@@ -8,7 +8,6 @@ void	*build_tree(t_shell *shell, t_token *token);
 // binary_tree_utils.c
 t_token	*get_next_pipe(t_token *token);
 bool	is_redir_token(t_token *token);
-bool	is_redir_node_type(t_node_type node_type);
 char	**get_args(t_shell *shell, t_token *token);
 
 // redir_node_functions.c

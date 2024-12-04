@@ -15,24 +15,35 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+// ************************** HEREDOC STRUCT *********************** //
+
+typedef struct s_heredoc
+{
+	int				i;
+	int				fd_heredoc;
+	char			*fd_heredoc_path;
+	char			*eof;
+	int				count_hd;
+	struct s_heredoc	*next;
+}	t_heredoc;
+
 // ******************************** SHELL STRUCT *********************** //
 
 typedef struct s_shell
 {
 	t_mem_alloc		mem_allocation;
 	void			*root;
-	int				*array_fd_here_doc;
 	int				exit_status;
 	int				pid;
 	int				process;
 	int				fd_in;
 	int				fd_out;
-	int				count_hd;
-	t_list			*envp_lst;
-	t_list			*export_lst;
 	char			*cmd;
 	char			*path;
+	t_list			*envp_lst;
+	t_list			*export_lst;
 	t_token			*token;
+	t_heredoc		*heredoc;
 }				t_shell;
 
 typedef struct s_var
@@ -64,7 +75,6 @@ typedef struct s_redir
 	void			*down;
 	int				id;
 	char			*file;
-	char			*env_var_name;
 }					t_redir;
 
 #endif

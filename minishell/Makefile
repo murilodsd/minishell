@@ -6,6 +6,7 @@ CCFLAGS= -Wall -Wextra -Werror -g
 EXTRA_FLAGS = -lreadline
 SRCS = src/main.c \
 	src/handle_signals/handle_signals.c \
+	src/handle_signals/handle_signals_hd.c \
 	src/syntax_check/syntax_check.c \
 	src/syntax_check/syntax_check_utils.c \
 	src/tokenizer/tokenizer.c \
@@ -18,10 +19,13 @@ SRCS = src/main.c \
 	src/parser/parser_handlers2.c \
 	src/parser/parser_checkers.c \
 	src/parser/parser_expand.c \
+	src/parser/parser_expand_utils.c \
 	src/parser/parser_utils.c \
 	src/binary_tree/binary_tree.c \
 	src/binary_tree/binary_tree_utils.c \
 	src/binary_tree/redir_node_functions.c \
+	src/heredoc/heredoc.c \
+	src/heredoc/heredoc_utils.c \
 	src/executer/executer.c \
 	src/builtins/builtins.c \
 	src/builtins/echo/echo.c \
@@ -51,7 +55,7 @@ INCLUDE_FLAG=$(addprefix -I , $(INCLUDE_PATH))
 RM = rm -f
 
 #VALGRIND
-VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --gen-suppressions=all
+VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-fds=yes --gen-suppressions=all
 VALGRIND_SUPP = --suppressions=readline.supp
 
 all: $(NAME)
