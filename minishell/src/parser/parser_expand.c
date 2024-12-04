@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:18:44 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/04 16:17:01 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:29:11 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	expand_var(t_token *token, t_shell *shell)
 			free(token->data);
 			token->data = NULL;
 			token->type = WORD;
-			check_var_space(env_var, token, shell);
+			check_var_space(env_var, &token);
 		}
 		else
 		{

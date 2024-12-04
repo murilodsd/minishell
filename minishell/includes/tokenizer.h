@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:14:11 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/01 15:36:02 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:08:18 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int			handle_word(char *cmd, int i, t_shell *shell);
 void		add_token(t_shell **shell, char *data, \
 	enum e_token_type type, enum e_token_quote quote);
 void		rm_token(t_token **token, t_shell *shell);
-void		find_place(t_token *token, char *word, t_token_quote quote);
+void		find_place(t_token **token, char *word, t_token_quote quote);
 t_token		*last_token(t_token *token);
 t_token		*last_token(t_token *token);
 void		clear_token_list(t_shell *shell);

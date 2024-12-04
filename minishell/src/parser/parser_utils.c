@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:39:02 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/04 15:36:04 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:36:41 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	split_token(t_token *token, int i)
 	free(token->data);
 	token->data = env_var;
 	token->type = ENV_VAR_NAME;
-	find_place(token, word, token->quote);
+	find_place(&token, word, token->quote);
 }
 
 void	add_next_char(char **data, char c)
@@ -66,10 +66,4 @@ void	skip_to_next_pipe(t_token **token)
 		*token = (*token)->next;
 	if (*token)
 		*token = (*token)->next;
-}
-
-void	add_space_token(t_token *token)
-{
-	find_place(token, ft_strdup(" "), token->quote);
-	token->next->type = SPACE_TOKEN;
 }
