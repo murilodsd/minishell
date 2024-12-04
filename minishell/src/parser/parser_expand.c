@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:18:44 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 17:19:44 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:35:22 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	expand_var(t_token *token, t_shell *shell)
 	if (token->type == ENV_VAR_NAME)
 	{
 		env_var = ft_getenv(shell->envp_lst, token->data);
-		if (env_var)
+		if (env_var && env_var[0] != '\0')
 		{
 			free(token->data);
 			token->data = ft_strdup(env_var);
