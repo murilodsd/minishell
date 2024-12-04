@@ -16,7 +16,6 @@ void	free_all(t_shell *shell)
 	free(shell);
 }
 
-
 void	msg_error(t_error_codes error_code, char *error_msg, ...)
 {
 	va_list	va_args;

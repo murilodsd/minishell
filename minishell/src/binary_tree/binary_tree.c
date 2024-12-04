@@ -108,26 +108,3 @@ void	*build_tree(t_shell *shell, t_token *token)
 	//ft_printf(1, "filho esquerdo %s filho direito %s\n", get_node_type_name(*((t_node_type *)((t_pipe *)root)->left)), get_node_type_name(*((t_node_type *)((t_pipe *)root)->right)));
 	return (root);
 }
-
-
-int	main(int argc, char **argv, char **envp)
-{
-	t_shell		*shell;
-
-	init_data(&shell, argc, argv, envp);
-	while (1)
-	{
-		shell->cmd = readline("minishell$ ");
-		if (shell->cmd && shell->cmd[0] != '\0')
-		{
-			add_history(shell->cmd);
-			handle_input(shell->cmd, shell);
-			if (shell->cmd)
-				free(shell->cmd);
-		}
-		else if (!shell->cmd)
-			exit(shell->exit_status);
-	}
-	return (0);
-}
-

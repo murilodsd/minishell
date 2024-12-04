@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+extern int	g_signal;
+
 void	sigint_handler(int signal)
 {
 	if (signal == SIGINT)
@@ -8,6 +10,7 @@ void	sigint_handler(int signal)
 		rl_on_new_line();
 		ft_printf(STDIN_FILENO, "\n");
 		rl_redisplay();
+		g_signal = signal;
 	}
 }
 
