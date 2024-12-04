@@ -19,6 +19,7 @@ SRCS = src/main.c \
 	src/parser/parser_handlers2.c \
 	src/parser/parser_checkers.c \
 	src/parser/parser_expand.c \
+	src/parser/parser_expand_utils.c \
 	src/parser/parser_utils.c \
 	src/binary_tree/binary_tree.c \
 	src/binary_tree/binary_tree_utils.c \

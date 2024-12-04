@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:01:24 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/01 17:28:54 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:44:40 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ void		expand_var(t_token *token, t_shell *shell);
 char		*expand_var_d_quote(t_shell *shell, char *tmp, char *cmd, int *i);
 char		*expand_exit_code(t_shell *shell, char *tmp);
 char		*ft_getenv(t_list *envp_lst, char *name);
+
+//parser_expand_utils.c
+void		add_var_token(t_token **token, char *env_var, int j, int i);
+void		check_var_space(char *env_var, t_token **token);
 
 //parser_utils.c
 void		split_token(t_token *token, int i);

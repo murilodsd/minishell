@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:18:44 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/04 11:35:22 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:44:49 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ void	expand_var(t_token *token, t_shell *shell)
 		if (env_var && env_var[0] != '\0')
 		{
 			free(token->data);
-			token->data = ft_strdup(env_var);
-			if (check_malloc(token->data))
-				return ;
+			token->data = NULL;
 			token->type = WORD;
+			check_var_space(env_var, &token);
 		}
 		else
 		{
