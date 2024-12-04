@@ -80,15 +80,30 @@ void	fork_execute_in_child(t_shell * shell, void *root)
 		shell->exit_status = get_child_status(child_exit_status);
 }
 
+void	execute_in_parent(void *root, t_shell *shell)
+{
+	t_node_type	node_type;
+
+	node_type = *(t_node_type *)root;
+	shell->process = 1; //REVIEW -> Parent
+	if (node_type == EXEC_NODE)
+		run_builtin_p((t_exec *)root, shell);
+	else if (node_type == REDIR_IN_NODE || node_type == REDIR_OUT_NODE
+		|| node_type == REDIR_APPEND_NODE || node_type == HEREDOC_NODE)
+		run_redir_p((t_redir *)root, shell);
+}
+
 void	executer(t_shell * shell, void *root)
 {
+	if (!root)
+		return ;
 	//REVIEW -> Checar se tem heredoc?
 	//if (*((t_node_type *)root) != PIPE_NODE && !shell->count_hd)
 	if (*((t_node_type *)root) != PIPE_NODE)
 		//REVIEW -> execute_in_parent(shell, root);
-		printf("execute_in_parent(shell, root);");
+		execute_in_parent(shell, root);
 	//REVIEW -> Checar se tem heredoc? Não é else, pois o resultado de parent afeta aqui
 	//if (shell->process == CHILD || shell->count_hd)
-	if (shell->process == CHILD)
+	else
 		fork_execute_in_child(shell, root);
 }
