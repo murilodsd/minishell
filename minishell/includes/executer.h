@@ -8,7 +8,7 @@ void	execute_tree(t_shell * shell, void *root);
 void	execute_root_node(t_shell *shell, void *root);
 
 //executer_utils.c
-int	safe_fork(t_shell *shell);
+int	safe_fork(t_shell *shell, int fd[2]);
 
 //exec_pipe.c
 void	execute_pipe(t_shell *shell, t_pipe *pipe_node);

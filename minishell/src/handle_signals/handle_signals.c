@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+extern int	g_signal;
+
 /**
  * sigint_handler - Manipula o sinal SIGINT (Ctrl-C).
  * @signal: Número do sinal recebido (deve ser SIGINT).

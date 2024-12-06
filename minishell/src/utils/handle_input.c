@@ -1,23 +1,6 @@
 #include "../../includes/minishell.h"
-/*
+
 //PUSH REVIEW -> apagar funcao de print da arvore
-* char *get_node_type_name(t_node_type type) {
-    if (type == EXEC_NODE) {
-        return "EXEC_NODE";
-    } else if (type == PIPE_NODE) {
-        return "PIPE_NODE";
-    } else if (type == REDIR_IN_NODE) {
-        return "REDIR_IN_NODE";
-    } else if (type == REDIR_OUT_NODE) {
-        return "REDIR_OUT_NODE";
-    } else if (type == REDIR_APPEND_NODE) {
-        return "REDIR_APPEND_NODE";
-    } else if (type == HEREDOC_NODE) {
-        return "HEREDOC_NODE";
-    } else {
-        return "UNKNOWN_TYPE"; // Valor inválido
-    }
-}
 char *get_node_type_name(t_node_type type, void *node) {
     if (type == EXEC_NODE) {
         return ("exec");
@@ -116,7 +99,7 @@ void printTree(void *node, int depth) {
 	else
 		printTree(((t_redir *)node)->down, depth + 1);
 }
-*/
+
 
 void	handle_input(char *cmd, t_shell *shell)
 {
@@ -132,7 +115,6 @@ void	handle_input(char *cmd, t_shell *shell)
 	print_list(shell->token);
 	tree = build_tree(shell, shell->token);
 	print_tree(tree, 0, TRUE);
-	//builtins();
 	executer(shell, tree);
 	//handle_error();
 	clear_token_list(shell);

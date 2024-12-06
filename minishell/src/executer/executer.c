@@ -20,11 +20,11 @@ int	get_child_status(int child_exit_status)
 	return (0);
 }
 
-void	fork_execute_execve(t_shell * shell, void *root)
+void	fork_execute_execve(t_shell *shell, void *root)
 {
 		int	child_exit_status;
 		
-		if (safe_fork(shell) == 0)
+		if (safe_fork(shell, NULL) == 0)
 		{
 			shell->process = CHILD;
 			reset_sig_int_and_quit();
@@ -86,7 +86,10 @@ void	execute_tree(t_shell * shell, void *root)
 	if (node_type == EXEC_NODE)
 		execute_builtin_or_execve(shell, (t_exec *)root, FALSE);
 	else if (is_redir_node_type(node_type))
-	 	execute_redirect(shell, (t_redir *)root, FALSE);
+	{
+		if (execute_redirect(shell, (t_redir *)root, FALSE) && ((t_redir *)root)->down)
+			execute_tree(shell, ((t_redir *)root)->down);
+	}
 	else if (node_type == PIPE_NODE)
 	 	execute_pipe(shell, (t_pipe *)root);
 }
