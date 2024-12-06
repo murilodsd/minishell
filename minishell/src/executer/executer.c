@@ -95,7 +95,7 @@ void	execute_root_node(t_shell *shell, void *root)
 {
 	t_node_type	node_type;
 
-	node_type = *(t_node_type *)root;
+	node_type = *((t_node_type *)root);
 	//REVIEW -> Precisa dessa linha abaixo?
 	//shell->process = 1; //REVIEW -> Parent
 	if (node_type == EXEC_NODE)
