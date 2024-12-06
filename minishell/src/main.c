@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/30 14:23:22 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:27:59 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	g_signal;
 	while (1)
 	{
 		shell->cmd = readline("minishell$ ");
+		if (!shell->cmd)
+			handle_ctrl_d(shell);
 		if (shell->cmd && shell->cmd[0] != '\0')
 		{
 			add_history(shell->cmd);

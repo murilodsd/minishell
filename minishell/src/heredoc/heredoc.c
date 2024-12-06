@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/06 11:54:00 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/06 13:33:49 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
 {
 	char	*line;
 
+	reset_sig_int_ignore_sig_quit();
 	while (1)
 	{
 		line = readline("> ");

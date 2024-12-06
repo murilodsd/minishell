@@ -1,7 +1,7 @@
 #include "../../includes/minishell.h"
-
+/*
 //PUSH REVIEW -> apagar funcao de print da arvore
-/* char *get_node_type_name(t_node_type type) {
+* char *get_node_type_name(t_node_type type) {
     if (type == EXEC_NODE) {
         return "EXEC_NODE";
     } else if (type == PIPE_NODE) {
@@ -17,7 +17,7 @@
     } else {
         return "UNKNOWN_TYPE"; // Valor inválido
     }
-} */
+}
 char *get_node_type_name(t_node_type type, void *node) {
     if (type == EXEC_NODE) {
         return ("exec");
@@ -116,14 +116,10 @@ void printTree(void *node, int depth) {
 	else
 		printTree(((t_redir *)node)->down, depth + 1);
 }
+*/
 
 void	handle_input(char *cmd, t_shell *shell)
 {
-	if (ft_strncmp(cmd, "exit", 5) == 0)
-	{
-		free_exit_error(shell, EXIT_SUCCESS, NULL);
-		exit(0);
-	}
 	if (syntax_check(cmd))
 	{
 		shell->exit_status = EXIT_USAGE_SYNTAX_ERROR;

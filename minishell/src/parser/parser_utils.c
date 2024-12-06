@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:39:02 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/06 11:23:01 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/06 14:54:22 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,11 @@ t_token	*find_redir_file(t_token *tmp, t_token_type type)
 	tmp = tmp->next;
 	if (tmp->type == SPACE_TOKEN)
 		tmp = tmp->next;
-	if (tmp)
-		tmp->type = type;
-	while (tmp && tmp->next && (tmp->next->type == WORD
-			|| tmp->next->type == ENV_VAR_NAME))
+	while (tmp && (tmp->type == WORD || (tmp->type == ENV_VAR_NAME
+			&& tmp->data[0] != '\0')))
 	{
-		tmp = tmp->next;
 		tmp->type = type;
+		tmp = tmp->next;
 	}
 	return (tmp);
 }
