@@ -4,9 +4,18 @@
 
 //executer.c
 void	executer(t_shell * shell, void *root);
-void	execute(t_shell * shell, void *root);
+void	execute_tree(t_shell * shell, void *root);
+void	execute_root_node(t_shell *shell, void *root);
+
 //executer_utils.c
 int	safe_fork(t_shell *shell);
+
+//exec_pipe.c
+void	execute_pipe(t_shell *shell, t_pipe *pipe_node);
+
+//exec_redir.c
+int	execute_redirect(t_shell *shell, t_redir *redir, bool is_root);
+void	execute_redir_root(t_redir *redir, t_shell *shell);
 
 //execve.c
 void	execute_execve(t_shell *shell, t_exec *exec);

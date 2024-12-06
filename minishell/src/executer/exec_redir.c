@@ -1,14 +1,14 @@
 #include "../../includes/minishell.h"
 
-void	run_redir_p(t_redir *redir, t_shell *shell)
+void	execute_redir_root(t_redir *redir, t_shell *shell)
 {
 	int	new_fd_to_stdout;
 	int	new_fd_to_stdin;
 
 	new_fd_to_stdout = dup(STDOUT_FILENO);
 	new_fd_to_stdin = dup(STDIN_FILENO);
-	if (redirect(shell, redir, TRUE))
-		run_in_parent(redir->down, shell);
+	if (execute_redirect(shell, redir, TRUE))
+		execute_root_node(redir->down, shell);
 	dup2(new_fd_to_stdout, STDOUT_FILENO);
 	dup2(new_fd_to_stdin, STDIN_FILENO);
 	close(new_fd_to_stdout);
@@ -100,7 +100,7 @@ bool	redirect_in(t_shell *shell, t_redir *redir, bool is_root)
 	return (TRUE);
 }
 
-int	redirect(t_shell *shell, t_redir *redir, bool is_root)
+int	execute_redirect(t_shell *shell, t_redir *redir, bool is_root)
 {
 	if (!is_there_a_file(shell, redir, is_root))
 		return (FALSE);	
