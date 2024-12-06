@@ -8,7 +8,7 @@ void	execute_redir_root(t_redir *redir, t_shell *shell)
 	new_fd_to_stdout = dup(STDOUT_FILENO);
 	new_fd_to_stdin = dup(STDIN_FILENO);
 	if (execute_redirect(shell, redir, TRUE))
-		execute_root_node(redir->down, shell);
+		execute_root_node(shell, redir->down);
 	dup2(new_fd_to_stdout, STDOUT_FILENO);
 	dup2(new_fd_to_stdin, STDIN_FILENO);
 	close(new_fd_to_stdout);
