@@ -129,11 +129,14 @@ void	handle_input(char *cmd, t_shell *shell)
 	}
 	tokenizer(cmd, shell, 0);
 	parser(shell);
-	print_list(shell->token);
+	if (g_signal == CTRL_C_HD)
+		handle_ctrl_c(shell);
+//	print_list(shell->token);
 	tree = build_tree(shell, shell->token);
-	print_tree(tree, 0, TRUE);
-	//builtins();
+//	print_tree(tree, 0, TRUE);
+	printf("antes de executar\n");
 	executer(shell, tree);
+	printf("depois de executar\n");
 	//handle_error();
 	clear_token_list(shell);
 	clear_heredoc_list(shell);

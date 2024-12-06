@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:57:26 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/06 11:23:36 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:58:51 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ void	check_var_space(char *env_var, t_token **token)
 {
 	int		i;
 	int		j;
-	t_token	*tmp;
 
 	i = 0;
 	j = 0;
-	tmp = *token;
 	while (env_var[i])
 	{
 		if (ft_isspace(env_var[i]))

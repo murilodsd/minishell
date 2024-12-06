@@ -17,7 +17,7 @@ void	sigint_handler(int signal)
 		rl_on_new_line();
 		ft_printf(STDIN_FILENO, "\n");
 		rl_redisplay();
-		g_signal = signal;
+		g_signal = CTRL_C;
 	}
 }
 
@@ -64,7 +64,7 @@ void	reset_sig_int_and_quit(void)
 
 void	reset_sig_int_ignore_sig_quit(void)
 {
-	signal(SIGINT, SIG_DFL);
+	signal(SIGINT, handle_hd_sigint);
 	signal(SIGQUIT, SIG_IGN);
 }
 

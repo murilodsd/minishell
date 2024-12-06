@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/06 16:12:18 by mde-souz         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/minishell.h"
 
-int	g_signal;
+int	g_signal = NONE;
 
  int	main(int argc, char **argv, char **envp)
 {
@@ -27,13 +15,10 @@ int	g_signal;
 	while (1)
 	{
 		shell->cmd = readline("minishell$ ");
-		if (g_signal == SIGINT)
-		{
-			shell->exit_status = 130;
-			g_signal = 0;
-		}
 		if (!shell->cmd)
 			handle_ctrl_d(shell);
+		if (g_signal == CTRL_C)
+			handle_ctrl_c(shell);
 		if (shell->cmd && shell->cmd[0] != '\0')
 		{
 			add_history(shell->cmd);

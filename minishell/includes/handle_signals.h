@@ -10,6 +10,7 @@ extern int	g_signal;
 
 typedef enum signal_type
 {
+	NONE,
 	CTRL_C,
 	CTRL_C_HD,
 	CTRL_BACKSLASH,
@@ -29,5 +30,9 @@ void	ignore_sig_int_and_quit(void);
 
 // handle_signals_utils.c
 void	handle_ctrl_d(t_shell *shell);
+void		handle_ctrl_c(t_shell *shell);
+void	handle_ctrl_c_hd(t_shell *shell);
+void	handle_hd_sigint(int signal);
+
 
 #endif

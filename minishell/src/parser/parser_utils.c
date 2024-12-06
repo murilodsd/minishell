@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:39:02 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/06 16:19:57 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:02:24 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_token	*find_redir_file(t_token *tmp, t_token_type type)
 	if (tmp->type == SPACE_TOKEN)
 		tmp = tmp->next;
 	while (tmp && (tmp->type == WORD || (tmp->type == ENV_VAR_NAME
-			&& tmp->data[0] != '\0')))
+				&& tmp->data[0] != '\0')))
 	{
 		tmp->type = type;
 		tmp = tmp->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/06 16:18:12 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/06 19:46:28 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
 	char	*line;
 
 	reset_sig_int_ignore_sig_quit();
-	while (1)
+	while (1 && g_signal != CTRL_C_HD)
 	{
 		line = readline("> ");
 		if (ft_strncmp(line, tmp_hd->eof, ft_strlen(tmp_hd->eof)) == 0)
@@ -55,6 +55,7 @@ void	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
 		write(tmp_hd->fd_heredoc, "\n", 1);
 		free(line);
 	}
+	handle_signals();
 }
 
 void	heredoc(t_shell *shell)
@@ -64,7 +65,7 @@ void	heredoc(t_shell *shell)
 
 	save_heredoc_info(shell);
 	tmp_hd = shell->heredoc;
-	while (tmp_hd)
+	while (tmp_hd && g_signal != CTRL_C_HD)
 	{
 		i = ft_itoa(tmp_hd->i);
 		tmp_hd->fd_heredoc_path = ft_strjoin("/tmp/tmp_heredoc", i);
