@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/03 20:29:32 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:12:18 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 int	g_signal;
 
-int	main(int argc, char **argv, char **envp)
+ int	main(int argc, char **argv, char **envp)
 {
 	t_shell		*shell;
 
+	if (argc != 1)
+	{
+		ft_printf(STDERR_FILENO, "minishell: too many arguments\n", argv[1]);
+		return (EXIT_USAGE_SYNTAX_ERROR);
+	}
 	init_data(&shell, argc, argv, envp);
 	while (1)
 	{
@@ -27,17 +32,14 @@ int	main(int argc, char **argv, char **envp)
 			shell->exit_status = 130;
 			g_signal = 0;
 		}
+		if (!shell->cmd)
+			handle_ctrl_d(shell);
 		if (shell->cmd && shell->cmd[0] != '\0')
 		{
 			add_history(shell->cmd);
 			handle_input(shell->cmd, shell);
 			if (shell->cmd)
 				free(shell->cmd);
-		}
-		else if (!shell->cmd)
-		{
-			ft_printf(STDOUT_FILENO, "exit\n");
-			free_exit(shell);
 		}
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:13:13 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/02 07:58:10 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:20:39 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	check_redir(char *cmd)
 			i = ignore_quotes(cmd, i);
 		else if (is_redir(cmd[i]))
 		{
+			if (cmd[i] == '>' && cmd[i + 1] == '|')
+				return (-1);
 			if (cmd[i + 1] == cmd[i])
 				i++;
 			i = ignore_spaces(cmd, i + 1);

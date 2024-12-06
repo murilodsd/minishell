@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:16:01 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/02 07:58:44 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:21:16 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	handle_redir_out(char *cmd, int i, t_shell *shell)
 	if (check_malloc(tmp))
 		return (0);
 	add_token(&shell, tmp, REDIR_OUT, NO_QUOTE);
+	if (cmd[i + 1] == '|')
+		return (i + 1);
 	return (i);
 }
 
