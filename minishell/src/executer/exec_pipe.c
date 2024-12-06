@@ -73,5 +73,6 @@ void	execute_pipe(t_shell *shell, t_pipe *pipe_node)
 	waitpid(pid[0], &exit_code[0], 0);
 	waitpid(pid[1], &exit_code[1], 0);
 	shell->exit_status = check_signaled_exit(exit_code);
-	free_exit(shell);
+	if (shell->root == pipe_node)
+		free_exit(shell);
 }
