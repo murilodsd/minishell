@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:13:13 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/01 17:25:15 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:05:09 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	check_redir(char *cmd)
 			i = ignore_quotes(cmd, i);
 		else if (is_redir(cmd[i]))
 		{
+			if (cmd[i] == '>' && cmd[i + 1] == '|')
+				return (-1);
 			if (cmd[i + 1] == cmd[i])
 				i++;
 			i = ignore_spaces(cmd, i + 1);

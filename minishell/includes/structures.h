@@ -23,6 +23,7 @@ typedef struct s_heredoc
 	int				fd_heredoc;
 	char			*fd_heredoc_path;
 	char			*eof;
+	t_token_quote	eof_quote;
 	int				count_hd;
 	struct s_heredoc	*next;
 }	t_heredoc;

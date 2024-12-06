@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:16:40 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/04 18:44:26 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/06 13:02:13 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	rm_token(t_token **token, t_shell *shell)
 	free(tmp);
 }
 
-void	find_place(t_token **token, char *word, t_token_quote quote)
+void	find_place(t_token **token, char *word, \
+	t_token_quote quote, t_token_type type)
 {
 	t_token	*new_token;
 	t_token	*tmp;
@@ -70,7 +71,7 @@ void	find_place(t_token **token, char *word, t_token_quote quote)
 	if (check_malloc(new_token))
 		return ;
 	new_token->data = word;
-	new_token->type = WORD;
+	new_token->type = type;
 	new_token->env_var_name = NULL;
 	new_token->quote = quote;
 	tmp = (*token)->next;

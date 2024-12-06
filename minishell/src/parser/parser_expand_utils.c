@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:57:26 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/04 18:33:23 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:23:36 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ void	add_var_token(t_token **token, char *env_var, int j, int i)
 		(*token)->data = ft_strdup(tmp);
 	else
 	{
-		find_place(token, ft_strdup(" "), (*token)->quote);
+		find_place(token, ft_strdup(" "), (*token)->quote, SPACE_TOKEN);
 		(*token) = (*token)->next;
-		(*token)->type = SPACE_TOKEN;
-		find_place(token, ft_strdup(tmp), (*token)->quote);
+		find_place(token, ft_strdup(tmp), (*token)->quote, WORD);
 		(*token) = (*token)->next;
 	}
 	(*token)->type = WORD;

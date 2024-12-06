@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/01 17:30:22 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:54:00 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,16 @@ void	save_heredoc_info(t_shell *shell)
 			{
 				tmp_hd->i = 1;
 				tmp_hd->eof = ft_strdup(tmp->next->data);
+				tmp_hd->eof_quote = tmp->next->quote;
 			}
 			else
-				assign_heredoc(&tmp_hd, tmp->next->data);
+				assign_heredoc(&tmp_hd, tmp->next->data, tmp->next->quote);
 		}
 		tmp = tmp->next;
 	}
 }
 
-void	fill_fd_heredoc(t_heredoc *tmp_hd)
+void	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
 {
 	char	*line;
 
@@ -47,6 +48,8 @@ void	fill_fd_heredoc(t_heredoc *tmp_hd)
 			free(line);
 			break ;
 		}
+		if (tmp_hd->eof_quote == NO_QUOTE)
+			check_hd_expand(&line, shell);
 		write(tmp_hd->fd_heredoc, line, ft_strlen(line));
 		write(tmp_hd->fd_heredoc, "\n", 1);
 		free(line);
@@ -72,8 +75,9 @@ void	heredoc(t_shell *shell)
 			printf("Error: can't open tmp file\n");
 			return ;
 		}
-		fill_fd_heredoc(tmp_hd);
+		fill_fd_heredoc(tmp_hd, shell);
 		close(tmp_hd->fd_heredoc);
 		tmp_hd = tmp_hd->next;
 	}
+	include_hd_path(shell);
 }
