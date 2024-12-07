@@ -12,10 +12,10 @@ static bool	ft_atol(char *nptr, long *n)
 	signal = 1;
 	while (ft_isspace(*nptr))
 		nptr++;
-	if (*nptr == '+' || *nptr == '-')
-		nptr++;
 	if (*nptr == '-')
 		signal = -1;
+	if (*nptr == '+' || *nptr == '-')
+		nptr++;
 	*n = 0;
 	while (ft_isdigit(*nptr))
 	{
