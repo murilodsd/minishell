@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/06 16:18:12 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:49:39 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ void	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
 	while (1)
 	{
 		line = readline("> ");
+		if (!line)
+		{
+			if (g_signal != CTRL_C_HD)
+				printf("minishell: warning: here-document delimited" \
+					" by end-of-file (wanted `%s')\n", tmp_hd->eof);
+			break ;
+		}
 		if (ft_strncmp(line, tmp_hd->eof, ft_strlen(tmp_hd->eof)) == 0)
 		{
 			free(line);
@@ -55,6 +62,7 @@ void	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
 		write(tmp_hd->fd_heredoc, "\n", 1);
 		free(line);
 	}
+	handle_signals();
 }
 
 void	heredoc(t_shell *shell)
@@ -71,13 +79,13 @@ void	heredoc(t_shell *shell)
 		free(i);
 		tmp_hd->fd_heredoc = \
 			open(tmp_hd->fd_heredoc_path, O_CREAT | O_RDWR | O_TRUNC, 0644);
-		if (tmp_hd->fd_heredoc < 0)
-		{
-			printf("Error: can't open tmp file\n");
-			return ;
-		}
 		fill_fd_heredoc(tmp_hd, shell);
 		close(tmp_hd->fd_heredoc);
+		if (g_signal == CTRL_C_HD)
+		{
+			handle_ctrl_c_hd(shell);
+			return ;
+		}
 		tmp_hd = tmp_hd->next;
 	}
 	include_hd_path(shell);

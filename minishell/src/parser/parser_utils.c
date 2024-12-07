@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:39:02 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/06 16:19:57 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:37:37 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	split_token(t_token *token, int i)
 	env_var = ft_substr(token->data, 0, i);
 	if (check_malloc(env_var))
 		return ;
-	word = ft_substr(token->data, i, ft_strlen(token->data - i + 1));
+	word = ft_substr(token->data, i, ft_strlen(token->data + i));
 	if (check_malloc(word))
 	{
 		free(env_var);
@@ -50,7 +50,7 @@ t_token	*find_redir_file(t_token *tmp, t_token_type type)
 	if (tmp->type == SPACE_TOKEN)
 		tmp = tmp->next;
 	while (tmp && (tmp->type == WORD || (tmp->type == ENV_VAR_NAME
-			&& tmp->data[0] != '\0')))
+				&& (tmp->data[0] != '\0' || tmp->next->type == WORD))))
 	{
 		tmp->type = type;
 		tmp = tmp->next;

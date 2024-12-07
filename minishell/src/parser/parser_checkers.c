@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:45:31 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/11/29 18:00:22 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:17:10 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ void	check_env_var(t_token *token, t_shell *shell)
 	i = 0;
 	while (token->data[i])
 	{
-		if (i == 0 && !ft_isalpha(token->data[i]) && token->data[i] != '_')
-		{
-			i++;
-			break ;
-		}
 		if (!isalnum(token->data[i]) && token->data[i] != '_')
 			break ;
 		i++;
@@ -55,7 +50,7 @@ char	*check_env_var_d_quote(t_shell *shell, char *data)
 	new_data = ft_strdup("");
 	while (data[i])
 	{
-		if (data[i] == '$' && !ft_isspace(data[i + 1]) && data[i + 1] != '\0')
+		if (data[i] == '$' && (isalpha(data[i + 1]) || data[i + 1] == '_'))
 		{
 			i++;
 			tmp = new_data;
