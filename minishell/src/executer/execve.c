@@ -1,5 +1,16 @@
 #include "../../includes/minishell.h"
 
+//Important because can cause a problem when handling a msg_error
+int	safe_access(const char *name, int type)
+{
+	int	ret;
+
+	ret = access(name, type);
+	//if (errno == 2)
+		errno = 0;
+	return (ret);
+}
+
 int	calculate_total_vars(t_list *envp)
 {
 	int	total;
@@ -83,19 +94,19 @@ char	**get_path(t_shell *shell)
 
 void	handle_exec_error(int execve_ret, t_exec *exec, t_shell *shell)
 {
+	struct stat st;
+	
 	shell->exit_status = EXIT_CMD_NOT_FOUND;
-	if (execve_ret == -1)
+	if (execve_ret == -1 && exec->args[0][0] != '/')
 	{
-		if (access(exec->args[0], X_OK) != 0)
+		if (safe_access(exec->args[0], F_OK) == 0)
 		{
 			shell->exit_status = 126;
+			if (stat(exec->args[0], &st) == 0 && S_ISDIR(st.st_mode))
+				free_exit_error(shell, IS_DIRECTORY, exec->args[0]);
 			free_exit_error(shell, PERMISSION_DENIED, exec->args[0]);
 		}
-		if ((exec->args[0][0] == '.' && exec->args[0][1] == '/')
-			|| exec->args[0][0] == '/')
-			free_exit_error(shell, IS_DIRECTORY, exec->args[0]);
-		else
-			free_exit_error(shell, CMD_NOT_FOUND, exec->args[0]);
+		free_exit_error(shell, CMD_NOT_FOUND, exec->args[0]);
 	}
 	if ((exec->args[0][0] == '.' && exec->args[0][1] == '/')
 			|| exec->args[0][0] == '/')
@@ -112,17 +123,23 @@ void	execute_execve(t_shell *shell, t_exec *exec)
 	char	*path_cmd;
 
 	execve_ret = 0;
-	exported_envs = get_exported_env_vars(shell, shell->envp_lst);
-	if (access(exec->args[0], F_OK) == 0)
-		execve_ret = execve(exec->args[0], exec->args, exported_envs);
-	path = get_path(shell);
-	i = -1;
-	while (path[++i])
+	if (strchr(exec->args[0], '/') != NULL)
 	{
-		path_cmd = ft_strjoin(path[i], exec->args[0]);
-		if (access(path_cmd, F_OK) == 0)
-			execve_ret = execve(path_cmd, exec->args, exported_envs);
-		free(path_cmd);
+		if (safe_access(exec->args[0], F_OK) == 0)
+			execve_ret = execve(exec->args[0], exec->args, NULL);
+	}
+	else
+	{
+		exported_envs = get_exported_env_vars(shell, shell->envp_lst);
+		path = get_path(shell);
+		i = -1;
+		while (path[++i])
+		{
+			path_cmd = ft_strjoin(path[i], exec->args[0]);
+			if (safe_access(path_cmd, F_OK) == 0)
+				execve_ret = execve(path_cmd, exec->args, exported_envs);
+			free(path_cmd);
+		}
 	}
 	handle_exec_error(execve_ret, exec, shell);
 }
