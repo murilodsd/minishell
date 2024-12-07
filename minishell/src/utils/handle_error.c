@@ -81,3 +81,11 @@ void	free_exit(t_shell *shell)
 	free_all(shell);
 	exit(exit_status);
 }
+
+void	free_restart(t_shell *shell)
+{
+	if (shell->token)
+		clear_token_list(shell);
+	if (shell->heredoc)
+		clear_heredoc_list(shell);
+}

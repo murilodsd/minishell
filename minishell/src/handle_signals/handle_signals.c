@@ -70,6 +70,8 @@ void	reset_sig_int_ignore_sig_quit(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
+
+
 /**
  * ignore_sig_int_and_quit - Configura sinais para ignorar SIGINT e SIGQUIT.
  *

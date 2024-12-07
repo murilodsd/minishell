@@ -20,5 +20,6 @@ void	handle_hd_sigint(int signal)
 	{
 		ft_printf(STDIN_FILENO, "\n");
 		g_signal = CTRL_C_HD;
+		close(STDIN_FILENO);
 	}
 }

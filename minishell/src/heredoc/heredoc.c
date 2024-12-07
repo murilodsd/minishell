@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/06 19:46:28 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/07 11:54:53 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ void	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
 	char	*line;
 
 	reset_sig_int_ignore_sig_quit();
-	while (1 && g_signal != CTRL_C_HD)
+	while (1)
 	{
 		line = readline("> ");
+		if (!line)
+			break ;
 		if (ft_strncmp(line, tmp_hd->eof, ft_strlen(tmp_hd->eof)) == 0)
 		{
 			free(line);
@@ -65,7 +67,7 @@ void	heredoc(t_shell *shell)
 
 	save_heredoc_info(shell);
 	tmp_hd = shell->heredoc;
-	while (tmp_hd && g_signal != CTRL_C_HD)
+	while (tmp_hd)
 	{
 		i = ft_itoa(tmp_hd->i);
 		tmp_hd->fd_heredoc_path = ft_strjoin("/tmp/tmp_heredoc", i);
@@ -79,6 +81,12 @@ void	heredoc(t_shell *shell)
 		}
 		fill_fd_heredoc(tmp_hd, shell);
 		close(tmp_hd->fd_heredoc);
+		if (g_signal == CTRL_C_HD)
+		{
+			open("/dev/tty", O_RDONLY);
+			free_restart(shell);
+			return ;
+		}
 		tmp_hd = tmp_hd->next;
 	}
 	include_hd_path(shell);
