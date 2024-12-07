@@ -72,7 +72,7 @@ bool	redirect_in(t_shell *shell, t_redir *redir, bool is_root)
 	int	fd;
 
 	fd = 0;
-	if (access(redir->file, F_OK) != 0)
+	if (safe_access(redir->file, F_OK) != 0)
 	{
 		shell->exit_status = EXIT_FAILURE;
 		if (!is_root)
@@ -107,5 +107,5 @@ int	execute_redirect(t_shell *shell, t_redir *redir, bool is_root)
 	if (redir->type == REDIR_OUT_NODE || redir->type == REDIR_APPEND_NODE)
 		return (redirect_out(shell, redir, is_root));
 	else
-		return(redirect_in(shell, redir, is_root));
+		return (redirect_in(shell, redir, is_root));
 }

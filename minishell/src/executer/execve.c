@@ -1,16 +1,5 @@
 #include "../../includes/minishell.h"
 
-//Important because can cause a problem when handling a msg_error
-int	safe_access(const char *name, int type)
-{
-	int	ret;
-
-	ret = access(name, type);
-	//if (errno == 2)
-		errno = 0;
-	return (ret);
-}
-
 int	calculate_total_vars(t_list *envp)
 {
 	int	total;

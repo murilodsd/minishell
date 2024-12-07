@@ -112,9 +112,9 @@ void	handle_input(char *cmd, t_shell *shell)
 	}
 	tokenizer(cmd, shell, 0);
 	parser(shell);
-	print_list(shell->token);
+	//print_list(shell->token);
 	tree = build_tree(shell, shell->token);
-	print_tree(tree, 0, TRUE);
+	//print_tree(tree, 0, TRUE);
 	executer(shell, tree);
 	//handle_error();
 	clear_token_list(shell);
