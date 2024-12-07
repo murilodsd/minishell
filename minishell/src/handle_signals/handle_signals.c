@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_signals.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/07 15:52:34 by dramos-j          #+#    #+#             */
+/*   Updated: 2024/12/07 15:53:44 by dramos-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 extern int	g_signal;
@@ -27,14 +39,16 @@ void	sigint_handler(int signal)
  * handle_signals - Configura sinais para o modo interativo do shell.
  *
  * Define sigint_handler como manipulador para SIGINT e ignora SIGQUIT.
- * Esta configuração garante que Ctrl-C exiba um novo prompt e Ctrl-\ seja ignorado.
+ * Esta configuração garante que Ctrl-C exiba um novo prompt e Ctrl-\
+ * seja ignorado.
  */
 
 /**
  * handle_signals - Configura sinais para o modo interativo do shell.
  *
  * Define sigint_handler como manipulador para SIGINT e ignora SIGQUIT.
- * Esta configuração garante que Ctrl-C exiba um novo prompt e Ctrl-\ seja ignorado.
+ * Esta configuração garante que Ctrl-C exiba um novo prompt e Ctrl-\
+ * seja ignorado.
  */
 
 void	handle_signals(void)
@@ -43,12 +57,13 @@ void	handle_signals(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-
 /**
- * reset_sig_int_and_quit - Restaura o comportamento padrão para SIGINT e SIGQUIT.
+ * reset_sig_int_and_quit - Restaura o comportamento padrão para SIGINT
+ * e SIGQUIT.
  *
  * Use esta função antes de executar programas externos no shell,
- * permitindo que os sinais SIGINT (Ctrl-C) e SIGQUIT (Ctrl-\) funcionem normalmente.
+ * permitindo que os sinais SIGINT (Ctrl-C) e SIGQUIT (Ctrl-\)
+ * funcionem normalmente.
  */
 
 void	reset_sig_int_and_quit(void)
@@ -58,9 +73,11 @@ void	reset_sig_int_and_quit(void)
 }
 
 /**
- * reset_sig_int_ignore_sig_quit - Restaura SIGINT ao comportamento padrão e ignora SIGQUIT.
+ * reset_sig_int_ignore_sig_quit - Restaura SIGINT ao comportamento padrão
+ * e ignora SIGQUIT.
  *
- * Esta função pode ser usada em situações onde Ctrl-C deve funcionar normalmente,
+ * Esta função pode ser usada em situações onde Ctrl-C deve funcionar
+ * normalmente,
  * mas Ctrl-\ continue sendo ignorado.
  */
 
@@ -70,12 +87,12 @@ void	reset_sig_int_ignore_sig_quit(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-
-
 /**
- * ignore_sig_int_and_quit - Configura sinais para ignorar SIGINT e SIGQUIT.
+ * ignore_sig_int_and_quit - Configura sinais para ignorar SIGINT e
+ * SIGQUIT.
  *
- * Use esta função para impedir que interrupções por Ctrl-C ou Ctrl-\ ocorram
+ * Use esta função para impedir que interrupções por Ctrl-C ou Ctrl-\
+ * ocorram
  * durante seções críticas do código.
  */
 
