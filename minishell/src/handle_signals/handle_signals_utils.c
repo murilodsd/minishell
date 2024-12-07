@@ -14,6 +14,14 @@ void	handle_ctrl_c(t_shell *shell)
 	clear_heredoc_list(shell);
 }
 
+void	handle_ctrl_c_hd(t_shell *shell)
+{
+	open("/dev/tty", O_RDONLY);
+	shell->exit_status = 130;
+	free_restart(shell);
+	g_signal = NONE;
+}
+
 void	handle_hd_sigint(int signal)
 {
 	if (signal == SIGINT)

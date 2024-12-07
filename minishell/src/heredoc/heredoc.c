@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/07 15:45:28 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:49:39 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,11 @@ void	heredoc(t_shell *shell)
 		free(i);
 		tmp_hd->fd_heredoc = \
 			open(tmp_hd->fd_heredoc_path, O_CREAT | O_RDWR | O_TRUNC, 0644);
-		if (tmp_hd->fd_heredoc < 0)
-		{
-			printf("Error: can't open tmp file\n");
-			return ;
-		}
 		fill_fd_heredoc(tmp_hd, shell);
 		close(tmp_hd->fd_heredoc);
 		if (g_signal == CTRL_C_HD)
 		{
-			open("/dev/tty", O_RDONLY);
-			shell->exit_status = 130;
-			free_restart(shell);
-			g_signal = NONE;
+			handle_ctrl_c_hd(shell);
 			return ;
 		}
 		tmp_hd = tmp_hd->next;
