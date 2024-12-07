@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/07 15:49:39 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/07 19:38:09 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,10 @@ void	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
 {
 	char	*line;
 
-	reset_sig_int_ignore_sig_quit();
 	while (1)
 	{
 		line = readline("> ");
-		if (!line)
+		if (!line || g_signal == CTRL_C_HD)
 		{
 			if (g_signal != CTRL_C_HD)
 				printf("minishell: warning: here-document delimited" \
@@ -62,13 +61,22 @@ void	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
 		write(tmp_hd->fd_heredoc, "\n", 1);
 		free(line);
 	}
-	handle_signals();
+}
+
+void	handle_heredoc_child(t_heredoc *tmp_hd, t_shell *shell)
+{
+	reset_sig_int_ignore_sig_quit();
+	fill_fd_heredoc(tmp_hd, shell);
+	close(tmp_hd->fd_heredoc);
+	exit(0);
 }
 
 void	heredoc(t_shell *shell)
 {
 	t_heredoc	*tmp_hd;
 	char		*i;
+	int			status;
+	pid_t		pid;
 
 	save_heredoc_info(shell);
 	tmp_hd = shell->heredoc;
@@ -79,12 +87,14 @@ void	heredoc(t_shell *shell)
 		free(i);
 		tmp_hd->fd_heredoc = \
 			open(tmp_hd->fd_heredoc_path, O_CREAT | O_RDWR | O_TRUNC, 0644);
-		fill_fd_heredoc(tmp_hd, shell);
-		close(tmp_hd->fd_heredoc);
-		if (g_signal == CTRL_C_HD)
+		pid = safe_fork(shell, NULL);
+		if (pid == 0)
+			handle_heredoc_child(tmp_hd, shell);
+		waitpid(pid, &status, 0);
+		if (get_child_status(status) == 130)
 		{
 			handle_ctrl_c_hd(shell);
-			return ;
+			break ;
 		}
 		tmp_hd = tmp_hd->next;
 	}
