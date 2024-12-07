@@ -24,7 +24,6 @@ int	safe_access(const char *name, int type)
 	int	ret;
 
 	ret = access(name, type);
-	//if (errno == 2)
-		errno = 0;
+	errno = 0;
 	return (ret);
 }
