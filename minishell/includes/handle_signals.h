@@ -13,10 +13,7 @@ typedef enum signal_type
 	NONE,
 	CTRL_C,
 	CTRL_C_HD,
-	CTRL_BACKSLASH,
-	CTRL_BACKSLASH_HD,
 	CTRL_D,
-	CTRL_D_HD
 }	t_signal_type;
 
 // *************************** FUNCTION PROTOTYPES ********************* //

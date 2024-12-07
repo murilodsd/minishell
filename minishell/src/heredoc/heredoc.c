@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/07 11:54:53 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:35:28 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,12 @@ void	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
 	{
 		line = readline("> ");
 		if (!line)
+		{
+			if (g_signal != CTRL_C_HD)
+				printf("minishell: warning: here-document delimited" \
+					" by end-of-file (wanted `%s')\n", tmp_hd->eof);
 			break ;
+		}
 		if (ft_strncmp(line, tmp_hd->eof, ft_strlen(tmp_hd->eof)) == 0)
 		{
 			free(line);
@@ -85,6 +90,7 @@ void	heredoc(t_shell *shell)
 		{
 			open("/dev/tty", O_RDONLY);
 			free_restart(shell);
+			g_signal = NONE;
 			return ;
 		}
 		tmp_hd = tmp_hd->next;
