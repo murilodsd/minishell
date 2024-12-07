@@ -36,7 +36,7 @@ int check_signaled_exit(int exit_code[2]) {
 
 void	create_left_and_right_nodes(t_shell *shell, t_pipe *pipe_node, int fd[2], int pid[2])
 {
-	pid[0] = safe_fork(shell);
+	pid[0] = safe_fork(shell, pid);
 	if (pid[0] == CHILD)
 	{
 		reset_sig_int_and_quit();
@@ -48,7 +48,7 @@ void	create_left_and_right_nodes(t_shell *shell, t_pipe *pipe_node, int fd[2], i
 	}
 	else
 	{
-		pid[1] = safe_fork(shell);
+		pid[1] = safe_fork(shell, pid);
 		if (pid[1] == CHILD)
 		{
 			reset_sig_int_and_quit();

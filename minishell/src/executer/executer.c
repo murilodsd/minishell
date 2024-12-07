@@ -48,9 +48,9 @@ void	execute_builtin_or_execve(t_shell *shell, t_exec *exec, bool is_root)
 	if (exec->args[0][0] == '\0')
 	{
 		shell->exit_status = EXIT_CMD_NOT_FOUND;
-		free_exit_error(shell, CMD_NOT_FOUND, exec->args[0]);
+		msg_error(CMD_NOT_FOUND, exec->args[0]);
 	}
-	if (!ft_strcmp(exec->args[0], "echo"))
+	else if (!ft_strcmp(exec->args[0], "echo"))
 		echo_builtin(shell, exec->args);
 	else if (!ft_strcmp(exec->args[0], "export"))
 		export_builtin(shell, exec->args);
