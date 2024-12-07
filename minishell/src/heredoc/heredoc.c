@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/07 15:35:28 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:45:28 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	heredoc(t_shell *shell)
 		if (g_signal == CTRL_C_HD)
 		{
 			open("/dev/tty", O_RDONLY);
+			shell->exit_status = 130;
 			free_restart(shell);
 			g_signal = NONE;
 			return ;
