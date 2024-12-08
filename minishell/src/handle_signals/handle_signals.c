@@ -19,7 +19,7 @@ void	sigint_handler(int signal)
 		rl_on_new_line();
 		ft_printf(STDIN_FILENO, "\n");
 		rl_redisplay();
-		g_signal = CTRL_C;
+		g_signal = SIGINT;
 	}
 }
 

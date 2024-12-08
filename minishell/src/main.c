@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/07 19:34:44 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/08 12:05:33 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	g_signal;
 	while (1)
 	{
 		shell->cmd = readline("minishell$ ");
-		if (g_signal == CTRL_C)
+		if (g_signal == SIGINT)
 			handle_ctrl_c(shell);
 		if (!shell->cmd)
 			handle_ctrl_d(shell);
