@@ -2,17 +2,18 @@
 
 void	execute_redir_root(t_redir *redir, t_shell *shell)
 {
-	int	new_fd_to_stdout;
-	int	new_fd_to_stdin;
-
-	new_fd_to_stdout = dup(STDOUT_FILENO);
-	new_fd_to_stdin = dup(STDIN_FILENO);
 	if (execute_redirect(shell, redir, TRUE) && redir->down)
 		execute_root_node(shell, redir->down);
-	dup2(new_fd_to_stdout, STDOUT_FILENO);
-	dup2(new_fd_to_stdin, STDIN_FILENO);
-	close(new_fd_to_stdout);
-	close(new_fd_to_stdin);
+	if (shell->fd_in != -1)
+		close(shell->fd_in);
+	if (shell->fd_out != -1)
+		close(shell->fd_out);
+	shell->fd_in = open("/dev/tty", O_RDONLY);
+	if (shell->fd_in == -1)
+		free_exit_error(shell, GENERAL_ERROR, "Error opening /dev/tty for reading");
+	shell->fd_out = open("/dev/tty", O_WRONLY);
+	if (shell->fd_out == -1)
+		free_exit_error(shell, GENERAL_ERROR, "Error opening /dev/tty for writing");
 }
 
 bool	is_there_a_file(t_shell *shell, t_redir *redir, bool is_root)
@@ -61,15 +62,11 @@ int	redirect_out(t_shell *shell, t_redir *redir, bool is_root)
 			return (FALSE);
 		}
 	}
-	else
-		dup2(shell->fd_out, STDOUT_FILENO);
 	return (TRUE);
 }
 
 bool	redirect_in(t_shell *shell, t_redir *redir, bool is_root)
 {
-	if (shell->fd_in != -1)
-		close (shell->fd_in);
 	if (safe_access(redir->file, F_OK) != 0)
 	{
 		shell->exit_status = EXIT_FAILURE;
@@ -81,6 +78,8 @@ bool	redirect_in(t_shell *shell, t_redir *redir, bool is_root)
 			return (FALSE);
 		}
 	}
+	if (shell->fd_in != -1)
+		close (shell->fd_in);
 	shell->fd_in = open(redir->file, O_RDONLY);
 	if (shell->fd_in == -1)
 	{
@@ -93,8 +92,6 @@ bool	redirect_in(t_shell *shell, t_redir *redir, bool is_root)
 			return (FALSE);
 		}
 	}
-	else
-		dup2(shell->fd_in, STDIN_FILENO);
 	return (TRUE);
 }
 
