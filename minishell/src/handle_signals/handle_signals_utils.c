@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:52:23 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/08 14:09:07 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:27:57 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,5 @@ void	handle_heredoc_signal(int signal)
 	{
 		ft_printf(STDIN_FILENO, "\n");
 		g_signal = SIGINT;
-		close(STDIN_FILENO);
 	}
 }

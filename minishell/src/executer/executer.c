@@ -23,7 +23,7 @@ int	get_child_status(int child_exit_status)
 void	fork_execute_execve(t_shell *shell, void *root)
 {
 	int	child_exit_status;
-	
+
 	ignore_sig_int_and_quit();
 	if (safe_fork(shell, NULL) == 0)
 	{

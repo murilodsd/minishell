@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 14:42:26 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/08 14:42:55 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:28:28 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	reset_sig_int_and_quit(void)
 
 void	reset_sig_int_ignore_sig_quit(void)
 {
-	signal(SIGINT, handle_heredoc_signal);
+	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_IGN);
 }
 

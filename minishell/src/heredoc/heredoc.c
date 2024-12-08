@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/08 14:40:17 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/08 20:05:53 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	handle_heredoc_child(t_heredoc *tmp_hd, t_shell *shell)
 {
 	int	status;
 
+
 	reset_sig_int_ignore_sig_quit();
 	while (1)
 	{
@@ -82,8 +83,6 @@ void	handle_heredoc_child(t_heredoc *tmp_hd, t_shell *shell)
 		free_all_heredoc(shell);
 		if (status == 0)
 			exit(0);
-		else if (status == 1)
-			exit(1);
 		else if (status == 2)
 			exit(130);
 	}
@@ -107,7 +106,7 @@ void	heredoc(t_shell *shell)
 		if (pid == 0)
 			handle_heredoc_child(tmp_hd, shell);
 		waitpid(pid, &status, 0);
-		if (get_child_status(status) == 130 || get_child_status(status) == 1)
+		if (get_child_status(status) == 130)
 		{
 			handle_ctrl_c_hd(shell);
 			return ;
