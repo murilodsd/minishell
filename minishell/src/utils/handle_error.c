@@ -33,8 +33,10 @@ void	msg_error(t_error_codes error_code, char *error_msg, ...)
 	{
 		if (errno == ENOENT)
 			ft_printf(STDERR_FILENO, "minishell: %s%s: %s\n", error_msg, va_arg(va_args, char *), strerror(errno));
+		if (errno == EACCES)
+			ft_printf(STDERR_FILENO, "minishell: %s: %s\n", error_msg, strerror(errno));
 		else
-			ft_printf(STDERR_FILENO, "minishell: %s%s\n", error_msg, strerror(errno));
+			ft_printf(STDERR_FILENO, "minishell: %s: %s\n", error_msg, strerror(errno));
 	}
 	else
 	{
