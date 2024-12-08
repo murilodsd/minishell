@@ -42,8 +42,8 @@ void	create_left_and_right_nodes(t_shell *shell, t_pipe *pipe_node, int fd[2], i
 		reset_sig_int_and_quit();
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
-		execute_tree(shell, pipe_node->left);
 		close(fd[1]);
+		execute_tree(shell, pipe_node->left);
 		free_exit(shell);
 	}
 	else
@@ -54,8 +54,8 @@ void	create_left_and_right_nodes(t_shell *shell, t_pipe *pipe_node, int fd[2], i
 			reset_sig_int_and_quit();
 			close(fd[1]);
 			dup2(fd[0], STDIN_FILENO);
-			execute_tree(shell, pipe_node->right);
 			close(fd[0]);
+			execute_tree(shell, pipe_node->right);
 			free_exit(shell);
 		}
 	}
