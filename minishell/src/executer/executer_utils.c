@@ -17,3 +17,13 @@ int	safe_fork(t_shell *shell, int fd[2])
 	}
 	return (pid);
 }
+
+//Important because can cause a problem when handling a msg_error
+int	safe_access(const char *name, int type)
+{
+	int	ret;
+
+	ret = access(name, type);
+	errno = 0;
+	return (ret);
+}

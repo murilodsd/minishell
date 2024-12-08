@@ -7,6 +7,10 @@ void	handle_error(void)
 
 void	free_all(t_shell *shell)
 {
+	if (shell->fd_out != -1)
+		close(shell->fd_out);
+	if (shell->fd_in != -1)
+		close(shell->fd_in);
 	if (shell->token)
 		clear_token_list(shell);
 	if (shell->mem_allocation.ptr_mem_list != NULL)

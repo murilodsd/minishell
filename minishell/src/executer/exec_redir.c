@@ -44,14 +44,13 @@ bool	is_there_a_file(t_shell *shell, t_redir *redir, bool is_root)
 
 int	redirect_out(t_shell *shell, t_redir *redir, bool is_root)
 {
-	int	fd;
-
-	fd = 0;
+	if (shell->fd_out != -1)
+		close (shell->fd_out);
 	if (redir->type == REDIR_OUT_NODE)
-		fd = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		shell->fd_out = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else
-		fd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (fd == -1)
+		shell->fd_out = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (shell->fd_out == -1)
 	{
 		shell->exit_status = EXIT_FAILURE;
 		if (!is_root)
@@ -63,16 +62,15 @@ int	redirect_out(t_shell *shell, t_redir *redir, bool is_root)
 		}
 	}
 	else
-		dup2(fd, STDOUT_FILENO);
+		dup2(shell->fd_out, STDOUT_FILENO);
 	return (TRUE);
 }
 
 bool	redirect_in(t_shell *shell, t_redir *redir, bool is_root)
 {
-	int	fd;
-
-	fd = 0;
-	if (access(redir->file, F_OK) != 0)
+	if (shell->fd_in != -1)
+		close (shell->fd_in);
+	if (safe_access(redir->file, F_OK) != 0)
 	{
 		shell->exit_status = EXIT_FAILURE;
 		if (!is_root)
@@ -83,8 +81,8 @@ bool	redirect_in(t_shell *shell, t_redir *redir, bool is_root)
 			return (FALSE);
 		}
 	}
-	fd = open(redir->file, O_RDONLY);
-	if (fd == -1)
+	shell->fd_in = open(redir->file, O_RDONLY);
+	if (shell->fd_in == -1)
 	{
 		shell->exit_status = EXIT_FAILURE;
 		if (!is_root)
@@ -96,7 +94,7 @@ bool	redirect_in(t_shell *shell, t_redir *redir, bool is_root)
 		}
 	}
 	else
-		dup2(fd, STDIN_FILENO);
+		dup2(shell->fd_in, STDIN_FILENO);
 	return (TRUE);
 }
 
@@ -107,5 +105,5 @@ int	execute_redirect(t_shell *shell, t_redir *redir, bool is_root)
 	if (redir->type == REDIR_OUT_NODE || redir->type == REDIR_APPEND_NODE)
 		return (redirect_out(shell, redir, is_root));
 	else
-		return(redirect_in(shell, redir, is_root));
+		return (redirect_in(shell, redir, is_root));
 }

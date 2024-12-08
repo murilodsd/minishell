@@ -23,19 +23,15 @@ int	get_child_status(int child_exit_status)
 void	fork_execute_execve(t_shell *shell, void *root)
 {
 		int	child_exit_status;
-
+		
+		ignore_sig_int_and_quit();
 		if (safe_fork(shell, NULL) == 0)
 		{
 			shell->process = CHILD;
 			reset_sig_int_and_quit();
-			//REVIEW -> Abrir heredoc?
-			//if (shell->count_hd)
-			//	open_all_heredocs(shell->root, shell);
 			execute_execve(shell, root);
 			free_exit(shell);
 		}
-		//REVIEW -> teríamos que ignorar aqui?
-		//ignore_sig_int_and_quit();
 		wait(&child_exit_status);
 		shell->exit_status = get_child_status(child_exit_status);
 }

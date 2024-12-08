@@ -112,6 +112,7 @@ void	handle_input(char *cmd, t_shell *shell)
 	}
 	tokenizer(cmd, shell, 0);
 	parser(shell);
+	//print_list(shell->token);
 	if (!shell->token)
 		return ;
 	tree = build_tree(shell, shell->token);
