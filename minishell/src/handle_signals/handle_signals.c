@@ -66,7 +66,7 @@ void	reset_sig_int_and_quit(void)
 
 void	reset_sig_int_ignore_sig_quit(void)
 {
-	signal(SIGINT, handle_hd_sigint);
+	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_IGN);
 }
 

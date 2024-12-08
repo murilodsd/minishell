@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:52:23 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/07 19:31:57 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:15:16 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ void	handle_ctrl_c(t_shell *shell)
 
 void	handle_ctrl_c_hd(t_shell *shell)
 {
+	close(shell->heredoc->fd_heredoc);
 	free_restart(shell);
-	g_signal = NONE;
+	handle_signals();
 }
 
 void	handle_hd_sigint(int signal)
