@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:45:31 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/07 14:17:10 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/08 15:57:14 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ void	check_env_var(t_token *token, t_shell *shell)
 	i = 0;
 	while (token->data[i])
 	{
+		if (i == 0 && ft_isdigit(token->data[i]))
+		{
+			i++;
+			break ;
+		}
 		if (!isalnum(token->data[i]) && token->data[i] != '_')
 			break ;
 		i++;
