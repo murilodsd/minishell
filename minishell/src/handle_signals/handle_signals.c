@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_signals.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 14:42:26 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/08 14:42:55 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/08 15:44:01 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	sigint_handler(int signal)
 	{
 		rl_replace_line("", 0);
 		rl_on_new_line();
-		ft_printf(STDIN_FILENO, "\n");
+		ft_printf(STDOUT_FILENO, "\n");
 		rl_redisplay();
 		g_signal = SIGINT;
 	}
