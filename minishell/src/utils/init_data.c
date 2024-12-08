@@ -52,8 +52,8 @@ void	 init_data(t_shell **shell, int argc, char **argv, char **envp)
 	(*shell)->export_lst = NULL;
 	(*shell)->exit_status = EXIT_SUCCESS;
 	//TODO - PEGAR NUMERO DO PROCESSO
-	(*shell)->fd_in = -1;
-	(*shell)->fd_out = -1;
+	(*shell)->fd_in = 0;
+	(*shell)->fd_out = 1;
 	create_env_export_lst(*shell, envp);
 	handle_signals();
 }
