@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:14 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/06 16:17:59 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/08 13:23:29 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_heredoc(t_shell *shell)
 	shell->heredoc->next = NULL;
 }
 
-void	clear_heredoc_list(t_shell *shell)
+void	clear_heredoc_list(t_shell *shell, int in_heredoc)
 {
 	t_heredoc	*tmp_heredoc;
 
@@ -35,14 +35,15 @@ void	clear_heredoc_list(t_shell *shell)
 		shell->heredoc = shell->heredoc->next;
 		if (tmp_heredoc->fd_heredoc_path)
 		{
-			unlink(tmp_heredoc->fd_heredoc_path);
+			if (!in_heredoc)
+				unlink(tmp_heredoc->fd_heredoc_path);
 			free(tmp_heredoc->fd_heredoc_path);
 		}
 		if (tmp_heredoc->eof)
 			free(tmp_heredoc->eof);
-		if (tmp_heredoc)
-			free(tmp_heredoc);
+		free(tmp_heredoc);
 	}
+	shell->heredoc = NULL;
 }
 
 void	assign_heredoc(t_heredoc **heredoc, char *eof, t_token_quote quote)

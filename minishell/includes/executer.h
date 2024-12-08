@@ -6,6 +6,7 @@
 void	executer(t_shell * shell, void *root);
 void	execute_tree(t_shell * shell, void *root);
 void	execute_root_node(t_shell *shell, void *root);
+int		get_child_status(int child_exit_status);
 
 //executer_utils.c
 int	safe_fork(t_shell *shell, int fd[2]);
