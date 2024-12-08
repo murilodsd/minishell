@@ -117,6 +117,7 @@ void	handle_input(char *cmd, t_shell *shell)
 	tree = build_tree(shell, shell->token);
 //	print_tree(tree, 0, TRUE);
 	executer(shell, tree);
+	handle_signals();
 	//handle_error();
 	free_restart(shell);
 }
