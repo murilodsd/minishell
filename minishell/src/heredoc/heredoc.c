@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/08 12:08:15 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/08 12:43:24 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	save_heredoc_info(t_shell *shell)
 	}
 }
 
-void	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
+int	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
 {
 	char	*line;
 
@@ -48,7 +48,7 @@ void	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
 			free(line);
 			printf("minishell: warning: here-document delimited" \
 				" by end-of-file (wanted `%s')\n", tmp_hd->eof);
-			break ;
+			return (1);
 		}
 		if (ft_strncmp(line, tmp_hd->eof, ft_strlen(tmp_hd->eof)) == 0)
 		{
@@ -61,14 +61,20 @@ void	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
 		write(tmp_hd->fd_heredoc, "\n", 1);
 		free(line);
 	}
+	return (0);
 }
 
 void	handle_heredoc_child(t_heredoc *tmp_hd, t_shell *shell)
 {
+	int	status;
+
 	reset_sig_int_ignore_sig_quit();
-	fill_fd_heredoc(tmp_hd, shell);
+	status = fill_fd_heredoc(tmp_hd, shell);
 	close(tmp_hd->fd_heredoc);
-	exit(0);
+	if (status)
+		exit(1);
+	else
+		exit(0);
 }
 
 void	heredoc(t_shell *shell)
@@ -92,7 +98,7 @@ void	heredoc(t_shell *shell)
 		if (pid == 0)
 			handle_heredoc_child(tmp_hd, shell);
 		waitpid(pid, &status, 0);
-		if (get_child_status(status) == 130)
+		if (get_child_status(status) == 130 || get_child_status(status) == 1)
 		{
 			handle_ctrl_c_hd(shell);
 			return ;

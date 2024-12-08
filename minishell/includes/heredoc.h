@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:06 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/06 16:01:10 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/08 12:43:07 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 // heredoc.c
 void	save_heredoc_info(t_shell *shell);
-void	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell);
+int	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell);
 void	heredoc(t_shell *shell);
 
 // heredoc_utils.c
