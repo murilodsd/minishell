@@ -14,6 +14,7 @@ void	handle_error(void);
 void	ft_lstremove_mem_node(t_list **lst, void *content);
 void	free_all(t_shell *shell);
 void	free_restart(t_shell *shell);
+void	free_all_heredoc(t_shell *shell);
 
 // handle_input.c
 void	handle_input(char *cmd, t_shell *shell);

@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:52:23 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/08 12:11:50 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/08 14:09:07 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,23 @@ void	handle_ctrl_d(t_shell *shell)
 void	handle_ctrl_c(t_shell *shell)
 {
 	shell->exit_status = 130;
-	clear_token_list(shell);
-	clear_heredoc_list(shell);
+	free_restart(shell);
 	g_signal = 0;
 }
 
 void	handle_ctrl_c_hd(t_shell *shell)
 {
 	shell->exit_status = 130;
-	close(shell->heredoc->fd_heredoc);
 	free_restart(shell);
-	handle_signals();
+	g_signal = 0;
+}
+
+void	handle_heredoc_signal(int signal)
+{
+	if (signal == SIGINT)
+	{
+		ft_printf(STDIN_FILENO, "\n");
+		g_signal = SIGINT;
+		close(STDIN_FILENO);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/08 12:43:24 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/08 14:40:17 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,15 @@ int	fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell)
 		if (!line)
 		{
 			free(line);
-			printf("minishell: warning: here-document delimited" \
-				" by end-of-file (wanted `%s')\n", tmp_hd->eof);
-			return (1);
+			if (g_signal == SIGINT)
+				return (2);
+			else
+				return (1);
 		}
 		if (ft_strncmp(line, tmp_hd->eof, ft_strlen(tmp_hd->eof)) == 0)
 		{
 			free(line);
-			break ;
+			return (0);
 		}
 		if (tmp_hd->eof_quote == NO_QUOTE)
 			check_hd_expand(&line, shell);
@@ -69,12 +70,23 @@ void	handle_heredoc_child(t_heredoc *tmp_hd, t_shell *shell)
 	int	status;
 
 	reset_sig_int_ignore_sig_quit();
-	status = fill_fd_heredoc(tmp_hd, shell);
-	close(tmp_hd->fd_heredoc);
-	if (status)
-		exit(1);
-	else
-		exit(0);
+	while (1)
+	{
+		tmp_hd->fd_heredoc = \
+			open(tmp_hd->fd_heredoc_path, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		status = fill_fd_heredoc(tmp_hd, shell);
+		if (status == 1)
+			printf("minishell: warning: here-document delimited" \
+					" by end-of-file (wanted `%s')\n", tmp_hd->eof);
+		close(tmp_hd->fd_heredoc);
+		free_all_heredoc(shell);
+		if (status == 0)
+			exit(0);
+		else if (status == 1)
+			exit(1);
+		else if (status == 2)
+			exit(130);
+	}
 }
 
 void	heredoc(t_shell *shell)
@@ -84,7 +96,6 @@ void	heredoc(t_shell *shell)
 	int			status;
 	pid_t		pid;
 
-	ignore_sig_int_and_quit();
 	save_heredoc_info(shell);
 	tmp_hd = shell->heredoc;
 	while (tmp_hd)
@@ -92,8 +103,6 @@ void	heredoc(t_shell *shell)
 		i = ft_itoa(tmp_hd->i);
 		tmp_hd->fd_heredoc_path = ft_strjoin("/tmp/tmp_heredoc", i);
 		free(i);
-		tmp_hd->fd_heredoc = \
-			open(tmp_hd->fd_heredoc_path, O_CREAT | O_RDWR | O_TRUNC, 0644);
 		pid = fork();
 		if (pid == 0)
 			handle_heredoc_child(tmp_hd, shell);
@@ -103,9 +112,7 @@ void	heredoc(t_shell *shell)
 			handle_ctrl_c_hd(shell);
 			return ;
 		}
-		close(tmp_hd->fd_heredoc);
 		tmp_hd = tmp_hd->next;
 	}
 	include_hd_path(shell);
-	handle_signals();
 }

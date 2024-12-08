@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:55:24 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/08 12:04:18 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/08 14:09:23 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void	ignore_sig_int_and_quit(void);
 void	handle_ctrl_d(t_shell *shell);
 void	handle_ctrl_c(t_shell *shell);
 void	handle_ctrl_c_hd(t_shell *shell);
-void	handle_hd_sigint(int signal);
+void	handle_heredoc_signal(int signal);
 
 #endif
