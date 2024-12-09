@@ -24,6 +24,8 @@ typedef enum e_error_codes
 
 # define EXIT_USAGE_SYNTAX_ERROR 2
 # define EXIT_CMD_NOT_FOUND 127
+# define EXIT_SIGINT 130
+# define EXIT_SIGQUIT 131
 
 // ********************************* PROCESS PID ************************* //
 

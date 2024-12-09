@@ -13,7 +13,6 @@ char	**get_args(t_shell *shell, t_token *token);
 
 // redir_node_functions.c
 t_token	*get_previous_redir(t_token *token);
-t_token	*get_next_redir(t_token *token);
 t_redir	*create_redir_node(t_shell *shell, void *down, t_token *token, bool reset_id);
 
 

@@ -2,9 +2,6 @@
 # define BUILTINS_H
 # include "minishell.h"
 
-// builtins.c
-void	builtins(t_shell *shell, char **args);
-
 // cd
 // cd.c
 void	cd_builtin(t_shell *shell, char **cd_args);
@@ -14,7 +11,6 @@ void	cd_builtin(t_shell *shell, char **cd_args);
 void	echo_builtin(t_shell *shell, char **args);
 
 // env
-
 // env.c
 void	env_builtin(t_shell *shell, char **args);
 
@@ -23,15 +19,17 @@ void	env_builtin(t_shell *shell, char **args);
 void	exit_builtin(t_shell * shell, char **exit_args);
 
 // export
+// export.c
+void	export_builtin(t_shell *shell, char **export_args);
+void	ft_lstadd_var_ordered(t_list **lst, t_list *new);
+void	add_or_edit_var(t_shell *shell, t_var *var);
 // export_utils.c
 t_list	*ft_lstfind_name(t_list *lst, char *name);
 void	edit_var(t_shell *shell, t_var *var);
 void	add_var(t_shell *shell, t_var *var);
 void	get_new_var_name_and_value(t_shell *shell, t_var *var, char *string);
-// export.c
-void	export_builtin(t_shell *shell, char **export_args);
+// export_utils2.c
 void	ft_lstadd_var_ordered(t_list **lst, t_list *new);
-void	add_or_edit_var(t_shell *shell, t_var *var);
 
 // pwd
 // pwd.c

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/09 09:31:01 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/12/09 10:04:03 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../includes/minishell.h"
 
 static bool	ft_atol(char *nptr, long *n)
@@ -28,34 +40,42 @@ static bool	ft_atol(char *nptr, long *n)
 	return (TRUE);
 }
 
-void	exit_builtin(t_shell * shell, char **exit_args)
+static void	check_first_argument(t_shell *shell, char *first_arg, \
+	long *status)
 {
-	int			i;
+	int	i;
+
+	i = 0;
+	if (*first_arg == '-' || *first_arg == '+')
+		i++;
+	if (*first_arg == '\0' || !ft_isalldigits(first_arg + i) \
+		|| !ft_atol(first_arg, status))
+	{
+		shell->exit_status = EXIT_USAGE_SYNTAX_ERROR;
+		msg_error(NUMERIC_ARGUMENT_REQUIRED, "exit", first_arg);
+		free_all(shell);
+		exit(EXIT_USAGE_SYNTAX_ERROR);
+	}
+}
+
+void	exit_builtin(t_shell *shell, char **exit_args)
+{
 	long	*status;
 
-	//REVIEW -> VER SE ALGUM PRINT EXIT É NO STDERROR
 	status = ft_calloc(1, sizeof(long));
 	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
-		status, "Getcwd failed");
-	ft_printf(STDOUT_FILENO, "exit\n");
+		status, "Calloc failed");
+	ft_printf(STDERR_FILENO, "exit\n");
 	if (exit_args[1])
 	{
-		i = 0;
-		if (*exit_args[1] == '-' || *exit_args[1] == '+')
-			i++;
-		if (!ft_isalldigits(exit_args[1] + i) || !ft_atol(exit_args[1], status) || exit_args[1][0] == '\0')
-		{
-			shell->exit_status = EXIT_USAGE_SYNTAX_ERROR;
-			msg_error(NUMERIC_ARGUMENT_REQUIRED, "exit", exit_args[1]);
-			free_all(shell);
-			exit(EXIT_USAGE_SYNTAX_ERROR);
-		}
+		check_first_argument(shell, exit_args[1], status);
 		if (exit_args[2])
 		{
 			if (shell->exit_status == EXIT_SUCCESS)
 				shell->exit_status = EXIT_FAILURE;
 			msg_error(TOO_MANY_ARGS, "exit");
-			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), status);
+			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), \
+				status);
 			return ;
 		}
 		shell->exit_status = *status % 256;
@@ -129,7 +149,8 @@ char **parse_input(char *input) {
 			add_history(shell->cmd);
 			//handle_input(shell->cmd);
 			//free(shell->cmd);
-			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), shell->cmd);
+			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), \
+				shell->cmd);
 		}
 	}
 	free_exit_error(shell, 0, "teste");

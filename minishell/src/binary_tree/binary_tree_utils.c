@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   binary_tree_utils.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/08 20:08:36 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/12/08 20:09:34 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 bool	is_redir_node_type(t_node_type node_type)
@@ -33,7 +45,7 @@ int	count_args(t_token *token)
 {
 	int	i;
 
-	i = 0;	
+	i = 0;
 	while (token->type != PIPE && token->type != NULL_TOKEN)
 	{
 		if (token->type == COMMAND || token->type == COMMAND_ARG)
@@ -45,8 +57,8 @@ int	count_args(t_token *token)
 
 char	**get_args(t_shell *shell, t_token *token)
 {
-	int	n_args;
-	int	i;
+	int		n_args;
+	int		i;
 	char	**args;
 
 	n_args = count_args(token);
@@ -56,7 +68,7 @@ char	**get_args(t_shell *shell, t_token *token)
 	check_mem_alloc(shell, &(shell->mem_allocation.matrix_mem_list), \
 			args, "Calloc failed");
 	i = 0;
-	while(i < n_args)
+	while (i < n_args)
 	{
 		if (token->type == COMMAND || token->type == COMMAND_ARG)
 		{

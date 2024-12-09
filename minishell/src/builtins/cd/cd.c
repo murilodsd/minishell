@@ -1,19 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/09 08:29:56 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/12/09 09:27:22 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../includes/minishell.h"
 
-//REVIEW -> TALVEZ SEJA MELHOR USAR O EXPAND
-char	*get_home(t_shell *shell)
+char	*get_home(t_shell *shell, char *actual_path)
 {
 	t_list	*home_node;
 
-	home_node = ft_lstfind_name(shell->envp_lst,"HOME");
-	if (!home_node)
+	home_node = ft_lstfind_name(shell->envp_lst, "HOME");
+	if (!home_node || !((t_var *)(home_node->content))->value)
+	{
+		msg_error(VAR_NOT_SET, "cd", "HOME");
+		ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), \
+			actual_path);
+		shell->exit_status = EXIT_FAILURE;
 		return (NULL);
+	}
 	return (((t_var *)(home_node->content))->value);
 }
 
-void	set_pwd(t_shell *shell)
+char	*get_oldpwd(t_shell *shell, char *actual_path)
+{
+	t_list	*oldpwd_node;
+
+	oldpwd_node = ft_lstfind_name(shell->envp_lst, "OLDPWD");
+	if (!oldpwd_node || !((t_var *)(oldpwd_node->content))->value)
+	{
+		msg_error(VAR_NOT_SET, "cd", "OLDPWD");
+		ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), \
+			actual_path);
+		shell->exit_status = EXIT_FAILURE;
+		return (NULL);
+	}
+	return (((t_var *)(oldpwd_node->content))->value);
+}
+
+void	set_pwd_and_oldpwd(t_shell *shell, char *value)
 {
 	t_var	*pwd;
+	t_var	*old_pwd;
 
 	pwd = (t_var *)ft_calloc(sizeof(t_var), 1);
 	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
@@ -23,12 +57,6 @@ void	set_pwd(t_shell *shell)
 	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
 			pwd->name, "Calloc failed");
 	add_or_edit_var(shell, pwd);
-}
-
-void	set_oldpwd(t_shell *shell, char *value)
-{
-	t_var	*old_pwd;
-
 	old_pwd = (t_var *)ft_calloc(sizeof(t_var), 1);
 	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
 			old_pwd, "Calloc failed");
@@ -37,6 +65,7 @@ void	set_oldpwd(t_shell *shell, char *value)
 			old_pwd->name, "Calloc failed");
 	old_pwd->value = value;
 	add_or_edit_var(shell, old_pwd);
+	shell->exit_status = EXIT_SUCCESS;
 }
 
 void	change_directory(t_shell *shell, char *path)
@@ -44,32 +73,31 @@ void	change_directory(t_shell *shell, char *path)
 	char	*actual_path;
 
 	actual_path = safe_getcwd(NULL, 0, shell);
-	if (!path)
+	if (!path || !ft_strcmp(path, "~"))
 	{
-		path = get_home(shell);
+		path = get_home(shell, actual_path);
 		if (!path)
-		{
-			msg_error(VAR_NOT_SET, "cd", "HOME");
-			shell->exit_status = EXIT_FAILURE;
 			return ;
-		}
+	}
+	else if (!ft_strcmp(path, "-"))
+	{
+		path = get_oldpwd(shell, actual_path);
+		if (!path)
+			return ;
 	}
 	if (chdir(path) == SUCCESS)
-	{
-		set_pwd(shell);
-		set_oldpwd(shell, actual_path);
-		shell->exit_status = EXIT_SUCCESS;
-	}
+		set_pwd_and_oldpwd(shell, actual_path);
 	else
 	{
-		ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), actual_path);
-		msg_error(0, "cd: ", path);
+		ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), \
+			actual_path);
+		msg_error(GENERAL_ERROR, "cd: ", path);
 		shell->exit_status = EXIT_FAILURE;
 	}
 }
 
 void	cd_builtin(t_shell *shell, char **cd_args)
-{	
+{
 	if (cd_args[1] && cd_args[2])
 	{
 		msg_error(TOO_MANY_ARGS, "cd");
@@ -78,10 +106,10 @@ void	cd_builtin(t_shell *shell, char **cd_args)
 	}
 	if (cd_args[1])
 	{
-		if(!ft_strcmp(cd_args[1], ""))
+		if (!ft_strcmp(cd_args[1], ""))
 		{
 			shell->exit_status = EXIT_SUCCESS;
-			return ;	
+			return ;
 		}
 	}
 	change_directory(shell, cd_args[1]);
@@ -204,7 +232,8 @@ void	cd_builtin(t_shell *shell, char **cd_args)
 			add_history(shell->cmd);
 			//handle_input(shell->cmd);
 			//free(shell->cmd);
-			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), shell->cmd);
+			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), \
+				shell->cmd);
 		}
 	}
 	free_exit_error(shell, 0, "teste");

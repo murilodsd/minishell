@@ -100,7 +100,6 @@ void printTree(void *node, int depth) {
 		printTree(((t_redir *)node)->down, depth + 1);
 }
 
-
 void	handle_input(char *cmd, t_shell *shell)
 {
 	void	*tree;
@@ -114,6 +113,7 @@ void	handle_input(char *cmd, t_shell *shell)
 	parser(shell);
 	if (!shell->token)
 		return ;
+//	print_list(shell->token);
 	tree = build_tree(shell, shell->token);
 //	print_tree(tree, 0, TRUE);
 	executer(shell, tree);

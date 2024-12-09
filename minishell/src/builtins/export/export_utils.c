@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/09 08:09:39 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/12/09 08:14:43 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../includes/minishell.h"
 
 void	edit_var(t_shell *shell, t_var *var)
@@ -6,13 +18,14 @@ void	edit_var(t_shell *shell, t_var *var)
 
 	if (!(var->value))
 		return ;
-	var_value = &((t_var *)\
+	var_value = &((t_var *) \
 		(ft_lstfind_name(shell->export_lst, var->name)->content))->value;
 	//REVIEW -> LIBERAR A MEMORIA DE VAR->NAME, VAR->IS_INCREMENTAL E VAR, POIS COMO FOI UMA EDIÇÃO, NÃO FORAM USADOS.
 	if (!var->is_incremental || (var->is_incremental && !*var_value))
 	{
 		if (*var_value)
-			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), *var_value);
+			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), \
+				*var_value);
 		*var_value = ft_strdup(var->value);
 	}
 	else
@@ -37,13 +50,13 @@ void	add_var(t_shell *shell, t_var *var)
 
 t_list	*ft_lstfind_name(t_list *lst, char *name)
 {
-	t_var *var;
+	t_var	*var;
 
 	while (lst)
 	{
 		var = (t_var *)lst->content;
 		if (ft_strcmp(var->name, name) == 0)
-			return lst;
+			return (lst);
 		lst = lst->next;
 	}
 	return (NULL);
@@ -68,27 +81,29 @@ static bool	validate_var_name(char *string)
 
 void	get_new_var_name_and_value(t_shell *shell, t_var *var, char *string)
 {
-		if (!validate_var_name(string))
-		{
-			msg_error(NOT_VALID_IDENTIFIER, "export", string);
-			shell->exit_status = EXIT_FAILURE;
-			return ;
-		}
-		if (!strchr(string, '='))
-			var->name = ft_strdup(string);
-		else
-		{
-			var->value = ft_strdup((ft_strchr(string, '=')) + 1);
-			check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
-				var->value, "Calloc failed");
-			if (ft_strchr(string, '+') && (ft_strchr(string, '=') > ft_strchr(string, '+')))
-			{
-				var->is_incremental = TRUE;
-				var->name = ft_substr(string, 0, ft_strchr(string, '=') - string - 1);
-			}
-			else
-				var->name = ft_substr(string, 0, ft_strchr(string, '=') - string);
-		}
+	if (!validate_var_name(string))
+	{
+		msg_error(NOT_VALID_IDENTIFIER, "export", string);
+		shell->exit_status = EXIT_FAILURE;
+		return ;
+	}
+	if (!strchr(string, '='))
+		var->name = ft_strdup(string);
+	else
+	{
+		var->value = ft_strdup((ft_strchr(string, '=')) + 1);
 		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
-				var->name, "Calloc failed");
+			var->value, "Calloc failed");
+		if (ft_strchr(string, '+') && \
+			(ft_strchr(string, '=') > ft_strchr(string, '+')))
+		{
+			var->is_incremental = TRUE;
+			var->name = ft_substr(string, 0, \
+				ft_strchr(string, '=') - string - 1);
+		}
+		else
+			var->name = ft_substr(string, 0, ft_strchr(string, '=') - string);
+	}
+	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+			var->name, "Calloc failed");
 }
