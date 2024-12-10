@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 22:19:00 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/09 22:19:01 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:11:19 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef enum e_error_codes
 // ********************************* EXIT CODES ************************* //
 
 # define EXIT_USAGE_SYNTAX_ERROR 2
+# define EXIT_PERMISSION_DENIED 126
 # define EXIT_CMD_NOT_FOUND 127
 # define EXIT_SIGINT 130
 # define EXIT_SIGQUIT 131

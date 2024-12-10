@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:46:35 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/10 14:22:15 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/10 14:55:02 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,19 @@ char	**get_path(t_shell *shell)
 	return (path_array_string);
 }
 
-void	handle_exec_error(int execve_ret, t_exec *exec, t_shell *shell)
+void	handle_exec_error(int execve_ret, t_exec *exec, t_shell *shell, \
+	bool path_exist)
 {
 	struct stat	st;
 
 	shell->exit_status = EXIT_CMD_NOT_FOUND;
+	if (!path_exist)
+		free_exit_error(shell, NO_FILE_DIRECTORY, exec->args[0]);
 	if (execve_ret == -1 && exec->args[0][0] != '/')
 	{
 		if (safe_access(exec->args[0], F_OK) == 0)
 		{
-			shell->exit_status = 126;
+			shell->exit_status = EXIT_PERMISSION_DENIED;
 			if (stat(exec->args[0], &st) == 0 && S_ISDIR(st.st_mode))
 				free_exit_error(shell, IS_DIRECTORY, exec->args[0]);
 			free_exit_error(shell, PERMISSION_DENIED, exec->args[0]);
@@ -86,16 +89,16 @@ void	execute_execve(t_shell *shell, t_exec *exec)
 	{
 		if (safe_access(exec->args[0], F_OK) == 0)
 			execve_ret = execve(exec->args[0], exec->args, exported_envs);
-		handle_exec_error(execve_ret, exec, shell);
+		handle_exec_error(execve_ret, exec, shell, TRUE);
 	}
 	path = get_path(shell);
 	i = -1;
-	while (path[++i])
+	while (path && path[++i])
 	{
 		path_cmd = ft_strjoin(path[i], exec->args[0]);
 		if (safe_access(path_cmd, F_OK) == 0)
 			execve_ret = execve(path_cmd, exec->args, exported_envs);
 		free(path_cmd);
 	}
-	handle_exec_error(execve_ret, exec, shell);
+	handle_exec_error(execve_ret, exec, shell, path && *path);
 }
