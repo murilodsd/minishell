@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:55:24 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/10 11:53:31 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:02:55 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	handle_ctrl_d(t_shell *shell);
 void	handle_ctrl_c(t_shell *shell);
 void	handle_ctrl_c_hd(t_shell *shell);
 void	set_signals_to_here_doc(void);
-void	handle_heredoc_signal(void);
+void	handle_heredoc_signal(int signal);
 
 #endif
