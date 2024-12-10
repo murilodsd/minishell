@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:15:24 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/10 16:20:51 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:05:36 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,14 @@ bool	redirect_in(t_shell *shell, t_redir *redir, bool is_root)
 {
 	if (safe_access(redir->file, F_OK) != 0)
 	{
-		shell->exit_status = EXIT_FAILURE;
+		msg_error(NO_FILE_DIRECTORY, redir->file);
 		if (!is_root)
-			free_exit_error(shell, NO_FILE_DIRECTORY, redir->file);
-		else
 		{
-			msg_error(NO_FILE_DIRECTORY, redir->file);
-			return (FALSE);
+			shell->exit_status = EXIT_FAILURE;
+			free_exit(shell);
 		}
+		shell->exit_status = EXIT_SUCCESS;
+		return (FALSE);
 	}
 	if (shell->fd_in != -1)
 		close(shell->fd_in);

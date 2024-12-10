@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:04:04 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/09 13:12:15 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:48:15 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	choose_builtin_or_execve(t_shell *shell, t_exec *exec, bool is_root)
 	else if (!ft_strcmp(exec->args[0], "cd"))
 		cd_builtin(shell, exec->args);
 	else if (!ft_strcmp(exec->args[0], "exit"))
-		exit_builtin(shell, exec->args);
+		exit_builtin(shell, exec->args, is_root);
 	else
 	{
 		if (is_root)

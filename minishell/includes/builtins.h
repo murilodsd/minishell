@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 22:13:56 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/09 22:14:51 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:49:24 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	echo_builtin(t_shell *shell, char **args);
 void	env_builtin(t_shell *shell, char **args);
 
 // exit.c
-void	exit_builtin(t_shell *shell, char **exit_args);
+void	exit_builtin(t_shell *shell, char **exit_args, bool is_root);
 
 // export.c
 void	export_builtin(t_shell *shell, char **export_args);

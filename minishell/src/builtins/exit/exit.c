@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 09:31:01 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/09 10:04:03 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:48:43 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,15 @@ static void	check_first_argument(t_shell *shell, char *first_arg, \
 	}
 }
 
-void	exit_builtin(t_shell *shell, char **exit_args)
+void	exit_builtin(t_shell *shell, char **exit_args, bool is_root)
 {
 	long	*status;
 
 	status = ft_calloc(1, sizeof(long));
 	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
 		status, "Calloc failed");
-	ft_printf(STDERR_FILENO, "exit\n");
+	if (is_root)
+		ft_printf(STDERR_FILENO, "exit\n");
 	if (exit_args[1])
 	{
 		check_first_argument(shell, exit_args[1], status);
