@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:15:24 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/09 13:18:32 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:20:51 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	execute_redir_root(t_redir *redir, t_shell *shell)
 
 bool	is_there_a_file(t_shell *shell, t_redir *redir, bool is_root)
 {
-	if (!redir->file)
+	if (!redir->file[0] && redir->env_var_name)
 	{
 		shell->exit_status = EXIT_FAILURE;
 		if (!is_root)
@@ -43,7 +43,7 @@ bool	is_there_a_file(t_shell *shell, t_redir *redir, bool is_root)
 			return (FALSE);
 		}
 	}
-	if (!redir->file[0])
+	else if (!redir->file[0])
 	{
 		shell->exit_status = EXIT_FAILURE;
 		if (!is_root)
