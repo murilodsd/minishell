@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 08:29:56 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/10 18:33:06 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:48:16 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,33 @@ char	*get_oldpwd(t_shell *shell, char *actual_path)
 	return (((t_var *)(oldpwd_node->content))->value);
 }
 
-void	set_pwd_and_oldpwd(t_shell *shell, char *value)
+int	chdir_and_set_pwd_and_oldpwd(t_shell *shell, char *new_path, char *old_path)
 {
 	t_var	*pwd;
 	t_var	*old_pwd;
 
-	pwd = (t_var *)ft_calloc(sizeof(t_var), 1);
-	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
-			pwd, "Calloc failed");
-	pwd->value = safe_getcwd(NULL, 0, shell);
-	pwd->name = ft_strdup("PWD");
-	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
-			pwd->name, "Calloc failed");
-	add_or_edit_var(shell, pwd);
-	old_pwd = (t_var *)ft_calloc(sizeof(t_var), 1);
-	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
-			old_pwd, "Calloc failed");
-	old_pwd->name = ft_strdup("OLDPWD");
-	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
-			old_pwd->name, "Calloc failed");
-	old_pwd->value = value;
-	add_or_edit_var(shell, old_pwd);
-	shell->exit_status = EXIT_SUCCESS;
+	if (chdir(new_path) == SUCCESS)
+	{
+		pwd = (t_var *)ft_calloc(sizeof(t_var), 1);
+		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+				pwd, "Calloc failed");
+		pwd->value = safe_getcwd(NULL, 0, shell);
+		pwd->name = ft_strdup("PWD");
+		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+				pwd->name, "Calloc failed");
+		add_or_edit_var(shell, pwd);
+		old_pwd = (t_var *)ft_calloc(sizeof(t_var), 1);
+		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+				old_pwd, "Calloc failed");
+		old_pwd->name = ft_strdup("OLDPWD");
+		check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
+				old_pwd->name, "Calloc failed");
+		old_pwd->value = old_path;
+		add_or_edit_var(shell, old_pwd);
+		shell->exit_status = EXIT_SUCCESS;
+		return (SUCCESS);
+	}
+	return (FAILURE);
 }
 
 void	change_directory(t_shell *shell, char *path)
@@ -82,13 +87,12 @@ void	change_directory(t_shell *shell, char *path)
 	else if (!ft_strcmp(path, "-"))
 	{
 		path = get_oldpwd(shell, actual_path);
+		if (path)
+			ft_printf(STDOUT_FILENO, "%s\n", path);
 		if (!path || !*path)
 			return ;
-		ft_printf(STDOUT_FILENO,"%s\n", path);
 	}
-	if (chdir(path) == SUCCESS)
-		set_pwd_and_oldpwd(shell, actual_path);
-	else
+	if (chdir_and_set_pwd_and_oldpwd(shell, path, actual_path) == FAILURE)
 	{
 		ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), \
 			actual_path);
