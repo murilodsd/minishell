@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:01:24 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/06 16:01:55 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:06:45 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,5 @@ void		split_token(t_token *token, int i);
 void		add_next_char(char **str, char c);
 t_token		*find_redir_file(t_token *tmp, t_token_type type);
 void		skip_to_next_pipe(t_token **token);
-
-// apagar.c
-char		*format_data_parentheses(const char *data);
-const char	*get_token_type_str(t_token_type type);
-const char	*get_token_quote_str(t_token_quote quote);
-void		print_list(t_token *token);
 
 #endif

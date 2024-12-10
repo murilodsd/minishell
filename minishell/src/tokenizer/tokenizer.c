@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:15:49 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/10 18:24:05 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:49:31 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ void	tokenizer(char *cmd, t_shell *shell, int i)
 			i = handle_word(cmd, i, shell);
 		if (cmd[i])
 			i++;
-	}\
+	}
 }

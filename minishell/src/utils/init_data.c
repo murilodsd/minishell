@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:18:35 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/09 14:19:18 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:14:29 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	init_data(t_shell **shell, int argc, char **argv, char **envp)
 	(*shell)->envp_lst = NULL;
 	(*shell)->export_lst = NULL;
 	(*shell)->exit_status = EXIT_SUCCESS;
-	//TODO - PEGAR NUMERO DO PROCESSO
 	(*shell)->fd_in = 0;
 	(*shell)->fd_out = 1;
 	create_env_export_lst(*shell, envp);

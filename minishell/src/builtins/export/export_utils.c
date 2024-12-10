@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 08:09:39 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/09 08:14:43 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:47:47 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	edit_var(t_shell *shell, t_var *var)
 		return ;
 	var_value = &((t_var *) \
 		(ft_lstfind_name(shell->export_lst, var->name)->content))->value;
-	//REVIEW -> LIBERAR A MEMORIA DE VAR->NAME, VAR->IS_INCREMENTAL E VAR, POIS COMO FOI UMA EDIÇÃO, NÃO FORAM USADOS.
 	if (!var->is_incremental || (var->is_incremental && !*var_value))
 	{
 		if (*var_value)

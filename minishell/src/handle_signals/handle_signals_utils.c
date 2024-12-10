@@ -6,13 +6,11 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:52:23 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/10 12:02:09 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:08:34 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-extern int	g_signal;
 
 void	handle_ctrl_d(t_shell *shell)
 {

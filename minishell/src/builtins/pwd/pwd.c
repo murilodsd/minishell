@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 08:23:24 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/10 14:54:24 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:47:59 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	pwd_builtin(t_shell *shell)
 	if (!pwd)
 	{
 		shell->exit_status = EXIT_FAILURE;
-		msg_error(GENERAL_ERROR,"Getcwd failed");
+		msg_error(GENERAL_ERROR, "Getcwd failed");
 		return ;
 	}
 	ft_printf(1, "%s\n", pwd);

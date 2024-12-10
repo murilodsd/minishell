@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 08:29:56 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/10 18:33:06 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:45:35 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	change_directory(t_shell *shell, char *path)
 		path = get_oldpwd(shell, actual_path);
 		if (!path || !*path)
 			return ;
-		ft_printf(STDOUT_FILENO,"%s\n", path);
+		ft_printf(STDOUT_FILENO, "%s\n", path);
 	}
 	if (chdir(path) == SUCCESS)
 		set_pwd_and_oldpwd(shell, actual_path);
