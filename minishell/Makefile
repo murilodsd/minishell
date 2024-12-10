@@ -62,7 +62,7 @@ INCLUDE_FLAG=$(addprefix -I , $(INCLUDE_PATH))
 RM = rm -f
 
 #VALGRIND
-VALGRIND_FLAGS = --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes --gen-suppressions=all
+VALGRIND_FLAGS = --quiet --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes --gen-suppressions=all
 VALGRIND_SUPP = --suppressions=readline.supp
 
 all: $(NAME)

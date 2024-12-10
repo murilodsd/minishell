@@ -6,11 +6,13 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/08 20:05:53 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:57:00 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern int	g_signal;
 
 void	save_heredoc_info(t_shell *shell)
 {
@@ -69,8 +71,7 @@ void	handle_heredoc_child(t_heredoc *tmp_hd, t_shell *shell)
 {
 	int	status;
 
-
-	reset_sig_int_ignore_sig_quit();
+	set_signals_to_here_doc();
 	while (1)
 	{
 		tmp_hd->fd_heredoc = \
@@ -81,7 +82,7 @@ void	handle_heredoc_child(t_heredoc *tmp_hd, t_shell *shell)
 					" by end-of-file (wanted `%s')\n", tmp_hd->eof);
 		close(tmp_hd->fd_heredoc);
 		free_all_heredoc(shell);
-		if (status == 0)
+		if (status == 0 || status == 1)
 			exit(0);
 		else if (status == 2)
 			exit(130);

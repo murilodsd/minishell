@@ -6,11 +6,13 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:52:23 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/08 17:27:57 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:54:04 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern int	g_signal;
 
 void	handle_ctrl_d(t_shell *shell)
 {
@@ -33,11 +35,18 @@ void	handle_ctrl_c_hd(t_shell *shell)
 	g_signal = 0;
 }
 
+void	set_signals_to_here_doc(void)
+{
+	signal(SIGINT, handle_heredoc_signal);
+	signal(SIGQUIT, SIG_DFL);
+}
+
 void	handle_heredoc_signal(int signal)
 {
 	if (signal == SIGINT)
 	{
-		ft_printf(STDIN_FILENO, "\n");
+		ft_printf(STDOUT_FILENO, "\n");
 		g_signal = SIGINT;
+		close(STDIN_FILENO);
 	}
 }

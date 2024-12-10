@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_signals.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:55:24 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/09 22:15:36 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:53:31 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ignore_sig_int_and_quit(void);
 void	handle_ctrl_d(t_shell *shell);
 void	handle_ctrl_c(t_shell *shell);
 void	handle_ctrl_c_hd(t_shell *shell);
-void	handle_heredoc_signal(int signal);
+void	set_signals_to_here_doc(void);
+void	handle_heredoc_signal(void);
 
 #endif
