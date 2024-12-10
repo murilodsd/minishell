@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/09 22:26:14 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:04:41 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		shell->cmd = readline("minishell$ ");
+		errno = 0;
 		if (g_signal == SIGINT)
 			handle_ctrl_c(shell);
 		if (!shell->cmd)
