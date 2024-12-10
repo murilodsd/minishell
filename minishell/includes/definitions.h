@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   definitions.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/09 22:19:00 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/12/09 22:19:01 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DEFINITIONS_H
 # define DEFINITIONS_H
 # include "minishell.h"
@@ -24,6 +36,8 @@ typedef enum e_error_codes
 
 # define EXIT_USAGE_SYNTAX_ERROR 2
 # define EXIT_CMD_NOT_FOUND 127
+# define EXIT_SIGINT 130
+# define EXIT_SIGQUIT 131
 
 // ********************************* PROCESS PID ************************* //
 

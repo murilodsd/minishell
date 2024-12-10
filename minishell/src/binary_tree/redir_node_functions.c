@@ -1,18 +1,19 @@
-#include "../../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir_node_functions.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/08 20:11:37 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/12/08 20:13:58 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-bool	is_last_redir(t_token *token)
-{
-	if (is_redir_token(token))
-		return (false);
-	token = get_next_redir(token);
-	if (!token)
-		return (true);
-	return (false);
-}
+#include "../../includes/minishell.h"
 
 void	define_redir_file(t_redir *redir, t_token *token)
 {
-	//REVIEW -> Precisavam mesmo dessa verificação? Não vai sempre existir o nome do arquivo?
 	if (!token->next)
 	{
 		redir->file = NULL;
@@ -49,9 +50,6 @@ void	*get_redir_down_node(void *down)
 		node_type = *(t_node_type *)down;
 		if (node_type == EXEC_NODE)
 			return ((t_exec *)down);
-		//REVIEW -> acho que poderia ser só um else
-		// else if (node_type == REDIR_IN_NODE || node_type == REDIR_OUT_NODE
-		// 	|| node_type == REDIR_APPEND_NODE || node_type == HEREDOC_NODE)
 		else
 			return ((t_redir *)down);
 	}
@@ -59,7 +57,8 @@ void	*get_redir_down_node(void *down)
 		return (NULL);
 }
 
-t_redir	*create_redir_node(t_shell *shell, void *down, t_token *token, bool reset_id)
+t_redir	*create_redir_node(t_shell *shell, void *down, t_token *token, \
+	bool reset_id)
 {
 	t_redir		*redir;
 	static int	id = 0;
@@ -73,8 +72,6 @@ t_redir	*create_redir_node(t_shell *shell, void *down, t_token *token, bool rese
 	check_mem_alloc(shell, &(shell->mem_allocation.ptr_mem_list), \
 			redir, "Calloc failed");
 	redir->down = get_redir_down_node(down);
-	//REVIEW -> APAGAR PRINT
-	//printf("tipo do token redir: %s\n", token->data);
 	redir->type = get_redir_node_type(token);
 	define_redir_file(redir, token);
 	if (redir->type == HEREDOC_NODE)
@@ -98,23 +95,6 @@ t_token	*get_previous_redir(t_token *token)
 		if (is_redir_token(token))
 			return (token);
 		token = token->prev;
-	}
-	return (NULL);
-}
-
-t_token	*get_next_redir(t_token *token)
-{
-	if (!token)
-		return (NULL);
-	if (token->next)
-		token = token->next;
-	else
-		return (NULL);
-	while (token && token->type != PIPE)
-	{
-		if (is_redir_token(token))
-			return (token);
-		token = token->next;
 	}
 	return (NULL);
 }

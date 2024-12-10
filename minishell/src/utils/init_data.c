@@ -1,7 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_data.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/09 14:18:35 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/12/09 14:19:18 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
-
-void	ft_lstadd_var_ordered(t_list **lst, t_list *new);
-
 
 static void	create_env_export_lst(t_shell *shell, char **envp)
 {
@@ -37,7 +46,7 @@ void	check_args(t_shell *shell, int argc, char **argv)
 	}
 }
 
-void	 init_data(t_shell **shell, int argc, char **argv, char **envp)
+void	init_data(t_shell **shell, int argc, char **argv, char **envp)
 {
 	*shell = ft_calloc(sizeof(t_shell), 1);
 	if (!(*shell))

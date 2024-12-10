@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/09 10:04:19 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/12/09 10:04:59 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../includes/minishell.h"
 
 void	echo_builtin(t_shell *shell, char **args)
 {
 	bool	new_line;
-	int	i;
+	int		i;
 
 	new_line = TRUE;
 	i = 1;
@@ -12,16 +24,16 @@ void	echo_builtin(t_shell *shell, char **args)
 		if (args[i][0] != '-')
 			break ;
 		if (!ft_str_in_set(args[i] + 1, "n"))
-			break;
+			break ;
 		new_line = FALSE;
 		i++;
 	}
 	while (args[i])
 	{
-		ft_printf(STDOUT_FILENO,"%s", args[i]);
+		ft_printf(STDOUT_FILENO, "%s", args[i]);
 		i++;
 		if (args[i])
-			ft_printf(STDOUT_FILENO, " ");	
+			ft_printf(STDOUT_FILENO, " ");
 	}
 	if (new_line)
 		ft_printf(STDOUT_FILENO, "\n");

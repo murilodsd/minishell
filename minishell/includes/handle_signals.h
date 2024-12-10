@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handle_signals.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:55:24 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/08 14:09:23 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/09 22:15:36 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HANDLE_SIGNALS_H
 # define HANDLE_SIGNALS_H
 # include "minishell.h"
-
-// ********************************* GLOBAL VARIABLE ********************* //
-
-extern int	g_signal;
 
 // *************************** FUNCTION PROTOTYPES ********************* //
 

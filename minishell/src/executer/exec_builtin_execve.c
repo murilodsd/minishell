@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executer.c                                         :+:      :+:    :+:   */
+/*   exec_builtin_execve.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 12:21:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/10 10:53:43 by dramos-j         ###   ########.fr       */
+/*   Created: 2024/12/09 13:04:04 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/12/09 13:12:15 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	get_child_status(int child_exit_status)
 	return (0);
 }
 
-void	fork_execute_execve(t_shell *shell, void *root)
+static void	fork_execute_execve(t_shell *shell, void *root)
 {
 	int	child_exit_status;
 
@@ -48,17 +48,9 @@ void	fork_execute_execve(t_shell *shell, void *root)
 	shell->exit_status = get_child_status(child_exit_status);
 }
 
-void	execute_builtin_or_execve(t_shell *shell, t_exec *exec, bool is_root)
+static void	choose_builtin_or_execve(t_shell *shell, t_exec *exec, bool is_root)
 {
-	if (!exec || !exec->args[0])
-		return ;
-	//REVIEW -> caso de o comando ser "" ou $abc
-	if (exec->args[0][0] == '\0')
-	{
-		shell->exit_status = EXIT_CMD_NOT_FOUND;
-		msg_error(CMD_NOT_FOUND, exec->args[0]);
-	}
-	else if (!ft_strcmp(exec->args[0], "echo"))
+	if (!ft_strcmp(exec->args[0], "echo"))
 		echo_builtin(shell, exec->args);
 	else if (!ft_strcmp(exec->args[0], "export"))
 		export_builtin(shell, exec->args);
@@ -72,7 +64,6 @@ void	execute_builtin_or_execve(t_shell *shell, t_exec *exec, bool is_root)
 		cd_builtin(shell, exec->args);
 	else if (!ft_strcmp(exec->args[0], "exit"))
 		exit_builtin(shell, exec->args);
-	//REVIEW - Caso de nao ser nenhum comando valido
 	else
 	{
 		if (is_root)
@@ -80,48 +71,20 @@ void	execute_builtin_or_execve(t_shell *shell, t_exec *exec, bool is_root)
 		else
 			execute_execve(shell, exec);
 	}
+}
+
+void	execute_builtin_or_execve(t_shell *shell, t_exec *exec, bool is_root)
+{
+	if (!exec || !exec->args[0])
+		return ;
+	//REVIEW -> caso de o comando ser $abc
+	if (exec->args[0][0] == '\0')
+	{
+		shell->exit_status = EXIT_CMD_NOT_FOUND;
+		msg_error(CMD_NOT_FOUND, exec->args[0]);
+	}
+	else
+		choose_builtin_or_execve(shell, exec, is_root);
 	if (!is_root)
 		free_exit(shell);
-}
-
-void	execute_tree(t_shell * shell, void *root)
-void	execute_tree(t_shell *shell, void *root)
-{
-	t_node_type	node_type;
-
-	if (!root)
-		return ;
-	node_type = *(t_node_type *)root;
-	if (node_type == EXEC_NODE)
-		execute_builtin_or_execve(shell, (t_exec *)root, FALSE);
-	else if (is_redir_node_type(node_type))
-	{
-		if (execute_redirect(shell, (t_redir *)root, FALSE) && \
-			((t_redir *)root)->down)
-			execute_tree(shell, ((t_redir *)root)->down);
-	}
-	else if (node_type == PIPE_NODE)
-		execute_pipe(shell, (t_pipe *)root);
-}
-
-void	execute_root_node(t_shell *shell, void *root)
-{
-	t_node_type	node_type;
-
-	node_type = *((t_node_type *)root);
-	if (node_type == EXEC_NODE)
-		execute_builtin_or_execve(shell, (t_exec *)root, TRUE);
-	else if (node_type == REDIR_IN_NODE || node_type == REDIR_OUT_NODE
-		|| node_type == REDIR_APPEND_NODE || node_type == HEREDOC_NODE)
-		execute_redir_root((t_redir *)root, shell);
-}
-
-void	executer(t_shell *shell, void *root)
-{
-	if (!root)
-		return ;
-	if (*((t_node_type *)root) != PIPE_NODE)
-		execute_root_node(shell, root);
-	else
-		execute_tree(shell, root);
 }

@@ -27,16 +27,18 @@ SRCS = src/main.c \
 	src/heredoc/heredoc.c \
 	src/heredoc/heredoc_utils.c \
 	src/executer/executer.c \
+	src/executer/executer_utils.c \
+	src/executer/exec_builtin_execve.c \
 	src/executer/exec_pipe.c \
 	src/executer/execve.c \
-	src/executer/executer_utils.c \
+	src/executer/execve_utils.c \
 	src/executer/exec_redir.c \
-	src/builtins/builtins.c \
 	src/builtins/echo/echo.c \
 	src/builtins/cd/cd.c \
 	src/builtins/pwd/pwd.c \
 	src/builtins/export/export.c \
 	src/builtins/export/export_utils.c \
+	src/builtins/export/export_utils2.c \
 	src/builtins/unset/unset.c \
 	src/builtins/env/env.c \
 	src/builtins/exit/exit.c \
@@ -45,6 +47,7 @@ SRCS = src/main.c \
 	src/utils/handle_error.c \
 	src/utils/handle_mem.c \
 	src/utils/init_data.c \
+	src/utils/free_functions.c \
 	src/parser/apagar.c
 OBJS = $(SRCS:.c=.o)
 

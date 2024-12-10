@@ -6,13 +6,13 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 19:06:20 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/16 19:29:39 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/09 22:23:33 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-void ft_str_replace(char **dest, char *src)
+void	ft_str_replace(char **dest, char *src)
 {
 	if (!dest)
 		return ;

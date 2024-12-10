@@ -1,14 +1,21 @@
-#include "../../../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/08 20:31:42 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/12/08 21:02:14 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-//unset -> só retorna
-//unset nonexistentvariable -> só retorna
-//unset USER -> apaga USER
-//unset "" -> retorna
+#include "../../../includes/minishell.h"
 
 void	ft_lstremove_mem_node(t_list **lst, void *content)
 {
-	t_list *current;
-	t_list *previous;
+	t_list	*current;
+	t_list	*previous;
 
 	if (!lst)
 		return ;
@@ -31,9 +38,8 @@ void	ft_lstremove_mem_node(t_list **lst, void *content)
 	}
 }
 
-
-
-void	ft_lstremove_var(t_shell *shell, char *name)
+void	ft_lstremove_from_export(t_shell *shell, char *name, \
+	t_list **ptr_mem_list)
 {
 	t_list	*current;
 	t_list	*previous;
@@ -49,13 +55,26 @@ void	ft_lstremove_var(t_shell *shell, char *name)
 			if (previous)
 				previous->next = current->next;
 			else
-				shell->envp_lst = current->next;
-			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), current);
-			break ;
+				shell->export_lst = current->next;
+			ft_lstremove_mem_node(ptr_mem_list, var->name);
+			ft_lstremove_mem_node(ptr_mem_list, var->value);
+			ft_lstremove_mem_node(ptr_mem_list, current->content);
+			ft_lstremove_mem_node(ptr_mem_list, current);
+			return ;
 		}
 		previous = current;
-      		current = current->next;
+		current = current->next;
 	}
+}
+
+void	ft_lstremove_var(t_shell *shell, char *name)
+{
+	t_list	*current;
+	t_list	*previous;
+	t_var	*var;
+	t_list	**ptr_mem_list;
+
+	ptr_mem_list = &(shell->mem_allocation.ptr_mem_list);
 	current = shell->envp_lst;
 	previous = NULL;
 	while (current)
@@ -67,20 +86,18 @@ void	ft_lstremove_var(t_shell *shell, char *name)
 				previous->next = current->next;
 			else
 				shell->envp_lst = current->next;
-			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), var->name);
-			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), var->value);
-			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), current->content);
-			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), current);
-			return ;
+			ft_lstremove_mem_node(ptr_mem_list, current);
+			break ;
 		}
 		previous = current;
-      		current = current->next;
+		current = current->next;
 	}
+	ft_lstremove_from_export(shell, name, ptr_mem_list);
 }
 
 void	unset_builtin(t_shell *shell, char **unset_args)
 {
-		int	i;
+	int	i;
 
 	if (!unset_args[1])
 		return ;
@@ -168,7 +185,8 @@ int	main(int argc, char **argv, char **envp)
 			add_history(shell->cmd);
 			//handle_input(shell->cmd);
 			//free(shell->cmd);
-			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), shell->cmd);
+			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), \
+				shell->cmd);
 		}
 	}
 	free_exit_error(shell, 0, "teste");

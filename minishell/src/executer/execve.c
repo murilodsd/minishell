@@ -1,53 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execve.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/09 13:46:35 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/12/09 15:27:56 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-int	calculate_total_vars(t_list *envp)
+void	append_slash(t_shell *shell, char **string)
 {
-	int	total;
+	char	*tmp;
 
-	total = 0;
-	while (envp)
-	{
-		if (((t_var *)(envp->content))->value)
-			total++;
-		envp = envp->next;
-	}
-	return (total);
-}
-
-size_t total_length(t_list *envp)
-{
-	size_t	size;
-
-	size = ft_strlen(((t_var *)(envp->content))->name);
-	size += ft_strlen(((t_var *)(envp->content))->value);
-	return (size);
-}
-
-char	**get_exported_env_vars(t_shell *shell, t_list *envp)
-{
-	char	**envp_copy;
-	int	i;
-
-	if (!envp)
-		return (NULL);
-	envp_copy = ft_calloc(calculate_total_vars(envp) + 1, sizeof(char *));
-	check_mem_alloc(shell, &(shell->mem_allocation.matrix_mem_list), \
-		envp_copy, "Calloc failed");
-	i = -1;
-	while (envp)
-	{
-		if (((t_var *)(envp->content))->value)
-		{
-			envp_copy[++i] = ft_calloc(total_length(envp) + 2, sizeof(char));
-			if (!envp_copy[i])
-				free_exit_error(shell, GENERAL_ERROR, "Calloc failed");
-			ft_strcat(envp_copy[i], ((t_var *)(envp->content))->name);
-			ft_strcat(envp_copy[i], "=");
-			ft_strcat(envp_copy[i], ((t_var *)(envp->content))->value);
-		}
-		envp = envp->next;
-	}
-	return (envp_copy);
+	tmp = *string;
+	*string = ft_strjoin(*string, "/");
+	free(tmp);
+	if (!(*string))
+		free_exit_error(shell, GENERAL_ERROR, "Calloc failed");
 }
 
 char	**get_path(t_shell *shell)
@@ -55,8 +28,7 @@ char	**get_path(t_shell *shell)
 	t_list	*path_node;
 	char	*path_string;
 	char	**path_array_string;
-	int	i;
-	char	*tmp;
+	int		i;
 
 	if (!shell->envp_lst)
 		return (NULL);
@@ -66,16 +38,13 @@ char	**get_path(t_shell *shell)
 	path_string = ((t_var *)(path_node->content))->value;
 	if (!path_string)
 		return (NULL);
-	path_array_string = ft_split(path_string,':');
-	check_mem_alloc(shell, &(shell->mem_allocation.matrix_mem_list), path_array_string, "Calloc failed");
+	path_array_string = ft_split(path_string, ':');
+	check_mem_alloc(shell, &(shell->mem_allocation.matrix_mem_list), \
+		path_array_string, "Calloc failed");
 	i = 0;
 	while (path_array_string[i])
 	{
-		tmp = path_array_string[i];
-		path_array_string[i] = ft_strjoin(path_array_string[i], "/");
-		free(tmp);
-		if (!path_array_string[i])
-			free_exit_error(shell, GENERAL_ERROR, "Calloc failed");
+		append_slash(shell, &(path_array_string[i]));
 		i++;
 	}
 	return (path_array_string);
@@ -83,8 +52,8 @@ char	**get_path(t_shell *shell)
 
 void	handle_exec_error(int execve_ret, t_exec *exec, t_shell *shell)
 {
-	struct stat st;
-	
+	struct stat	st;
+
 	shell->exit_status = EXIT_CMD_NOT_FOUND;
 	if (execve_ret == -1 && exec->args[0][0] != '/')
 	{
@@ -116,19 +85,17 @@ void	execute_execve(t_shell *shell, t_exec *exec)
 	{
 		if (safe_access(exec->args[0], F_OK) == 0)
 			execve_ret = execve(exec->args[0], exec->args, NULL);
+		handle_exec_error(execve_ret, exec, shell);
 	}
-	else
+	exported_envs = get_exported_env_vars(shell, shell->envp_lst);
+	path = get_path(shell);
+	i = -1;
+	while (path[++i])
 	{
-		exported_envs = get_exported_env_vars(shell, shell->envp_lst);
-		path = get_path(shell);
-		i = -1;
-		while (path[++i])
-		{
-			path_cmd = ft_strjoin(path[i], exec->args[0]);
-			if (safe_access(path_cmd, F_OK) == 0)
-				execve_ret = execve(path_cmd, exec->args, exported_envs);
-			free(path_cmd);
-		}
+		path_cmd = ft_strjoin(path[i], exec->args[0]);
+		if (safe_access(path_cmd, F_OK) == 0)
+			execve_ret = execve(path_cmd, exec->args, exported_envs);
+		free(path_cmd);
 	}
 	handle_exec_error(execve_ret, exec, shell);
 }

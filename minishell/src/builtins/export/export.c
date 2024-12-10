@@ -1,39 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/09 10:05:18 by mde-souz          #+#    #+#             */
+/*   Updated: 2024/12/09 10:55:30 by mde-souz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../includes/minishell.h"
-
-	//export var=    -> var=""
-	//export var=1 var2=2 var=3    -> salva todas
-	//export var 1   -> bash: export: `1': not a valid identifier     (so pode comecar com letra ou _ e no nome so pode conter letras numeros e _)
-	//export var=1; export var;     -> irá manter o valor anterior de var
-	//export = ->  bash: export: `=': not a valid identifier
-
-
-void	ft_lstadd_var_ordered(t_list **lst, t_list *new)
-{
-	t_list	*node_ref;
-
-	if (!lst || !new)
-		return ;
-	if (!(*lst))
-		*lst = new;
-	else if (ft_strcmp(((t_var *)((*lst)->content))->name, ((t_var *)((new)->content))->name) > 0)
-	{
-		new->next = *lst;
-		*lst = new;
-	}
-	else
-	{
-		node_ref = *lst;
-		while (node_ref->next && ft_strcmp(((t_var *)(node_ref->next->content))->name, ((t_var *)(new->content))->name ) < 0)
-			node_ref = node_ref->next;
-		if (node_ref->next == NULL)
-			ft_lstlast(*lst)->next = new;
-		else
-		{
-			new->next = node_ref->next;
-			node_ref->next = new;
-		}
-	}
-}
 
 void	add_or_edit_var(t_shell *shell, t_var *var)
 {
@@ -100,7 +77,8 @@ void	export_builtin(t_shell *shell, char **export_args)
 	(void)envp;
 	//REVIEW -> APAGAR LINHA DEBAIXO
 	char *envp1[] = {"aaa=primeira", "var2=1", "var3=", "var", NULL};
-	char *args[] = {"export", "", "1var=", "var2 =", "var2=2", "var3", "var=", "var4", NULL};
+	char *args[] = {"export", "", "1var=", "var2 =", "var2=2", \
+		"var3", "var=", "var4", NULL};
 	init_data(&shell, argc, argv, envp1);
 	export_builtin(shell, args);
 	char *args0[] = {"export", NULL};
@@ -151,7 +129,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	char **args;
 	//char *envp1[] = {"aaa=primeira", "var2=1", "var3=", "var", NULL};
-	char *args00[] = {"export", "", "1var=", "var2 =", "var2=2", "var3", "var=", "var4", NULL};
+	char *args00[] = {"export", "", "1var=", "var2 =", "var2=2", \
+		"var3", "var=", "var4", NULL};
 	char *args00[] = {"export", "VAR+=", "VAR+=1", "var+=100", NULL};
  	init_data(&shell, argc, argv, envp);
 	export_builtin(shell, args00);
@@ -193,7 +172,8 @@ int	main(int argc, char **argv, char **envp)
 			ft_printf(1, "exit_status: %d\n", shell->exit_status);
 			//handle_input(shell->cmd);
 			//free(shell->cmd);
-			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), shell->cmd);
+			ft_lstremove_mem_node(&(shell->mem_allocation.ptr_mem_list), \
+				shell->cmd);
 		}
 	}
 	free_exit_error(shell, 0, "teste");
