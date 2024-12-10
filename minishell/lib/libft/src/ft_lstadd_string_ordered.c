@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 18:52:14 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/11/15 18:52:53 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/09 22:22:17 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	ft_lstadd_string_ordered(t_list **lst, t_list *new)
 	else
 	{
 		node_ref = *lst;
-		while (node_ref->next && (ft_strcmp((char *)(node_ref->next->content), (char *)((new)->content)) < 0))
+		while (node_ref->next && (ft_strcmp((char *)(node_ref->next->content), \
+			(char *)((new)->content)) < 0))
 			node_ref = node_ref->next;
 		if (node_ref->next == NULL)
 			ft_lstlast(*lst)->next = new;
