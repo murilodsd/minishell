@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 08:29:56 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/09 09:27:22 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:33:06 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,15 @@ void	change_directory(t_shell *shell, char *path)
 	if (!path || !ft_strcmp(path, "~"))
 	{
 		path = get_home(shell, actual_path);
-		if (!path)
+		if (!path || !*path)
 			return ;
 	}
 	else if (!ft_strcmp(path, "-"))
 	{
 		path = get_oldpwd(shell, actual_path);
-		if (!path)
+		if (!path || !*path)
 			return ;
+		ft_printf(STDOUT_FILENO,"%s\n", path);
 	}
 	if (chdir(path) == SUCCESS)
 		set_pwd_and_oldpwd(shell, actual_path);
