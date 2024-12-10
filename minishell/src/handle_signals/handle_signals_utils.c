@@ -6,11 +6,13 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:52:23 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/10 11:54:04 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:59:34 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern int	g_signal;
 
 extern int	g_signal;
 
