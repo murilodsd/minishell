@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:21 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/10 19:08:41 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:52:54 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	handle_heredoc_child(t_heredoc *tmp_hd, t_shell *shell)
 		if (status == 0 || status == 1)
 			exit(0);
 		else if (status == 2)
-			exit(130);
+			exit(EXIT_SIGINT);
 	}
 }
 
@@ -105,7 +105,7 @@ void	heredoc(t_shell *shell)
 		if (pid == 0)
 			handle_heredoc_child(tmp_hd, shell);
 		waitpid(pid, &status, 0);
-		if (get_child_status(status) == 130)
+		if (get_child_status(status) == EXIT_SIGINT)
 		{
 			handle_ctrl_c_hd(shell);
 			return ;

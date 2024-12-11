@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:04:04 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/10 21:50:04 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:53:09 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int	get_child_status(int child_exit_status)
 		if (WTERMSIG(child_exit_status) == SIGINT)
 		{
 			ft_printf(1, "\n");
-			return (130);
+			return (EXIT_SIGINT);
 		}
 		else if (WTERMSIG(child_exit_status) == SIGQUIT)
 		{
 			ft_printf(1, "Quit (core dumped)\n");
-			return (131);
+			return (EXIT_SIGQUIT);
 		}
 	}
 	return (0);
