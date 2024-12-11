@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:04:04 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/10 21:23:51 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:50:04 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	execute_builtin_or_execve(t_shell *shell, t_exec *exec, bool is_root)
 {
 	if (!exec || !exec->args[0])
 		return ;
-	//REVIEW -> caso de o comando ser $abc
 	if (exec->args[0][0] == '\0')
 	{
 		shell->exit_status = EXIT_CMD_NOT_FOUND;

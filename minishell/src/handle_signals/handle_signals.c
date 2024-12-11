@@ -6,13 +6,11 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 14:42:26 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/10 10:54:03 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:08:29 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-extern int	g_signal;
 
 void	sigint_handler(int signal)
 {

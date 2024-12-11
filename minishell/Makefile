@@ -48,7 +48,7 @@ SRCS = src/main.c \
 	src/utils/handle_mem.c \
 	src/utils/init_data.c \
 	src/utils/free_functions.c \
-	src/parser/apagar.c
+	src/apagar.c
 OBJS = $(SRCS:.c=.o)
 
 #GENERAL

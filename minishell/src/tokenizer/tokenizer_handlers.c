@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:16:08 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/07 14:20:41 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:30:50 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	handle_env_var(char *cmd, int i, t_shell *shell)
 		tmp = ft_substr(cmd, i, 1);
 	if (check_malloc(tmp))
 		return (0);
-	if (cmd[i + 1] == '\0' || (!isalnum(cmd[i + 1]) && cmd[i + 1] != '_'))
+	if (cmd[i + 1] == '\0' || (!ft_isalpha(cmd[i + 1]) && cmd[i + 1] != '_'))
 		add_token(&shell, tmp, WORD, NO_QUOTE);
 	else
 	{

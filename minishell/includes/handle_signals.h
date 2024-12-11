@@ -6,13 +6,17 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:55:24 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/10 12:02:55 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:15:24 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HANDLE_SIGNALS_H
 # define HANDLE_SIGNALS_H
 # include "minishell.h"
+
+// *************************** GLOBAL VARIABLES ************************ //
+
+extern int	g_signal;
 
 // *************************** FUNCTION PROTOTYPES ********************* //
 
