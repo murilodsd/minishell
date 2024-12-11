@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 20:31:42 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/08 21:02:14 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:31:40 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	unset_builtin(t_shell *shell, char **unset_args)
 			i++;
 		}
 	}
-	shell->exit_status = 0;
+	shell->exit_status = EXIT_SUCCESS;
 }
 
 /* #define MAX_TOKENS 100
