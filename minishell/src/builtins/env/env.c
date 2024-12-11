@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 09:30:45 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/09 09:30:48 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:23:06 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,18 @@ void	print_env(void *envp)
 		printf("%s=%s\n", content->name, content->value);
 }
 
-void	env_builtin(t_shell *shell, char **args)
+void	env_builtin(t_shell *shell, char **args, bool is_root)
 {
 	if (args[1])
 	{
 		shell->exit_status = EXIT_CMD_NOT_FOUND;
 		ft_printf(STDERR_FILENO, "env: '%s': No such file or directory\n", \
 			args[1]);
-		free_exit(shell);
+		if (!is_root)
+			free_exit(shell);
+		else
+			return ;
 	}
 	ft_lstiter(shell->envp_lst, print_env);
-	shell->exit_status = 0;
+	shell->exit_status = EXIT_SUCCESS;
 }
