@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 22:19:32 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/10 19:06:22 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:57:55 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_lstremove_mem_node(t_list **lst, void *content);
 void	handle_input(char *cmd, t_shell *shell);
 
 // init_data.c
-void	init_data(t_shell **shell, int argc, char **argv, char **envp);
+void	init_data(t_shell **shell, char **envp);
 
 // utils.c
 int		ft_isspace(char c);

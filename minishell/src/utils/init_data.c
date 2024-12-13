@@ -3,15 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:18:35 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/10 19:14:29 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:57:47 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/**
+ * @brief Creates and initializes the environment and export lists.
+ *
+ * This function iterates through the provided environment variables (envp),
+ * creates a new variable structure for each environment variable, and adds
+ * it to both the environment list (envp_lst) and the export list (export_lst)
+ * in the shell structure.
+ *
+ * @param shell A pointer to the shell structure containing the lists and 
+ * memory allocation info.
+ * @param envp An array of strings representing the environment variables.
+
+ *
+ * Memory allocation failures are checked and handled by the check_mem_alloc function.
+ */
 static void	create_env_export_lst(t_shell *shell, char **envp)
 {
 	int		i;
@@ -37,16 +52,8 @@ static void	create_env_export_lst(t_shell *shell, char **envp)
 	}
 }
 
-void	check_args(t_shell *shell, int argc, char **argv)
-{
-	if (argc != 1)
-	{
-		shell->exit_status = EXIT_USAGE_SYNTAX_ERROR;
-		free_exit_error(shell, NO_FILE_DIRECTORY, argv[1]);
-	}
-}
 
-void	init_data(t_shell **shell, int argc, char **argv, char **envp)
+void	init_data(t_shell **shell, char **envp)
 {
 	*shell = ft_calloc(sizeof(t_shell), 1);
 	if (!(*shell))
@@ -54,14 +61,11 @@ void	init_data(t_shell **shell, int argc, char **argv, char **envp)
 		msg_error(GENERAL_ERROR, "Calloc Error\n");
 		exit(EXIT_FAILURE);
 	}
-	check_args(*shell, argc, argv);
-	(*shell)->envp_lst = NULL;
-	(*shell)->export_lst = NULL;
 	(*shell)->envp_lst = NULL;
 	(*shell)->export_lst = NULL;
 	(*shell)->exit_status = EXIT_SUCCESS;
-	(*shell)->fd_in = 0;
-	(*shell)->fd_out = 1;
+	(*shell)->fd_in = STDIN_FILENO;
+	(*shell)->fd_out = STDOUT_FILENO;
 	create_env_export_lst(*shell, envp);
 	handle_signals();
 }

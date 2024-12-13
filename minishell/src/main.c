@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:09:36 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/10 19:14:42 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:12:31 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_printf(STDERR_FILENO, "minishell: too many arguments\n", argv[1]);
 		return (EXIT_USAGE_SYNTAX_ERROR);
 	}
-	init_data(&shell, argc, argv, envp);
+	init_data(&shell, envp);
 	while (1)
 	{
 		shell->cmd = readline("minishell$ ");
