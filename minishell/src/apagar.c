@@ -92,8 +92,8 @@ void	print_list(t_token *token)
 		tmp = tmp->next;
 		index++;
 	}
-}
-
+}*/
+/*
 //PUSH REVIEW -> apagar funcao de print da arvore
 char *get_node_type_name(t_node_type type, void *node) {
     if (type == EXEC_NODE) {

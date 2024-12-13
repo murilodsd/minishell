@@ -6,7 +6,7 @@
 /*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 22:19:32 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/12 18:57:55 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:15:58 by mde-souz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ int		ft_isspace(char c);
 int		ignore_spaces(char *cmd, int i);
 int		ft_isword(char c);
 int		check_malloc(void *ptr);
+int		check_var_alone(t_shell *shell);
 
 #endif

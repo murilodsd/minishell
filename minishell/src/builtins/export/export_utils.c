@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 08:09:39 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/10 18:47:47 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:57:59 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static bool	validate_var_name(char *string)
 		return (FALSE);
 	i = 0;
 	while (string[i] && \
-		(string[i] != '=' && (string[i] != '+' && string[i + 1] != '=')))
+		(string[i] != '=' && !(string[i] == '+' && string[i + 1] == '=')))
 	{
 		if (!ft_isalnum(string[i]) && string[i] != '_')
 			return (FALSE);
