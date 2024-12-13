@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 11:13:13 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/10 18:24:48 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:56:10 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	syntax_check(char *cmd)
 	int	redir_check;
 
 	if (check_spaces(cmd))
-		return (1);
+		return (2);
 	else if (check_quotes(cmd))
 		msg_error(SYNTAX_ERROR, "open quote");
 	else if (check_pipe(cmd))

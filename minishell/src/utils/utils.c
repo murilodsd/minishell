@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:26:26 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/09 15:26:27 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/13 12:06:13 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,21 @@ int	check_malloc(void *ptr)
 	if (!ptr)
 	{
 		printf("Malloc failed\n");
+		return (1);
+	}
+	return (0);
+}
+
+int	check_var_alone(t_shell *shell)
+{
+	t_token	*token;
+
+	token = shell->token;
+	if (token->type == ENV_VAR_NAME && token->next
+		&& token->next->type == NULL_TOKEN)
+	{
+		shell->exit_status = 0;
+		free_restart(shell);
 		return (1);
 	}
 	return (0);

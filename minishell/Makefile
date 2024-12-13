@@ -4,6 +4,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 CC=cc
 CCFLAGS= -Wall -Wextra -Werror -g
 EXTRA_FLAGS = -lreadline
+FSANITIZE = -fsanitize=address -fsanitize=leak -fsanitize=undefined -fno-omit-frame-pointer
 SRCS = src/main.c \
 	src/handle_signals/handle_signals.c \
 	src/handle_signals/handle_signals_utils.c \
@@ -82,6 +83,9 @@ msg:
 
 valgrind: all
 	valgrind $(VALGRIND_FLAGS) $(VALGRIND_SUPP) ./$(NAME)
+
+sanitize: $(NAME)
+	$(CC) $(CCFLAGS) $(FSANITIZE) $(OBJS) $(INCLUDE_FLAG) $(LIBS_FLAGS) -o $(NAME)
 
 clean:
 	make -s -C $(LIBFT_DIR) clean
