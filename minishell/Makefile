@@ -49,7 +49,7 @@ SRCS = src/main.c \
 	src/utils/handle_mem.c \
 	src/utils/init_data.c \
 	src/utils/free_functions.c \
-	src/prints.c
+	src/utils/prints.c
 OBJS = $(SRCS:.c=.o)
 
 #GENERAL

@@ -6,11 +6,11 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 17:00:13 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/14 17:05:45 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:13:13 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char	*format_data_parentheses(const char *data)
 {
