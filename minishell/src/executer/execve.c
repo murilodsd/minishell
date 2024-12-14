@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:46:35 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/10 14:55:02 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/14 16:55:53 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	execute_execve(t_shell *shell, t_exec *exec)
 
 	execve_ret = 0;
 	exported_envs = get_exported_env_vars(shell, shell->envp_lst);
-	if (strchr(exec->args[0], '/') != NULL)
+	if (ft_strchr(exec->args[0], '/') != NULL)
 	{
 		if (safe_access(exec->args[0], F_OK) == 0)
 			execve_ret = execve(exec->args[0], exec->args, exported_envs);
