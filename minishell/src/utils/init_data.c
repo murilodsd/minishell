@@ -3,30 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:18:35 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/12 18:57:47 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:09:06 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/**
- * @brief Creates and initializes the environment and export lists.
- *
- * This function iterates through the provided environment variables (envp),
- * creates a new variable structure for each environment variable, and adds
- * it to both the environment list (envp_lst) and the export list (export_lst)
- * in the shell structure.
- *
- * @param shell A pointer to the shell structure containing the lists and 
- * memory allocation info.
- * @param envp An array of strings representing the environment variables.
-
- *
- * Memory allocation failures are checked and handled by the check_mem_alloc function.
- */
 static void	create_env_export_lst(t_shell *shell, char **envp)
 {
 	int		i;

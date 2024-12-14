@@ -6,7 +6,7 @@
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:30:14 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/08 13:23:29 by dramos-j         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:07:57 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_heredoc(t_shell *shell)
 	shell->heredoc->next = NULL;
 }
 
-void	clear_heredoc_list(t_shell *shell, int in_heredoc)
+void	clear_heredoc_list(t_shell *shell)
 {
 	t_heredoc	*tmp_heredoc;
 
@@ -34,11 +34,7 @@ void	clear_heredoc_list(t_shell *shell, int in_heredoc)
 		tmp_heredoc = shell->heredoc;
 		shell->heredoc = shell->heredoc->next;
 		if (tmp_heredoc->fd_heredoc_path)
-		{
-			if (!in_heredoc)
-				unlink(tmp_heredoc->fd_heredoc_path);
 			free(tmp_heredoc->fd_heredoc_path);
-		}
 		if (tmp_heredoc->eof)
 			free(tmp_heredoc->eof);
 		free(tmp_heredoc);

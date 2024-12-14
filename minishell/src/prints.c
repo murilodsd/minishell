@@ -1,4 +1,16 @@
-/*#include "../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prints.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/14 17:00:13 by dramos-j          #+#    #+#             */
+/*   Updated: 2024/12/14 17:05:45 by dramos-j         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/minishell.h"
 
 char	*format_data_parentheses(const char *data)
 {
@@ -92,36 +104,34 @@ void	print_list(t_token *token)
 		tmp = tmp->next;
 		index++;
 	}
-}*/
-/*
-//PUSH REVIEW -> apagar funcao de print da arvore
-char *get_node_type_name(t_node_type type, void *node) {
-    if (type == EXEC_NODE) {
-        return ("exec");
-    } else if (type == PIPE_NODE) {
-        return "|";
-    } else if (type == REDIR_IN_NODE) {
-        return (ft_strjoin("< ", (((t_redir *)node)->file)));
-    } else if (type == REDIR_OUT_NODE) {
-        return (ft_strjoin("> ", (((t_redir *)node)->file)));
-    } else if (type == REDIR_APPEND_NODE) {
-        return (ft_strjoin(">> ", (((t_redir *)node)->file)));
-    } else if (type == HEREDOC_NODE) {
-        return (ft_strjoin("<< ", (((t_redir *)node)->file)));
-    } else {
-        return "UNKNOWN_TYPE"; // Valor inválido
-    }
 }
-void print_tree(void *node, int level, bool first) {
-	int i = 0;
-	if (node == NULL) {
-		return;
-	}
 
+char *get_node_type_name(t_node_type type, void *node)
+{
+	if (type == EXEC_NODE)
+		return ("exec");
+	else if (type == PIPE_NODE)
+		return "|";
+	else if (type == REDIR_IN_NODE)
+		return (ft_strjoin("< ", (((t_redir *)node)->file)));
+	else if (type == REDIR_OUT_NODE)
+		return (ft_strjoin("> ", (((t_redir *)node)->file)));
+	else if (type == REDIR_APPEND_NODE)
+		return (ft_strjoin(">> ", (((t_redir *)node)->file)));
+	else if (type == HEREDOC_NODE)
+		return (ft_strjoin("<< ", (((t_redir *)node)->file)));
+	else
+		return "UNKNOWN_TYPE"; // Valor inválido
+}
+
+void print_tree(void *node, int level, bool first)
+{
+	int i = 0;
+	if (node == NULL)
+		return;
 	// Recur para o lado direito primeiro, para impressão hierárquica
 	if (*((t_node_type *)node) == PIPE_NODE)
 		print_tree(((t_pipe *)node)->right, level + 1, TRUE);
-
 	// Imprime o nível atual
 	for (int i = 0; i < level; i++)
 	{
@@ -143,7 +153,6 @@ void print_tree(void *node, int level, bool first) {
 			}
 		// }
 	}
-
 	// Exibe o tipo do nó
 	if (*((t_node_type *)node) == PIPE_NODE)
 		printf("( %s )\n", get_node_type_name(*((t_node_type *)node), node));
@@ -160,37 +169,32 @@ void print_tree(void *node, int level, bool first) {
 
 	// Recur para o lado esquerdo
 	if (*((t_node_type *)node) == PIPE_NODE)
-    		print_tree(((t_pipe *)node)->left, level + 1, TRUE);
+			print_tree(((t_pipe *)node)->left, level + 1, TRUE);
 	else if (*((t_node_type *)node) == EXEC_NODE)
 		printf("\n");
 	else
 		print_tree(((t_redir *)node)->down, level + 1, FALSE);
 }
 
-void printTree(void *node, int depth) {
-  if (node == NULL) {
-    return;
-  }
-
-  // Imprime espaços para representar a profundidade
-  for (int i = 0; i < depth; i++) {
-    printf("  ");
-  }
-
-  // Imprime o tipo de nó e o dado
-  //printf("Type: %s\n", get_node_type_name(*((t_node_type *)node)));
-  printf("(%d)\n", *((t_node_type *)node));
-
-  // Chama recursivamente para a subárvore direita
-  if (*((t_node_type *)node) == PIPE_NODE)
-  	printTree(((t_pipe *)node)->right, depth + 1);
-
-  // Chama recursivamente para a subárvore esquerda (que só tem um ramo)
-  if (*((t_node_type *)node) == PIPE_NODE)
-    		printTree(((t_pipe *)node)->left, depth + 1);
+void printTree(void *node, int depth)
+{
+	if (node == NULL)
+	return;
+	// Imprime espaços para representar a profundidade
+	for (int i = 0; i < depth; i++) {
+	printf("  ");
+	}
+	// Imprime o tipo de nó e o dado
+	//printf("Type: %s\n", get_node_type_name(*((t_node_type *)node)));
+	printf("(%d)\n", *((t_node_type *)node));
+	// Chama recursivamente para a subárvore direita
+	if (*((t_node_type *)node) == PIPE_NODE)
+		printTree(((t_pipe *)node)->right, depth + 1);
+	// Chama recursivamente para a subárvore esquerda (que só tem um ramo)
+	if (*((t_node_type *)node) == PIPE_NODE)
+			printTree(((t_pipe *)node)->left, depth + 1);
 	else if (*((t_node_type *)node) == EXEC_NODE)
 		return ;
 	else
 		printTree(((t_redir *)node)->down, depth + 1);
 }
-*/

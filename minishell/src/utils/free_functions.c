@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-souz <mde-souz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:20:02 by mde-souz          #+#    #+#             */
-/*   Updated: 2024/12/09 15:25:17 by mde-souz         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:08:42 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	free_restart(t_shell *shell)
 	if (shell->token)
 		clear_token_list(shell);
 	if (shell->heredoc)
-		clear_heredoc_list(shell, 0);
+		clear_heredoc_list(shell);
 }
 
 void	free_all_heredoc(t_shell *shell)
@@ -54,7 +54,7 @@ void	free_all_heredoc(t_shell *shell)
 	if (shell->token)
 		clear_token_list(shell);
 	if (shell->heredoc)
-		clear_heredoc_list(shell, 1);
+		clear_heredoc_list(shell);
 	free(shell);
 }
 
@@ -73,6 +73,6 @@ void	free_all(t_shell *shell)
 	if (shell->token)
 		clear_token_list(shell);
 	if (shell->heredoc)
-		clear_heredoc_list(shell, 0);
+		clear_heredoc_list(shell);
 	free(shell);
 }

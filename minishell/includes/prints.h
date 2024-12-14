@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.h                                          :+:      :+:    :+:   */
+/*   prints.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dramos-j <dramos-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/01 17:30:06 by dramos-j          #+#    #+#             */
-/*   Updated: 2024/12/14 17:08:34 by dramos-j         ###   ########.fr       */
+/*   Created: 2024/12/14 16:58:36 by dramos-j          #+#    #+#             */
+/*   Updated: 2024/12/14 17:06:08 by dramos-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEREDOC_H
-# define HEREDOC_H
+#ifndef PRINTS_H
+# define PRINTS_H
 # include "minishell.h"
 
-// heredoc.c
-void	save_heredoc_info(t_shell *shell);
-int		fill_fd_heredoc(t_heredoc *tmp_hd, t_shell *shell);
-void	heredoc(t_shell *shell);
-
-// heredoc_utils.c
-void	init_heredoc(t_shell *shell);
-void	clear_heredoc_list(t_shell *shell);
-void	assign_heredoc(t_heredoc **heredoc, char *eof, t_token_quote quote);
-void	include_hd_path(t_shell *shell);
-void	check_hd_expand(char **line, t_shell *shell);
+// print.c
+char		*format_data_parentheses(const char *data);
+const char	*get_token_type_str(t_token_type type);
+const char	*get_token_quote_str(t_token_quote quote);
+void		print_list(t_token *token);
+char		*get_node_type_name(t_node_type type, void *node);
+void		print_tree(void *node, int level, bool is_root);
 
 #endif
