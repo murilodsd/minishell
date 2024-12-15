@@ -1,7 +1,5 @@
 # Minishell
 
-# Minishell
-
 Minishell is a simple Unix shell implementation that replicates some basic functionalities of a shell environment. It supports command execution, pipes, redirection, environment variables, and more. This project is designed to deepen the understanding of processes, system calls, and inter-process communication in Linux.
 This project was developed in collaboration with my course mate [Murilo](https://github.com/murilodsd). 
 
@@ -50,15 +48,13 @@ To run the shell:
 
 ### Example
 
-1. 
-minishell> `echo Hello, world!`
-Hello, world!
+minishell> `echo Hello, world!`  
+Hello, world!  
 
-2. 
-minishell> `cd /home/user`
-minishell> pwd
-/home/user
+minishell> `cd /home/user`  
+minishell> pwd  
+/home/user  
 
-3. 
-minishell> `echo $HOME`
-/home/user
+minishell> `echo $HOME`  
+/home/user  
+
