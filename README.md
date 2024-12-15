@@ -1,6 +1,6 @@
 # Minishell
 
-Minishell is a simple Unix shell implementation that replicates some basic functionalities of a shell environment. It supports command execution, pipes, redirection, environment variables, and more. This project is designed to deepen the understanding of processes, system calls, and inter-process communication in Linux.
+Minishell is a simple Unix shell implementation that replicates some basic functionalities of a shell environment. It supports command execution, pipes, redirection, environment variables, and more. This project is designed to deepen the understanding of processes, system calls, and inter-process communication in Linux.  
 This project was developed in collaboration with my course mate [Murilo](https://github.com/murilodsd). 
 
 ## Features
@@ -26,13 +26,13 @@ This project was developed in collaboration with my course mate [Murilo](https:/
 
 To install and run Minishell, follow these steps:
 
-1. Clone the repository:
+Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/minishell.git
+git clone git@github.com:danielarjordao/minishell.git
 ```
 
-2. Navigate to the project directory and compile the program using make:
+Navigate to the project directory and compile the program using make:
 
 ```bash
 cd minishell
