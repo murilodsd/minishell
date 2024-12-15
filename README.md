@@ -30,27 +30,32 @@ To install and run Minishell, follow these steps:
 
 1. Clone the repository:
 
-- ```bash
-- git clone https://github.com/yourusername/minishell.git
+```bash
+git clone https://github.com/yourusername/minishell.git
 
 2. Navigate to the project directory and compile the program using make:
 
-- cd minishell
-- make
+```bash
+cd minishell
+make
 
 ## Usage
 
 To run the shell:
+```bash
 ./minishell
 
 ### Example
 
-- minishell> echo Hello, world!
-- Hello, world!
+```bash
+minishell> `echo Hello, world!`
+Hello, world!
 
-- minishell> cd /home/user
+```bash
+- minishell> `cd /home/user`
 - minishell> pwd
 - /home/user
 
-- minishell> echo $HOME
+```bash
+- minishell> ```bash echo $HOME
 - /home/user
