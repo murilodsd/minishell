@@ -35,7 +35,7 @@ git clone git@github.com:danielarjordao/minishell.git
 Navigate to the project directory and compile the program using make:
 
 ```bash
-cd minishell
+cd minishell/minishell
 make
 ```
 
