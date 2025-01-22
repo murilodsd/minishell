@@ -179,4 +179,115 @@ The development of the **Minishell** project is structured to emulate the basic 
 
 -   Key components like the parser, executor, and built-ins are independent, making debugging and future extensions easier.
 
-This structured approach ensures that the **Minishell** replicates a Unix shell's core functionalities while maintaining code readability and extensibility.
+## Examples of Usage
+
+### 1\. Basic Command Execution
+
+Run a simple command:
+
+```
+ls -l
+```
+
+### 2\. Input Redirection (`<`)
+
+Redirect input from a file:
+
+```
+cat < input.txt
+```
+
+### 3\. Output Redirection (`>`)
+
+Redirect output to a file, overwriting its content:
+
+```
+echo "Hello, Minishell!" > output.txt
+```
+
+### 4\. Append Redirection (`>>`)
+
+Append output to the end of a file:
+
+```
+echo "This is appended text." >> output.txt
+```
+
+### 5\. Heredoc (`<<`)
+
+Provide inline input directly to a command until a specified delimiter is reached:
+
+```
+cat << EOF
+This is a test of heredoc functionality.
+EOF
+```
+
+### 6\. Piping (`|`)
+
+Pass the output of one command as input to another:
+
+```
+ls -l | grep minishell
+```
+
+### 7\. Combining Pipes and Redirections
+
+Mix pipes and redirections for more complex workflows:
+
+```
+cat input.txt | grep keyword > filtered_output.txt
+```
+
+### 8\. Environment Variable Expansion
+
+Use environment variables:
+
+```
+echo $HOME
+```
+
+Set and use a custom environment variable:
+
+```
+export MY_VAR="Hello, Minishell!"
+echo $MY_VAR
+```
+
+### 9\. Built-in Commands
+
+-   Change directory:
+
+    ```
+    cd /path/to/directory
+    ```
+
+-   Print the current directory:
+
+    ```
+    pwd
+    ```
+
+-   List environment variables:
+
+    ```
+    env
+    ```
+
+-   Remove an environment variable:
+
+    ```
+    unset MY_VAR
+    ```
+
+-   Exit the shell:
+
+    ```
+    exit
+    ```
+
+### 10\. Signal Handling
+
+-   Press `Ctrl+C` to interrupt a running command.
+
+-   Press `Ctrl+D` to exit the shell.
