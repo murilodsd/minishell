@@ -14,13 +14,13 @@ Developing this project with my course mate [Daniela](https://github.com/daniela
 - **Environment Variables**: Expands environment variables, such as `$HOME`, and handles `$?` to expand to the exit status of the most recently executed foreground pipeline.
 - **Signal Handling**: Implements handling for `Ctrl-C`, `Ctrl-D`, and `Ctrl-\`.
 - **Builtins**: Minishell includes the following built-in commands:
--   `**echo**`: Display a line of text. Supports the `-n` option to omit the trailing newline.
--   `**cd**`: Change the current directory. Accepts relative or absolute paths.
--   `**pwd**`: Print the current working directory.
--   `**export**`: Set environment variables.
--   `**unset**`: Unset environment variables.
--   `**env**`: Display the environment variables.
--   `**exit**`: Exit the shell.
+    -   `echo`: Display a line of text. Supports the `-n` option to omit the trailing newline.
+    -   `cd`: Change the current directory. Accepts relative or absolute paths.
+    -   `pwd`: Print the current working directory.
+    -   `export`: Set environment variables.
+    -   `unset`: Unset environment variables.
+    -   `env`: Display the environment variables.
+    -   `exit`: Exit the shell.
 
 ## Getting Started
 
