@@ -1,7 +1,7 @@
 # Minishell
 
-Minishell is a simple Unix shell implementation that replicates some basic functionalities of a shell environment. It supports command execution, pipes, redirection, environment variables, and more. This project is designed to deepen the understanding of processes, system calls, and inter-process communication in Linux.  
-This project was developed in collaboration with my course mate [Murilo](https://github.com/murilodsd). 
+Minishell is a project developed at 42 school that aims to create a simple Unix shell implementation that replicates some basic functionalities of a shell environment. It supports command execution, pipes, redirection, environment variables, and more. This project is designed to deepen the understanding of processes, system calls, and inter-process communication in Linux.  
+Developing this project with my course mate [Daniela](https://github.com/danielarjordao) was an extraordinary experience. 
 
 ## Features
 
@@ -13,17 +13,16 @@ This project was developed in collaboration with my course mate [Murilo](https:/
 - **Quoting**: Handles single (`'`) and double (`"`) quotes to prevent interpretation of metacharacters inside the quotes.
 - **Environment Variables**: Expands environment variables, such as `$HOME`, and handles `$?` to expand to the exit status of the most recently executed foreground pipeline.
 - **Signal Handling**: Implements handling for `Ctrl-C`, `Ctrl-D`, and `Ctrl-\`.
-- **Builtins**: Implements the following builtins:
-  - `echo -n`
-  - `cd` (only with relative or absolute paths)
-  - `pwd` (no options)
-  - `export` (no options)
-  - `unset` (no options)
-  - `env` (no options or arguments)
-  - `exit` (no options)
+- **Builtins**: Minishell includes the following built-in commands:
+-   `**echo**`: Display a line of text. Supports the `-n` option to omit the trailing newline.
+-   `**cd**`: Change the current directory. Accepts relative or absolute paths.
+-   `**pwd**`: Print the current working directory.
+-   `**export**`: Set environment variables.
+-   `**unset**`: Unset environment variables.
+-   `**env**`: Display the environment variables.
+-   `**exit**`: Exit the shell.
 
 ## Getting Started
----------------
 
 ### Prerequisites
 
@@ -87,13 +86,15 @@ Minishell includes the following built-in commands:
 Redirections and Pipes
 ----------------------
 
--   **Input Redirection (**`**<**`**)**: Redirect input from a file.
+-   **Input Redirection ( < )**: Redirect input from a file.
 
--   **Output Redirection (**`**>**`**)**: Redirect output to a file, overwriting the file.
+-   **Output Redirection ( > )**: Redirect output to a file, overwriting the file.
 
--   **Append Redirection (**`**>>**`**)**: Redirect output to a file, appending to the file.
+-   **Append Redirection ( >> )**: Redirect output to a file, appending to the file.
 
--   **Pipes (**`**|**`**)**: Pass the output of one command as input to another.
+-   **Here Document ( << )**: Accept input until a specific delimiter is encountered, allowing multiline input directly in the shell.
+
+-   **Pipes ( **|** )**: Pass the output of one command as input to another.
 
 Signal Handling
 ---------------
@@ -132,11 +133,13 @@ The development of the **Minishell** project is structured to emulate the basic 
 
 ### 3\. Handling Redirections
 
--   **Input Redirection (**`**<**`**)**: The shell redirects standard input (`stdin`) to read from a specified file.
+-   **Input Redirection ( < )**: The shell redirects standard input (`stdin`) to read from a specified file.
 
--   **Output Redirection (**`**>**`**)**: Standard output (`stdout`) is redirected to a file, overwriting its content.
+-   **Output Redirection ( > )**: Standard output (`stdout`) is redirected to a file, overwriting its content.
 
--   **Append Redirection (**`**>>**`**)**: Similar to output redirection, but appends to the file instead of overwriting.
+-   **Append Redirection ( >> )**: Similar to output redirection, but appends to the file instead of overwriting.
+
+-   **Here Document ( << )**: Multiline input is read directly from the terminal until a specified delimiter is matched. This allows users to provide input for a command interactively.
 
 -   **Logic**: The file descriptors are manipulated using system calls like `open`, `dup2`, and `close`.
 
